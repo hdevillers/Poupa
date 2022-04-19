@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from codecs import *
 import csv
 import re
-
+import mysql.connector
 
 COULEURS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9242b4"]
 test = True
@@ -222,7 +222,7 @@ def accueil():
         file_input = st.text_input('Fichier de données')
         tab_cpt = []
         for i in range(4):
-            capteur_input = st.text_input('Capteur %d' % (i+1))
+            capteur_input = st.text_input('Capteur %d' % (i + 1))
             tab_cpt.append(capteur_input)
         button = st.button('Lancer')
         if button:
@@ -230,5 +230,8 @@ def accueil():
 
 
 if test:
+    # rows = run_query("SELECT * from boitiers;")
+    # for row in rows:
+    #   st.write(f"le boitier {row[0]} est il dispo ? {row[1]}")
     accueil()
     # dessiner_courbes('data\PP03-001.TXT', [1, 2, 3, 4])
