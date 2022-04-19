@@ -9,10 +9,7 @@ import matplotlib.pyplot as plt
 from codecs import *
 import csv
 import re
-import tkinter as tk
-from tkinter import ttk
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+
 
 COULEURS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9242b4"]
 test = True
