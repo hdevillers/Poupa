@@ -1,0 +1,2232 @@
+6 ; temperature ; 22.06 ; °C
+60 ; temperature ; 22.30 ; °C
+120 ; temperature ; 22.54 ; °C
+180 ; temperature ; 22.70 ; °C
+240 ; temperature ; 22.86 ; °C
+300 ; temperature ; 22.94 ; °C
+360 ; temperature ; 23.10 ; °C
+420 ; temperature ; 23.26 ; °C
+480 ; temperature ; 23.34 ; °C
+540 ; temperature ; 23.50 ; °C
+600 ; temperature ; 23.66 ; °C
+660 ; temperature ; 23.83 ; °C
+720 ; temperature ; 23.91 ; °C
+780 ; temperature ; 24.07 ; °C
+840 ; temperature ; 24.23 ; °C
+900 ; temperature ; 24.31 ; °C
+960 ; temperature ; 24.47 ; °C
+1020 ; temperature ; 24.55 ; °C
+1080 ; temperature ; 24.72 ; °C
+1140 ; temperature ; 24.88 ; °C
+1200 ; temperature ; 24.96 ; °C
+1260 ; temperature ; 25.04 ; °C
+1320 ; temperature ; 25.20 ; °C
+1380 ; temperature ; 25.28 ; °C
+1440 ; temperature ; 25.45 ; °C
+1500 ; temperature ; 25.53 ; °C
+1560 ; temperature ; 25.61 ; °C
+1620 ; temperature ; 25.69 ; °C
+1680 ; temperature ; 25.86 ; °C
+1740 ; temperature ; 25.94 ; °C
+1800 ; temperature ; 26.02 ; °C
+1860 ; temperature ; 26.10 ; °C
+1920 ; temperature ; 26.27 ; °C
+1980 ; temperature ; 26.35 ; °C
+2040 ; temperature ; 26.43 ; °C
+2101 ; temperature ; 26.51 ; °C
+2160 ; temperature ; 26.59 ; °C
+2198 ; capteur   3 ; 60.46 ; mm
+2220 ; temperature ; 26.68 ; °C
+2246 ; capteur   2 ; 73.34 ; mm
+2258 ; capteur   3 ; 60.70 ; mm
+2280 ; temperature ; 26.84 ; °C
+2306 ; capteur   2 ; 72.62 ; mm
+2318 ; capteur   3 ; 60.44 ; mm
+2340 ; temperature ; 26.92 ; °C
+2366 ; capteur   2 ; 73.26 ; mm
+2378 ; capteur   3 ; 60.30 ; mm
+2400 ; temperature ; 27.01 ; °C
+2426 ; capteur   2 ; 73.48 ; mm
+2438 ; capteur   3 ; 60.58 ; mm
+2449 ; capteur   4 ; 66.28 ; mm
+2460 ; temperature ; 27.09 ; °C
+2486 ; capteur   2 ; 72.32 ; mm
+2498 ; capteur   3 ; 60.70 ; mm
+2510 ; capteur   4 ; 67.38 ; mm
+2520 ; temperature ; 27.17 ; °C
+2534 ; capteur   1 ; 68.30 ; mm
+2546 ; capteur   2 ; 73.08 ; mm
+2558 ; capteur   3 ; 60.16 ; mm
+2569 ; capteur   4 ; 66.98 ; mm
+2580 ; temperature ; 27.25 ; °C
+2594 ; capteur   1 ; 68.24 ; mm
+2606 ; capteur   2 ; 73.84 ; mm
+2618 ; capteur   3 ; 60.06 ; mm
+2630 ; capteur   4 ; 66.82 ; mm
+2640 ; temperature ; 27.34 ; °C
+2654 ; capteur   1 ; 69.24 ; mm
+2666 ; capteur   2 ; 73.38 ; mm
+2678 ; capteur   3 ; 61.34 ; mm
+2689 ; capteur   4 ; 66.78 ; mm
+2700 ; temperature ; 27.42 ; °C
+2714 ; capteur   1 ; 68.74 ; mm
+2726 ; capteur   2 ; 73.10 ; mm
+2738 ; capteur   3 ; 60.60 ; mm
+2750 ; capteur   4 ; 66.86 ; mm
+2760 ; temperature ; 27.50 ; °C
+2774 ; capteur   1 ; 68.60 ; mm
+2786 ; capteur   2 ; 73.06 ; mm
+2798 ; capteur   3 ; 60.68 ; mm
+2809 ; capteur   4 ; 67.14 ; mm
+2820 ; temperature ; 27.59 ; °C
+2833 ; capteur   1 ; 68.72 ; mm
+2846 ; capteur   2 ; 72.92 ; mm
+2858 ; capteur   3 ; 60.26 ; mm
+2870 ; capteur   4 ; 67.48 ; mm
+2880 ; temperature ; 27.67 ; °C
+2894 ; capteur   1 ; 67.86 ; mm
+2906 ; capteur   2 ; 73.50 ; mm
+2918 ; capteur   3 ; 60.44 ; mm
+2929 ; capteur   4 ; 67.60 ; mm
+2940 ; temperature ; 27.75 ; °C
+2953 ; capteur   1 ; 68.68 ; mm
+2966 ; capteur   2 ; 73.10 ; mm
+2978 ; capteur   3 ; 60.62 ; mm
+2990 ; capteur   4 ; 67.34 ; mm
+3000 ; temperature ; 27.84 ; °C
+3014 ; capteur   1 ; 67.88 ; mm
+3026 ; capteur   2 ; 73.08 ; mm
+3038 ; capteur   3 ; 60.66 ; mm
+3050 ; capteur   4 ; 67.32 ; mm
+3060 ; temperature ; 27.92 ; °C
+3073 ; capteur   1 ; 67.92 ; mm
+3086 ; capteur   2 ; 73.80 ; mm
+3098 ; capteur   3 ; 60.92 ; mm
+3110 ; capteur   4 ; 68.06 ; mm
+3120 ; temperature ; 28.00 ; °C
+3134 ; capteur   1 ; 68.90 ; mm
+3146 ; capteur   2 ; 74.02 ; mm
+3158 ; capteur   3 ; 60.88 ; mm
+3170 ; capteur   4 ; 67.58 ; mm
+3180 ; temperature ; 28.00 ; °C
+3193 ; capteur   1 ; 68.58 ; mm
+3206 ; capteur   2 ; 73.68 ; mm
+3218 ; capteur   3 ; 61.50 ; mm
+3230 ; capteur   4 ; 68.04 ; mm
+3240 ; temperature ; 28.09 ; °C
+3254 ; capteur   1 ; 68.72 ; mm
+3266 ; capteur   2 ; 72.98 ; mm
+3278 ; capteur   3 ; 61.68 ; mm
+3290 ; capteur   4 ; 67.90 ; mm
+3300 ; temperature ; 28.17 ; °C
+3313 ; capteur   1 ; 67.62 ; mm
+3325 ; capteur   2 ; 73.16 ; mm
+3338 ; capteur   3 ; 60.72 ; mm
+3350 ; capteur   4 ; 68.12 ; mm
+3360 ; temperature ; 28.25 ; °C
+3374 ; capteur   1 ; 68.08 ; mm
+3386 ; capteur   2 ; 74.14 ; mm
+3398 ; capteur   3 ; 61.02 ; mm
+3410 ; capteur   4 ; 67.68 ; mm
+3420 ; temperature ; 28.25 ; °C
+3434 ; capteur   1 ; 68.54 ; mm
+3445 ; capteur   2 ; 73.12 ; mm
+3458 ; capteur   3 ; 61.20 ; mm
+3470 ; capteur   4 ; 67.80 ; mm
+3480 ; temperature ; 28.34 ; °C
+3494 ; capteur   1 ; 68.06 ; mm
+3506 ; capteur   2 ; 72.94 ; mm
+3518 ; capteur   3 ; 61.04 ; mm
+3530 ; capteur   4 ; 67.70 ; mm
+3540 ; temperature ; 28.42 ; °C
+3554 ; capteur   1 ; 68.52 ; mm
+3565 ; capteur   2 ; 73.44 ; mm
+3578 ; capteur   3 ; 60.78 ; mm
+3590 ; capteur   4 ; 67.98 ; mm
+3600 ; temperature ; 28.42 ; °C
+3614 ; capteur   1 ; 67.58 ; mm
+3626 ; capteur   2 ; 73.44 ; mm
+3638 ; capteur   3 ; 60.56 ; mm
+3650 ; capteur   4 ; 67.76 ; mm
+3660 ; temperature ; 28.42 ; °C
+3674 ; capteur   1 ; 68.40 ; mm
+3685 ; capteur   2 ; 73.22 ; mm
+3698 ; capteur   3 ; 60.96 ; mm
+3710 ; capteur   4 ; 66.16 ; mm
+3720 ; temperature ; 28.42 ; °C
+3734 ; capteur   1 ; 68.56 ; mm
+3746 ; capteur   2 ; 73.30 ; mm
+3758 ; capteur   3 ; 60.80 ; mm
+3770 ; capteur   4 ; 66.92 ; mm
+3780 ; temperature ; 28.42 ; °C
+3794 ; capteur   1 ; 68.28 ; mm
+3805 ; capteur   2 ; 73.62 ; mm
+3818 ; capteur   3 ; 60.36 ; mm
+3830 ; capteur   4 ; 67.18 ; mm
+3840 ; temperature ; 28.42 ; °C
+3854 ; capteur   1 ; 68.28 ; mm
+3866 ; capteur   2 ; 73.46 ; mm
+3878 ; capteur   3 ; 60.72 ; mm
+3890 ; capteur   4 ; 67.82 ; mm
+3900 ; temperature ; 28.34 ; °C
+3914 ; capteur   1 ; 68.00 ; mm
+3925 ; capteur   2 ; 73.26 ; mm
+3937 ; capteur   3 ; 60.38 ; mm
+3950 ; capteur   4 ; 67.28 ; mm
+3960 ; temperature ; 28.34 ; °C
+3974 ; capteur   1 ; 68.80 ; mm
+3986 ; capteur   2 ; 72.88 ; mm
+3998 ; capteur   3 ; 59.90 ; mm
+4010 ; capteur   4 ; 67.96 ; mm
+4020 ; temperature ; 28.25 ; °C
+4034 ; capteur   1 ; 67.62 ; mm
+4046 ; capteur   2 ; 73.40 ; mm
+4057 ; capteur   3 ; 60.34 ; mm
+4070 ; capteur   4 ; 67.42 ; mm
+4080 ; temperature ; 28.17 ; °C
+4094 ; capteur   1 ; 67.42 ; mm
+4106 ; capteur   2 ; 72.46 ; mm
+4118 ; capteur   3 ; 60.54 ; mm
+4130 ; capteur   4 ; 66.24 ; mm
+4140 ; temperature ; 28.09 ; °C
+4154 ; capteur   1 ; 68.20 ; mm
+4166 ; capteur   2 ; 73.04 ; mm
+4177 ; capteur   3 ; 61.06 ; mm
+4190 ; capteur   4 ; 67.24 ; mm
+4200 ; temperature ; 28.00 ; °C
+4214 ; capteur   1 ; 68.38 ; mm
+4226 ; capteur   2 ; 73.62 ; mm
+4238 ; capteur   3 ; 61.08 ; mm
+4250 ; capteur   4 ; 67.76 ; mm
+4260 ; temperature ; 28.00 ; °C
+4274 ; capteur   1 ; 67.82 ; mm
+4286 ; capteur   2 ; 73.18 ; mm
+4297 ; capteur   3 ; 60.24 ; mm
+4310 ; capteur   4 ; 67.30 ; mm
+4320 ; temperature ; 27.92 ; °C
+4334 ; capteur   1 ; 68.46 ; mm
+4346 ; capteur   2 ; 72.96 ; mm
+4358 ; capteur   3 ; 60.10 ; mm
+4370 ; capteur   4 ; 67.44 ; mm
+4380 ; temperature ; 27.84 ; °C
+4394 ; capteur   1 ; 68.08 ; mm
+4406 ; capteur   2 ; 73.40 ; mm
+4417 ; capteur   3 ; 60.26 ; mm
+4429 ; capteur   4 ; 66.90 ; mm
+4440 ; temperature ; 27.75 ; °C
+4454 ; capteur   1 ; 67.98 ; mm
+4466 ; capteur   2 ; 72.96 ; mm
+4478 ; capteur   3 ; 60.78 ; mm
+4490 ; capteur   4 ; 66.22 ; mm
+4500 ; temperature ; 27.67 ; °C
+4514 ; capteur   1 ; 67.54 ; mm
+4526 ; capteur   2 ; 73.76 ; mm
+4538 ; capteur   3 ; 60.58 ; mm
+4549 ; capteur   4 ; 67.28 ; mm
+4560 ; temperature ; 27.59 ; °C
+4574 ; capteur   1 ; 67.88 ; mm
+4586 ; capteur   2 ; 73.32 ; mm
+4598 ; capteur   3 ; 60.78 ; mm
+4610 ; capteur   4 ; 66.84 ; mm
+4620 ; temperature ; 27.50 ; °C
+4634 ; capteur   1 ; 68.36 ; mm
+4646 ; capteur   2 ; 73.34 ; mm
+4658 ; capteur   3 ; 61.32 ; mm
+4669 ; capteur   4 ; 66.66 ; mm
+4680 ; temperature ; 27.42 ; °C
+4694 ; capteur   1 ; 67.24 ; mm
+4706 ; capteur   2 ; 74.28 ; mm
+4718 ; capteur   3 ; 60.62 ; mm
+4730 ; capteur   4 ; 66.80 ; mm
+4740 ; temperature ; 27.34 ; °C
+4754 ; capteur   1 ; 68.22 ; mm
+4766 ; capteur   2 ; 72.94 ; mm
+4778 ; capteur   3 ; 60.54 ; mm
+4789 ; capteur   4 ; 67.52 ; mm
+4800 ; temperature ; 27.34 ; °C
+4813 ; capteur   1 ; 67.00 ; mm
+4826 ; capteur   2 ; 73.18 ; mm
+4838 ; capteur   3 ; 60.76 ; mm
+4850 ; capteur   4 ; 66.74 ; mm
+4860 ; temperature ; 27.25 ; °C
+4874 ; capteur   1 ; 67.92 ; mm
+4886 ; capteur   2 ; 72.50 ; mm
+4898 ; capteur   3 ; 59.78 ; mm
+4909 ; capteur   4 ; 67.28 ; mm
+4920 ; temperature ; 27.17 ; °C
+4933 ; capteur   1 ; 68.04 ; mm
+4946 ; capteur   2 ; 72.82 ; mm
+4958 ; capteur   3 ; 59.10 ; mm
+4970 ; capteur   4 ; 65.66 ; mm
+4980 ; temperature ; 27.09 ; °C
+4994 ; capteur   1 ; 66.26 ; mm
+5006 ; capteur   2 ; 72.98 ; mm
+5018 ; capteur   3 ; 60.16 ; mm
+5029 ; capteur   4 ; 66.18 ; mm
+5040 ; temperature ; 27.09 ; °C
+5053 ; capteur   1 ; 67.24 ; mm
+5066 ; capteur   2 ; 73.58 ; mm
+5078 ; capteur   3 ; 59.42 ; mm
+5090 ; capteur   4 ; 66.38 ; mm
+5100 ; temperature ; 27.01 ; °C
+5114 ; capteur   1 ; 66.78 ; mm
+5126 ; capteur   2 ; 73.80 ; mm
+5138 ; capteur   3 ; 59.00 ; mm
+5150 ; capteur   4 ; 67.28 ; mm
+5160 ; temperature ; 26.92 ; °C
+5173 ; capteur   1 ; 67.64 ; mm
+5186 ; capteur   2 ; 72.72 ; mm
+5198 ; capteur   3 ; 59.58 ; mm
+5210 ; capteur   4 ; 65.86 ; mm
+5220 ; temperature ; 26.92 ; °C
+5234 ; capteur   1 ; 67.54 ; mm
+5246 ; capteur   2 ; 73.38 ; mm
+5258 ; capteur   3 ; 59.94 ; mm
+5270 ; capteur   4 ; 66.02 ; mm
+5280 ; temperature ; 26.84 ; °C
+5293 ; capteur   1 ; 66.32 ; mm
+5306 ; capteur   2 ; 72.54 ; mm
+5318 ; capteur   3 ; 59.78 ; mm
+5330 ; capteur   4 ; 66.86 ; mm
+5340 ; temperature ; 26.84 ; °C
+5354 ; capteur   1 ; 67.28 ; mm
+5366 ; capteur   2 ; 73.86 ; mm
+5378 ; capteur   3 ; 59.46 ; mm
+5390 ; capteur   4 ; 66.68 ; mm
+5400 ; temperature ; 26.76 ; °C
+5413 ; capteur   1 ; 67.70 ; mm
+5425 ; capteur   2 ; 73.02 ; mm
+5438 ; capteur   3 ; 59.28 ; mm
+5450 ; capteur   4 ; 66.80 ; mm
+5460 ; temperature ; 26.76 ; °C
+5474 ; capteur   1 ; 66.42 ; mm
+5486 ; capteur   2 ; 73.42 ; mm
+5498 ; capteur   3 ; 60.56 ; mm
+5510 ; capteur   4 ; 66.66 ; mm
+5520 ; temperature ; 26.68 ; °C
+5534 ; capteur   1 ; 67.28 ; mm
+5545 ; capteur   2 ; 72.68 ; mm
+5558 ; capteur   3 ; 58.82 ; mm
+5570 ; capteur   4 ; 66.60 ; mm
+5580 ; temperature ; 26.68 ; °C
+5594 ; capteur   1 ; 67.64 ; mm
+5606 ; capteur   2 ; 73.22 ; mm
+5618 ; capteur   3 ; 58.66 ; mm
+5630 ; capteur   4 ; 66.22 ; mm
+5640 ; temperature ; 26.59 ; °C
+5654 ; capteur   1 ; 66.72 ; mm
+5665 ; capteur   2 ; 72.82 ; mm
+5678 ; capteur   3 ; 59.14 ; mm
+5690 ; capteur   4 ; 66.50 ; mm
+5700 ; temperature ; 26.59 ; °C
+5714 ; capteur   1 ; 67.28 ; mm
+5726 ; capteur   2 ; 72.10 ; mm
+5738 ; capteur   3 ; 59.50 ; mm
+5750 ; capteur   4 ; 66.42 ; mm
+5760 ; temperature ; 26.51 ; °C
+5774 ; capteur   1 ; 67.18 ; mm
+5785 ; capteur   2 ; 73.10 ; mm
+5798 ; capteur   3 ; 59.22 ; mm
+5810 ; capteur   4 ; 66.26 ; mm
+5820 ; temperature ; 26.51 ; °C
+5834 ; capteur   1 ; 66.44 ; mm
+5846 ; capteur   2 ; 72.94 ; mm
+5858 ; capteur   3 ; 58.82 ; mm
+5870 ; capteur   4 ; 66.20 ; mm
+5880 ; temperature ; 26.43 ; °C
+5894 ; capteur   1 ; 66.70 ; mm
+5905 ; capteur   2 ; 73.26 ; mm
+5918 ; capteur   3 ; 58.88 ; mm
+5930 ; capteur   4 ; 65.32 ; mm
+5940 ; temperature ; 26.43 ; °C
+5954 ; capteur   1 ; 66.78 ; mm
+5966 ; capteur   2 ; 73.00 ; mm
+5978 ; capteur   3 ; 58.54 ; mm
+5990 ; capteur   4 ; 65.96 ; mm
+6000 ; temperature ; 26.35 ; °C
+6014 ; capteur   1 ; 66.08 ; mm
+6025 ; capteur   2 ; 73.30 ; mm
+6037 ; capteur   3 ; 58.42 ; mm
+6050 ; capteur   4 ; 65.30 ; mm
+6060 ; temperature ; 26.35 ; °C
+6074 ; capteur   1 ; 65.60 ; mm
+6086 ; capteur   2 ; 73.04 ; mm
+6098 ; capteur   3 ; 58.74 ; mm
+6110 ; capteur   4 ; 65.02 ; mm
+6120 ; temperature ; 26.35 ; °C
+6134 ; capteur   1 ; 66.36 ; mm
+6146 ; capteur   2 ; 71.74 ; mm
+6157 ; capteur   3 ; 59.18 ; mm
+6170 ; capteur   4 ; 65.86 ; mm
+6180 ; temperature ; 26.27 ; °C
+6194 ; capteur   1 ; 66.96 ; mm
+6206 ; capteur   2 ; 72.84 ; mm
+6218 ; capteur   3 ; 58.46 ; mm
+6230 ; capteur   4 ; 66.08 ; mm
+6240 ; temperature ; 26.27 ; °C
+6254 ; capteur   1 ; 67.12 ; mm
+6266 ; capteur   2 ; 72.26 ; mm
+6277 ; capteur   3 ; 59.28 ; mm
+6290 ; capteur   4 ; 65.10 ; mm
+6300 ; temperature ; 26.27 ; °C
+6314 ; capteur   1 ; 66.74 ; mm
+6326 ; capteur   2 ; 72.44 ; mm
+6338 ; capteur   3 ; 58.60 ; mm
+6350 ; capteur   4 ; 65.66 ; mm
+6360 ; temperature ; 26.27 ; °C
+6374 ; capteur   1 ; 66.54 ; mm
+6386 ; capteur   2 ; 73.32 ; mm
+6397 ; capteur   3 ; 58.80 ; mm
+6410 ; capteur   4 ; 65.80 ; mm
+6420 ; temperature ; 26.18 ; °C
+6434 ; capteur   1 ; 67.18 ; mm
+6446 ; capteur   2 ; 72.92 ; mm
+6458 ; capteur   3 ; 57.76 ; mm
+6470 ; capteur   4 ; 65.46 ; mm
+6480 ; temperature ; 26.18 ; °C
+6494 ; capteur   1 ; 66.26 ; mm
+6506 ; capteur   2 ; 72.56 ; mm
+6517 ; capteur   3 ; 57.68 ; mm
+6530 ; capteur   4 ; 65.34 ; mm
+6540 ; temperature ; 26.18 ; °C
+6554 ; capteur   1 ; 66.50 ; mm
+6566 ; capteur   2 ; 72.66 ; mm
+6578 ; capteur   3 ; 58.56 ; mm
+6590 ; capteur   4 ; 65.12 ; mm
+6600 ; temperature ; 26.18 ; °C
+6614 ; capteur   1 ; 65.54 ; mm
+6626 ; capteur   2 ; 72.96 ; mm
+6637 ; capteur   3 ; 57.46 ; mm
+6649 ; capteur   4 ; 65.14 ; mm
+6660 ; temperature ; 26.10 ; °C
+6674 ; capteur   1 ; 65.48 ; mm
+6686 ; capteur   2 ; 72.24 ; mm
+6698 ; capteur   3 ; 58.08 ; mm
+6710 ; capteur   4 ; 66.24 ; mm
+6720 ; temperature ; 26.10 ; °C
+6734 ; capteur   1 ; 65.26 ; mm
+6746 ; capteur   2 ; 71.38 ; mm
+6758 ; capteur   3 ; 58.26 ; mm
+6769 ; capteur   4 ; 65.70 ; mm
+6780 ; temperature ; 26.10 ; °C
+6794 ; capteur   1 ; 65.78 ; mm
+6806 ; capteur   2 ; 72.98 ; mm
+6818 ; capteur   3 ; 58.56 ; mm
+6830 ; capteur   4 ; 63.74 ; mm
+6840 ; temperature ; 26.10 ; °C
+6854 ; capteur   1 ; 66.18 ; mm
+6866 ; capteur   2 ; 72.64 ; mm
+6878 ; capteur   3 ; 57.48 ; mm
+6889 ; capteur   4 ; 65.10 ; mm
+6900 ; temperature ; 26.10 ; °C
+6914 ; capteur   1 ; 66.56 ; mm
+6926 ; capteur   2 ; 72.90 ; mm
+6938 ; capteur   3 ; 57.76 ; mm
+6950 ; capteur   4 ; 64.68 ; mm
+6960 ; temperature ; 26.02 ; °C
+6974 ; capteur   1 ; 65.88 ; mm
+6986 ; capteur   2 ; 73.38 ; mm
+6998 ; capteur   3 ; 58.22 ; mm
+7009 ; capteur   4 ; 65.42 ; mm
+7020 ; temperature ; 26.02 ; °C
+7033 ; capteur   1 ; 66.12 ; mm
+7046 ; capteur   2 ; 72.58 ; mm
+7058 ; capteur   3 ; 57.52 ; mm
+7070 ; capteur   4 ; 64.64 ; mm
+7080 ; temperature ; 26.02 ; °C
+7094 ; capteur   1 ; 65.80 ; mm
+7106 ; capteur   2 ; 72.18 ; mm
+7118 ; capteur   3 ; 57.68 ; mm
+7129 ; capteur   4 ; 65.02 ; mm
+7141 ; temperature ; 26.02 ; °C
+7153 ; capteur   1 ; 65.64 ; mm
+7166 ; capteur   2 ; 72.58 ; mm
+7178 ; capteur   3 ; 57.68 ; mm
+7190 ; capteur   4 ; 64.04 ; mm
+7200 ; temperature ; 26.02 ; °C
+7214 ; capteur   1 ; 66.10 ; mm
+7226 ; capteur   2 ; 72.64 ; mm
+7238 ; capteur   3 ; 57.96 ; mm
+7249 ; capteur   4 ; 65.06 ; mm
+7260 ; temperature ; 25.94 ; °C
+7273 ; capteur   1 ; 65.96 ; mm
+7286 ; capteur   2 ; 72.66 ; mm
+7298 ; capteur   3 ; 57.58 ; mm
+7310 ; capteur   4 ; 64.42 ; mm
+7320 ; temperature ; 25.94 ; °C
+7334 ; capteur   1 ; 65.34 ; mm
+7346 ; capteur   2 ; 72.82 ; mm
+7358 ; capteur   3 ; 57.76 ; mm
+7370 ; capteur   4 ; 64.82 ; mm
+7380 ; temperature ; 25.94 ; °C
+7393 ; capteur   1 ; 66.72 ; mm
+7406 ; capteur   2 ; 73.26 ; mm
+7418 ; capteur   3 ; 57.88 ; mm
+7430 ; capteur   4 ; 64.52 ; mm
+7440 ; temperature ; 25.94 ; °C
+7454 ; capteur   1 ; 65.58 ; mm
+7466 ; capteur   2 ; 73.38 ; mm
+7478 ; capteur   3 ; 57.48 ; mm
+7490 ; capteur   4 ; 64.92 ; mm
+7500 ; temperature ; 25.94 ; °C
+7513 ; capteur   1 ; 65.26 ; mm
+7526 ; capteur   2 ; 72.76 ; mm
+7538 ; capteur   3 ; 57.18 ; mm
+7550 ; capteur   4 ; 64.64 ; mm
+7560 ; temperature ; 25.94 ; °C
+7574 ; capteur   1 ; 64.72 ; mm
+7586 ; capteur   2 ; 72.42 ; mm
+7598 ; capteur   3 ; 57.84 ; mm
+7610 ; capteur   4 ; 64.90 ; mm
+7620 ; temperature ; 25.94 ; °C
+7633 ; capteur   1 ; 66.46 ; mm
+7645 ; capteur   2 ; 72.84 ; mm
+7658 ; capteur   3 ; 56.68 ; mm
+7670 ; capteur   4 ; 65.06 ; mm
+7680 ; temperature ; 25.94 ; °C
+7694 ; capteur   1 ; 65.26 ; mm
+7706 ; capteur   2 ; 73.20 ; mm
+7718 ; capteur   3 ; 57.10 ; mm
+7730 ; capteur   4 ; 63.82 ; mm
+7740 ; temperature ; 25.86 ; °C
+7754 ; capteur   1 ; 65.80 ; mm
+7765 ; capteur   2 ; 72.90 ; mm
+7778 ; capteur   3 ; 57.10 ; mm
+7790 ; capteur   4 ; 64.34 ; mm
+7800 ; temperature ; 25.86 ; °C
+7814 ; capteur   1 ; 64.16 ; mm
+7826 ; capteur   2 ; 72.60 ; mm
+7838 ; capteur   3 ; 57.18 ; mm
+7850 ; capteur   4 ; 64.06 ; mm
+7860 ; temperature ; 25.86 ; °C
+7874 ; capteur   1 ; 65.40 ; mm
+7885 ; capteur   2 ; 71.90 ; mm
+7898 ; capteur   3 ; 56.58 ; mm
+7910 ; capteur   4 ; 64.54 ; mm
+7920 ; temperature ; 25.86 ; °C
+7934 ; capteur   1 ; 65.04 ; mm
+7946 ; capteur   2 ; 73.08 ; mm
+7958 ; capteur   3 ; 57.62 ; mm
+7970 ; capteur   4 ; 63.94 ; mm
+7980 ; temperature ; 25.86 ; °C
+7994 ; capteur   1 ; 64.42 ; mm
+8005 ; capteur   2 ; 71.88 ; mm
+8018 ; capteur   3 ; 57.04 ; mm
+8030 ; capteur   4 ; 63.82 ; mm
+8040 ; temperature ; 25.86 ; °C
+8054 ; capteur   1 ; 65.14 ; mm
+8066 ; capteur   2 ; 72.26 ; mm
+8078 ; capteur   3 ; 56.18 ; mm
+8090 ; capteur   4 ; 64.32 ; mm
+8100 ; temperature ; 25.86 ; °C
+8114 ; capteur   1 ; 65.68 ; mm
+8125 ; capteur   2 ; 72.80 ; mm
+8138 ; capteur   3 ; 55.62 ; mm
+8150 ; capteur   4 ; 63.76 ; mm
+8160 ; temperature ; 25.86 ; °C
+8174 ; capteur   1 ; 64.36 ; mm
+8186 ; capteur   2 ; 72.36 ; mm
+8198 ; capteur   3 ; 55.94 ; mm
+8210 ; capteur   4 ; 65.46 ; mm
+8220 ; temperature ; 25.86 ; °C
+8234 ; capteur   1 ; 64.78 ; mm
+8245 ; capteur   2 ; 72.10 ; mm
+8257 ; capteur   3 ; 55.90 ; mm
+8270 ; capteur   4 ; 64.14 ; mm
+8280 ; temperature ; 25.86 ; °C
+8294 ; capteur   1 ; 64.36 ; mm
+8306 ; capteur   2 ; 71.76 ; mm
+8318 ; capteur   3 ; 56.06 ; mm
+8330 ; capteur   4 ; 63.94 ; mm
+8340 ; temperature ; 25.86 ; °C
+8354 ; capteur   1 ; 64.02 ; mm
+8366 ; capteur   2 ; 72.10 ; mm
+8377 ; capteur   3 ; 55.80 ; mm
+8390 ; capteur   4 ; 64.40 ; mm
+8400 ; temperature ; 25.86 ; °C
+8414 ; capteur   1 ; 64.36 ; mm
+8426 ; capteur   2 ; 72.40 ; mm
+8438 ; capteur   3 ; 56.46 ; mm
+8450 ; capteur   4 ; 64.18 ; mm
+8460 ; temperature ; 25.94 ; °C
+8474 ; capteur   1 ; 64.26 ; mm
+8486 ; capteur   2 ; 73.38 ; mm
+8497 ; capteur   3 ; 56.20 ; mm
+8510 ; capteur   4 ; 63.94 ; mm
+8520 ; temperature ; 25.94 ; °C
+8534 ; capteur   1 ; 64.82 ; mm
+8546 ; capteur   2 ; 72.40 ; mm
+8558 ; capteur   3 ; 56.18 ; mm
+8570 ; capteur   4 ; 63.46 ; mm
+8580 ; temperature ; 26.02 ; °C
+8594 ; capteur   1 ; 64.32 ; mm
+8606 ; capteur   2 ; 72.66 ; mm
+8617 ; capteur   3 ; 55.54 ; mm
+8630 ; capteur   4 ; 64.26 ; mm
+8640 ; temperature ; 26.02 ; °C
+8654 ; capteur   1 ; 63.50 ; mm
+8666 ; capteur   2 ; 72.80 ; mm
+8678 ; capteur   3 ; 55.68 ; mm
+8690 ; capteur   4 ; 62.54 ; mm
+8700 ; temperature ; 26.10 ; °C
+8714 ; capteur   1 ; 63.52 ; mm
+8726 ; capteur   2 ; 72.52 ; mm
+8737 ; capteur   3 ; 56.48 ; mm
+8750 ; capteur   4 ; 63.72 ; mm
+8760 ; temperature ; 26.10 ; °C
+8774 ; capteur   1 ; 62.90 ; mm
+8786 ; capteur   2 ; 73.14 ; mm
+8798 ; capteur   3 ; 56.08 ; mm
+8810 ; capteur   4 ; 62.70 ; mm
+8820 ; temperature ; 26.18 ; °C
+8834 ; capteur   1 ; 63.54 ; mm
+8846 ; capteur   2 ; 72.52 ; mm
+8857 ; capteur   3 ; 55.36 ; mm
+8869 ; capteur   4 ; 62.96 ; mm
+8880 ; temperature ; 26.27 ; °C
+8894 ; capteur   1 ; 63.86 ; mm
+8906 ; capteur   2 ; 72.94 ; mm
+8918 ; capteur   3 ; 55.30 ; mm
+8930 ; capteur   4 ; 62.76 ; mm
+8940 ; temperature ; 26.27 ; °C
+8954 ; capteur   1 ; 63.08 ; mm
+8966 ; capteur   2 ; 71.62 ; mm
+8978 ; capteur   3 ; 54.94 ; mm
+8989 ; capteur   4 ; 62.18 ; mm
+9000 ; temperature ; 26.35 ; °C
+9014 ; capteur   1 ; 62.78 ; mm
+9026 ; capteur   2 ; 72.68 ; mm
+9038 ; capteur   3 ; 56.08 ; mm
+9050 ; capteur   4 ; 63.10 ; mm
+9060 ; temperature ; 26.43 ; °C
+9074 ; capteur   1 ; 62.60 ; mm
+9086 ; capteur   2 ; 72.54 ; mm
+9098 ; capteur   3 ; 55.70 ; mm
+9109 ; capteur   4 ; 61.86 ; mm
+9120 ; temperature ; 26.51 ; °C
+9134 ; capteur   1 ; 62.22 ; mm
+9146 ; capteur   2 ; 72.30 ; mm
+9158 ; capteur   3 ; 55.16 ; mm
+9170 ; capteur   4 ; 62.82 ; mm
+9180 ; temperature ; 26.51 ; °C
+9194 ; capteur   1 ; 63.00 ; mm
+9206 ; capteur   2 ; 72.34 ; mm
+9218 ; capteur   3 ; 54.98 ; mm
+9229 ; capteur   4 ; 61.78 ; mm
+9240 ; temperature ; 26.59 ; °C
+9253 ; capteur   1 ; 62.48 ; mm
+9266 ; capteur   2 ; 72.60 ; mm
+9278 ; capteur   3 ; 55.00 ; mm
+9290 ; capteur   4 ; 62.24 ; mm
+9300 ; temperature ; 26.68 ; °C
+9314 ; capteur   1 ; 62.66 ; mm
+9326 ; capteur   2 ; 72.90 ; mm
+9338 ; capteur   3 ; 55.10 ; mm
+9349 ; capteur   4 ; 61.74 ; mm
+9361 ; temperature ; 26.76 ; °C
+9373 ; capteur   1 ; 63.02 ; mm
+9386 ; capteur   2 ; 72.86 ; mm
+9398 ; capteur   3 ; 54.62 ; mm
+9410 ; capteur   4 ; 61.36 ; mm
+9420 ; temperature ; 26.76 ; °C
+9434 ; capteur   1 ; 62.56 ; mm
+9446 ; capteur   2 ; 72.42 ; mm
+9458 ; capteur   3 ; 54.74 ; mm
+9469 ; capteur   4 ; 61.46 ; mm
+9480 ; temperature ; 26.84 ; °C
+9493 ; capteur   1 ; 61.56 ; mm
+9506 ; capteur   2 ; 72.34 ; mm
+9518 ; capteur   3 ; 54.42 ; mm
+9530 ; capteur   4 ; 60.76 ; mm
+9540 ; temperature ; 26.92 ; °C
+9554 ; capteur   1 ; 63.24 ; mm
+9566 ; capteur   2 ; 72.00 ; mm
+9578 ; capteur   3 ; 54.40 ; mm
+9590 ; capteur   4 ; 61.72 ; mm
+9600 ; temperature ; 27.01 ; °C
+9613 ; capteur   1 ; 61.86 ; mm
+9626 ; capteur   2 ; 72.46 ; mm
+9638 ; capteur   3 ; 54.98 ; mm
+9650 ; capteur   4 ; 61.90 ; mm
+9660 ; temperature ; 27.01 ; °C
+9674 ; capteur   1 ; 62.24 ; mm
+9686 ; capteur   2 ; 71.54 ; mm
+9698 ; capteur   3 ; 54.64 ; mm
+9710 ; capteur   4 ; 61.26 ; mm
+9720 ; temperature ; 27.09 ; °C
+9733 ; capteur   1 ; 61.82 ; mm
+9746 ; capteur   2 ; 72.48 ; mm
+9758 ; capteur   3 ; 55.08 ; mm
+9770 ; capteur   4 ; 62.02 ; mm
+9780 ; temperature ; 27.17 ; °C
+9794 ; capteur   1 ; 61.76 ; mm
+9806 ; capteur   2 ; 71.90 ; mm
+9818 ; capteur   3 ; 53.88 ; mm
+9830 ; capteur   4 ; 61.68 ; mm
+9840 ; temperature ; 27.17 ; °C
+9853 ; capteur   1 ; 62.08 ; mm
+9865 ; capteur   2 ; 72.22 ; mm
+9878 ; capteur   3 ; 53.78 ; mm
+9890 ; capteur   4 ; 59.96 ; mm
+9900 ; temperature ; 27.25 ; °C
+9914 ; capteur   1 ; 62.50 ; mm
+9926 ; capteur   2 ; 72.70 ; mm
+9938 ; capteur   3 ; 55.02 ; mm
+9950 ; capteur   4 ; 61.48 ; mm
+9960 ; temperature ; 27.34 ; °C
+9974 ; capteur   1 ; 62.56 ; mm
+9985 ; capteur   2 ; 72.32 ; mm
+9998 ; capteur   3 ; 54.20 ; mm
+10010 ; capteur   4 ; 59.92 ; mm
+10020 ; temperature ; 27.34 ; °C
+10034 ; capteur   1 ; 61.88 ; mm
+10046 ; capteur   2 ; 71.70 ; mm
+10058 ; capteur   3 ; 53.78 ; mm
+10070 ; capteur   4 ; 60.24 ; mm
+10080 ; temperature ; 27.42 ; °C
+10094 ; capteur   1 ; 61.62 ; mm
+10105 ; capteur   2 ; 71.86 ; mm
+10118 ; capteur   3 ; 53.70 ; mm
+10130 ; capteur   4 ; 59.82 ; mm
+10140 ; temperature ; 27.50 ; °C
+10154 ; capteur   1 ; 61.64 ; mm
+10166 ; capteur   2 ; 71.98 ; mm
+10178 ; capteur   3 ; 53.68 ; mm
+10190 ; capteur   4 ; 59.78 ; mm
+10200 ; temperature ; 27.50 ; °C
+10214 ; capteur   1 ; 62.12 ; mm
+10225 ; capteur   2 ; 71.80 ; mm
+10238 ; capteur   3 ; 53.84 ; mm
+10250 ; capteur   4 ; 59.22 ; mm
+10260 ; temperature ; 27.59 ; °C
+10274 ; capteur   1 ; 61.82 ; mm
+10286 ; capteur   2 ; 72.02 ; mm
+10298 ; capteur   3 ; 53.56 ; mm
+10310 ; capteur   4 ; 59.84 ; mm
+10320 ; temperature ; 27.67 ; °C
+10334 ; capteur   1 ; 61.50 ; mm
+10345 ; capteur   2 ; 72.28 ; mm
+10358 ; capteur   3 ; 53.42 ; mm
+10370 ; capteur   4 ; 60.24 ; mm
+10380 ; temperature ; 27.67 ; °C
+10394 ; capteur   1 ; 61.68 ; mm
+10406 ; capteur   2 ; 72.04 ; mm
+10418 ; capteur   3 ; 53.32 ; mm
+10430 ; capteur   4 ; 59.42 ; mm
+10440 ; temperature ; 27.75 ; °C
+10454 ; capteur   1 ; 62.12 ; mm
+10465 ; capteur   2 ; 72.26 ; mm
+10477 ; capteur   3 ; 54.00 ; mm
+10490 ; capteur   4 ; 58.76 ; mm
+10500 ; temperature ; 27.84 ; °C
+10514 ; capteur   1 ; 61.32 ; mm
+10526 ; capteur   2 ; 72.06 ; mm
+10538 ; capteur   3 ; 53.84 ; mm
+10550 ; capteur   4 ; 59.00 ; mm
+10560 ; temperature ; 27.84 ; °C
+10574 ; capteur   1 ; 60.44 ; mm
+10586 ; capteur   2 ; 71.84 ; mm
+10597 ; capteur   3 ; 53.78 ; mm
+10610 ; capteur   4 ; 58.68 ; mm
+10620 ; temperature ; 27.92 ; °C
+10634 ; capteur   1 ; 60.40 ; mm
+10646 ; capteur   2 ; 71.26 ; mm
+10658 ; capteur   3 ; 54.38 ; mm
+10670 ; capteur   4 ; 58.64 ; mm
+10680 ; temperature ; 27.92 ; °C
+10694 ; capteur   1 ; 61.02 ; mm
+10706 ; capteur   2 ; 72.20 ; mm
+10717 ; capteur   3 ; 53.44 ; mm
+10730 ; capteur   4 ; 59.12 ; mm
+10740 ; temperature ; 28.00 ; °C
+10754 ; capteur   1 ; 60.84 ; mm
+10766 ; capteur   2 ; 72.00 ; mm
+10778 ; capteur   3 ; 52.88 ; mm
+10790 ; capteur   4 ; 58.42 ; mm
+10800 ; temperature ; 28.09 ; °C
+10814 ; capteur   1 ; 59.88 ; mm
+10826 ; capteur   2 ; 71.60 ; mm
+10837 ; capteur   3 ; 52.66 ; mm
+10850 ; capteur   4 ; 58.60 ; mm
+10860 ; temperature ; 28.09 ; °C
+10874 ; capteur   1 ; 61.00 ; mm
+10886 ; capteur   2 ; 71.52 ; mm
+10898 ; capteur   3 ; 52.78 ; mm
+10910 ; capteur   4 ; 56.98 ; mm
+10920 ; temperature ; 28.17 ; °C
+10934 ; capteur   1 ; 60.82 ; mm
+10946 ; capteur   2 ; 71.74 ; mm
+10957 ; capteur   3 ; 52.38 ; mm
+10970 ; capteur   4 ; 56.96 ; mm
+10980 ; temperature ; 28.25 ; °C
+10994 ; capteur   1 ; 59.28 ; mm
+11006 ; capteur   2 ; 72.00 ; mm
+11018 ; capteur   3 ; 52.52 ; mm
+11030 ; capteur   4 ; 57.16 ; mm
+11040 ; temperature ; 28.25 ; °C
+11054 ; capteur   1 ; 60.34 ; mm
+11066 ; capteur   2 ; 71.42 ; mm
+11077 ; capteur   3 ; 53.42 ; mm
+11089 ; capteur   4 ; 57.68 ; mm
+11100 ; temperature ; 28.34 ; °C
+11114 ; capteur   1 ; 59.62 ; mm
+11126 ; capteur   2 ; 71.86 ; mm
+11138 ; capteur   3 ; 52.80 ; mm
+11150 ; capteur   4 ; 58.12 ; mm
+11160 ; temperature ; 28.34 ; °C
+11174 ; capteur   1 ; 59.88 ; mm
+11186 ; capteur   2 ; 71.44 ; mm
+11198 ; capteur   3 ; 52.92 ; mm
+11209 ; capteur   4 ; 57.00 ; mm
+11220 ; temperature ; 28.42 ; °C
+11234 ; capteur   1 ; 57.92 ; mm
+11246 ; capteur   2 ; 70.96 ; mm
+11258 ; capteur   3 ; 52.00 ; mm
+11270 ; capteur   4 ; 56.42 ; mm
+11280 ; temperature ; 28.42 ; °C
+11294 ; capteur   1 ; 58.96 ; mm
+11306 ; capteur   2 ; 71.66 ; mm
+11318 ; capteur   3 ; 51.74 ; mm
+11329 ; capteur   4 ; 57.22 ; mm
+11340 ; temperature ; 28.50 ; °C
+11354 ; capteur   1 ; 59.84 ; mm
+11366 ; capteur   2 ; 70.84 ; mm
+11378 ; capteur   3 ; 52.42 ; mm
+11390 ; capteur   4 ; 55.92 ; mm
+11400 ; temperature ; 28.50 ; °C
+11414 ; capteur   1 ; 57.64 ; mm
+11426 ; capteur   2 ; 72.20 ; mm
+11438 ; capteur   3 ; 51.98 ; mm
+11449 ; capteur   4 ; 55.84 ; mm
+11460 ; temperature ; 28.59 ; °C
+11473 ; capteur   1 ; 58.60 ; mm
+11486 ; capteur   2 ; 70.54 ; mm
+11498 ; capteur   3 ; 51.62 ; mm
+11510 ; capteur   4 ; 55.46 ; mm
+11520 ; temperature ; 28.59 ; °C
+11534 ; capteur   1 ; 58.34 ; mm
+11546 ; capteur   2 ; 70.54 ; mm
+11558 ; capteur   3 ; 50.90 ; mm
+11569 ; capteur   4 ; 55.38 ; mm
+11581 ; temperature ; 28.67 ; °C
+11593 ; capteur   1 ; 59.02 ; mm
+11606 ; capteur   2 ; 71.24 ; mm
+11618 ; capteur   3 ; 50.94 ; mm
+11630 ; capteur   4 ; 56.08 ; mm
+11640 ; temperature ; 28.67 ; °C
+11654 ; capteur   1 ; 58.96 ; mm
+11666 ; capteur   2 ; 70.34 ; mm
+11678 ; capteur   3 ; 51.28 ; mm
+11689 ; capteur   4 ; 55.92 ; mm
+11700 ; temperature ; 28.76 ; °C
+11713 ; capteur   1 ; 57.96 ; mm
+11726 ; capteur   2 ; 70.62 ; mm
+11738 ; capteur   3 ; 50.80 ; mm
+11750 ; capteur   4 ; 55.50 ; mm
+11760 ; temperature ; 28.76 ; °C
+11774 ; capteur   1 ; 57.80 ; mm
+11786 ; capteur   2 ; 71.06 ; mm
+11798 ; capteur   3 ; 51.44 ; mm
+11810 ; capteur   4 ; 56.54 ; mm
+11820 ; temperature ; 28.84 ; °C
+11833 ; capteur   1 ; 58.02 ; mm
+11846 ; capteur   2 ; 69.92 ; mm
+11858 ; capteur   3 ; 51.98 ; mm
+11870 ; capteur   4 ; 56.00 ; mm
+11880 ; temperature ; 28.84 ; °C
+11894 ; capteur   1 ; 57.36 ; mm
+11906 ; capteur   2 ; 70.36 ; mm
+11918 ; capteur   3 ; 49.86 ; mm
+11930 ; capteur   4 ; 55.76 ; mm
+11940 ; temperature ; 28.92 ; °C
+11953 ; capteur   1 ; 57.28 ; mm
+11966 ; capteur   2 ; 70.10 ; mm
+11978 ; capteur   3 ; 50.84 ; mm
+11990 ; capteur   4 ; 54.42 ; mm
+12000 ; temperature ; 28.92 ; °C
+12014 ; capteur   1 ; 57.30 ; mm
+12026 ; capteur   2 ; 70.58 ; mm
+12038 ; capteur   3 ; 50.24 ; mm
+12050 ; capteur   4 ; 54.38 ; mm
+12060 ; temperature ; 28.92 ; °C
+12073 ; capteur   1 ; 57.02 ; mm
+12085 ; capteur   2 ; 69.16 ; mm
+12098 ; capteur   3 ; 49.96 ; mm
+12110 ; capteur   4 ; 54.06 ; mm
+12120 ; temperature ; 29.01 ; °C
+12134 ; capteur   1 ; 57.02 ; mm
+12146 ; capteur   2 ; 69.34 ; mm
+12158 ; capteur   3 ; 49.88 ; mm
+12170 ; capteur   4 ; 53.12 ; mm
+12180 ; temperature ; 29.01 ; °C
+12194 ; capteur   1 ; 57.00 ; mm
+12205 ; capteur   2 ; 69.18 ; mm
+12218 ; capteur   3 ; 49.16 ; mm
+12230 ; capteur   4 ; 54.38 ; mm
+12240 ; temperature ; 29.09 ; °C
+12254 ; capteur   1 ; 57.04 ; mm
+12266 ; capteur   2 ; 69.88 ; mm
+12278 ; capteur   3 ; 49.28 ; mm
+12290 ; capteur   4 ; 54.34 ; mm
+12300 ; temperature ; 29.09 ; °C
+12314 ; capteur   1 ; 57.24 ; mm
+12325 ; capteur   2 ; 69.58 ; mm
+12338 ; capteur   3 ; 49.38 ; mm
+12350 ; capteur   4 ; 54.10 ; mm
+12360 ; temperature ; 29.09 ; °C
+12374 ; capteur   1 ; 56.28 ; mm
+12386 ; capteur   2 ; 70.44 ; mm
+12398 ; capteur   3 ; 49.16 ; mm
+12410 ; capteur   4 ; 53.20 ; mm
+12420 ; temperature ; 29.18 ; °C
+12434 ; capteur   1 ; 56.76 ; mm
+12445 ; capteur   2 ; 69.56 ; mm
+12458 ; capteur   3 ; 48.62 ; mm
+12470 ; capteur   4 ; 53.48 ; mm
+12480 ; temperature ; 29.18 ; °C
+12494 ; capteur   1 ; 56.28 ; mm
+12506 ; capteur   2 ; 70.14 ; mm
+12518 ; capteur   3 ; 48.16 ; mm
+12530 ; capteur   4 ; 52.92 ; mm
+12540 ; temperature ; 29.18 ; °C
+12554 ; capteur   1 ; 56.46 ; mm
+12565 ; capteur   2 ; 70.14 ; mm
+12577 ; capteur   3 ; 48.26 ; mm
+12590 ; capteur   4 ; 53.36 ; mm
+12600 ; temperature ; 29.26 ; °C
+12614 ; capteur   1 ; 56.34 ; mm
+12626 ; capteur   2 ; 69.56 ; mm
+12638 ; capteur   3 ; 47.88 ; mm
+12650 ; capteur   4 ; 53.14 ; mm
+12660 ; temperature ; 29.26 ; °C
+12674 ; capteur   1 ; 54.96 ; mm
+12686 ; capteur   2 ; 68.76 ; mm
+12697 ; capteur   3 ; 47.60 ; mm
+12710 ; capteur   4 ; 53.02 ; mm
+12720 ; temperature ; 29.35 ; °C
+12734 ; capteur   1 ; 56.72 ; mm
+12746 ; capteur   2 ; 69.54 ; mm
+12758 ; capteur   3 ; 47.54 ; mm
+12770 ; capteur   4 ; 54.58 ; mm
+12780 ; temperature ; 29.35 ; °C
+12794 ; capteur   1 ; 55.28 ; mm
+12806 ; capteur   2 ; 69.80 ; mm
+12817 ; capteur   3 ; 47.34 ; mm
+12830 ; capteur   4 ; 54.18 ; mm
+12840 ; temperature ; 29.35 ; °C
+12854 ; capteur   1 ; 55.44 ; mm
+12866 ; capteur   2 ; 68.68 ; mm
+12878 ; capteur   3 ; 47.40 ; mm
+12890 ; capteur   4 ; 54.20 ; mm
+12900 ; temperature ; 29.43 ; °C
+12914 ; capteur   1 ; 54.64 ; mm
+12926 ; capteur   2 ; 69.22 ; mm
+12937 ; capteur   3 ; 47.46 ; mm
+12950 ; capteur   4 ; 53.24 ; mm
+12960 ; temperature ; 29.43 ; °C
+12974 ; capteur   1 ; 53.24 ; mm
+12986 ; capteur   2 ; 68.46 ; mm
+12998 ; capteur   3 ; 47.16 ; mm
+13010 ; capteur   4 ; 53.50 ; mm
+13020 ; temperature ; 29.43 ; °C
+13034 ; capteur   1 ; 54.34 ; mm
+13046 ; capteur   2 ; 70.10 ; mm
+13057 ; capteur   3 ; 45.84 ; mm
+13070 ; capteur   4 ; 52.72 ; mm
+13080 ; temperature ; 29.52 ; °C
+13094 ; capteur   1 ; 54.04 ; mm
+13106 ; capteur   2 ; 70.00 ; mm
+13118 ; capteur   3 ; 46.94 ; mm
+13130 ; capteur   4 ; 52.56 ; mm
+13140 ; temperature ; 29.52 ; °C
+13154 ; capteur   1 ; 54.60 ; mm
+13166 ; capteur   2 ; 68.96 ; mm
+13177 ; capteur   3 ; 46.26 ; mm
+13189 ; capteur   4 ; 52.54 ; mm
+13200 ; temperature ; 29.52 ; °C
+13214 ; capteur   1 ; 54.24 ; mm
+13226 ; capteur   2 ; 69.48 ; mm
+13238 ; capteur   3 ; 46.20 ; mm
+13250 ; capteur   4 ; 51.84 ; mm
+13260 ; temperature ; 29.60 ; °C
+13274 ; capteur   1 ; 54.02 ; mm
+13286 ; capteur   2 ; 69.02 ; mm
+13298 ; capteur   3 ; 45.72 ; mm
+13309 ; capteur   4 ; 50.22 ; mm
+13320 ; temperature ; 29.60 ; °C
+13334 ; capteur   1 ; 53.78 ; mm
+13346 ; capteur   2 ; 69.26 ; mm
+13358 ; capteur   3 ; 45.74 ; mm
+13370 ; capteur   4 ; 50.58 ; mm
+13380 ; temperature ; 29.60 ; °C
+13394 ; capteur   1 ; 53.78 ; mm
+13406 ; capteur   2 ; 68.76 ; mm
+13418 ; capteur   3 ; 46.16 ; mm
+13429 ; capteur   4 ; 50.48 ; mm
+13440 ; temperature ; 29.69 ; °C
+13454 ; capteur   1 ; 53.66 ; mm
+13466 ; capteur   2 ; 68.16 ; mm
+13478 ; capteur   3 ; 44.32 ; mm
+13490 ; capteur   4 ; 50.38 ; mm
+13500 ; temperature ; 29.69 ; °C
+13514 ; capteur   1 ; 54.00 ; mm
+13526 ; capteur   2 ; 68.82 ; mm
+13538 ; capteur   3 ; 45.30 ; mm
+13549 ; capteur   4 ; 51.00 ; mm
+13560 ; temperature ; 29.69 ; °C
+13573 ; capteur   1 ; 53.34 ; mm
+13586 ; capteur   2 ; 68.62 ; mm
+13598 ; capteur   3 ; 45.04 ; mm
+13610 ; capteur   4 ; 51.42 ; mm
+13620 ; temperature ; 29.77 ; °C
+13634 ; capteur   1 ; 51.18 ; mm
+13646 ; capteur   2 ; 67.60 ; mm
+13658 ; capteur   3 ; 44.96 ; mm
+13670 ; capteur   4 ; 49.62 ; mm
+13680 ; temperature ; 29.77 ; °C
+13693 ; capteur   1 ; 52.54 ; mm
+13706 ; capteur   2 ; 68.56 ; mm
+13718 ; capteur   3 ; 44.84 ; mm
+13730 ; capteur   4 ; 50.74 ; mm
+13740 ; temperature ; 29.77 ; °C
+13754 ; capteur   1 ; 51.90 ; mm
+13766 ; capteur   2 ; 68.76 ; mm
+13778 ; capteur   3 ; 45.04 ; mm
+13790 ; capteur   4 ; 50.04 ; mm
+13800 ; temperature ; 29.77 ; °C
+13813 ; capteur   1 ; 51.80 ; mm
+13826 ; capteur   2 ; 68.06 ; mm
+13838 ; capteur   3 ; 43.74 ; mm
+13850 ; capteur   4 ; 49.56 ; mm
+13860 ; temperature ; 29.86 ; °C
+13874 ; capteur   1 ; 52.56 ; mm
+13886 ; capteur   2 ; 67.38 ; mm
+13898 ; capteur   3 ; 44.86 ; mm
+13910 ; capteur   4 ; 49.48 ; mm
+13920 ; temperature ; 29.86 ; °C
+13934 ; capteur   1 ; 51.80 ; mm
+13945 ; capteur   2 ; 68.16 ; mm
+13958 ; capteur   3 ; 43.22 ; mm
+13970 ; capteur   4 ; 49.82 ; mm
+13980 ; temperature ; 29.86 ; °C
+13994 ; capteur   1 ; 51.68 ; mm
+14006 ; capteur   2 ; 66.74 ; mm
+14018 ; capteur   3 ; 43.42 ; mm
+14030 ; capteur   4 ; 48.60 ; mm
+14040 ; temperature ; 29.94 ; °C
+14054 ; capteur   1 ; 50.76 ; mm
+14065 ; capteur   2 ; 66.62 ; mm
+14078 ; capteur   3 ; 43.64 ; mm
+14090 ; capteur   4 ; 49.18 ; mm
+14100 ; temperature ; 29.94 ; °C
+14114 ; capteur   1 ; 50.82 ; mm
+14126 ; capteur   2 ; 67.04 ; mm
+14138 ; capteur   3 ; 42.90 ; mm
+14150 ; capteur   4 ; 49.00 ; mm
+14160 ; temperature ; 29.94 ; °C
+14174 ; capteur   1 ; 51.78 ; mm
+14185 ; capteur   2 ; 67.10 ; mm
+14197 ; capteur   3 ; 41.84 ; mm
+14210 ; capteur   4 ; 48.84 ; mm
+14220 ; temperature ; 29.94 ; °C
+14234 ; capteur   1 ; 50.82 ; mm
+14246 ; capteur   2 ; 66.84 ; mm
+14258 ; capteur   3 ; 42.92 ; mm
+14270 ; capteur   4 ; 48.92 ; mm
+14280 ; temperature ; 29.94 ; °C
+14294 ; capteur   1 ; 51.84 ; mm
+14306 ; capteur   2 ; 66.96 ; mm
+14317 ; capteur   3 ; 42.18 ; mm
+14330 ; capteur   4 ; 48.22 ; mm
+14340 ; temperature ; 29.94 ; °C
+14354 ; capteur   1 ; 51.18 ; mm
+14366 ; capteur   2 ; 65.86 ; mm
+14378 ; capteur   3 ; 42.52 ; mm
+14390 ; capteur   4 ; 48.26 ; mm
+14400 ; temperature ; 29.86 ; °C
+14414 ; capteur   1 ; 50.90 ; mm
+14426 ; capteur   2 ; 66.24 ; mm
+14437 ; capteur   3 ; 41.92 ; mm
+14450 ; capteur   4 ; 47.36 ; mm
+14460 ; temperature ; 29.86 ; °C
+14474 ; capteur   1 ; 50.66 ; mm
+14486 ; capteur   2 ; 65.36 ; mm
+14498 ; capteur   3 ; 41.50 ; mm
+14510 ; capteur   4 ; 48.12 ; mm
+14520 ; temperature ; 29.86 ; °C
+14534 ; capteur   1 ; 50.14 ; mm
+14546 ; capteur   2 ; 65.98 ; mm
+14558 ; capteur   3 ; 41.68 ; mm
+14569 ; capteur   4 ; 47.46 ; mm
+14580 ; temperature ; 29.77 ; °C
+14594 ; capteur   1 ; 51.28 ; mm
+14606 ; capteur   2 ; 65.86 ; mm
+14618 ; capteur   3 ; 41.30 ; mm
+14630 ; capteur   4 ; 47.16 ; mm
+14640 ; temperature ; 29.77 ; °C
+14654 ; capteur   1 ; 49.92 ; mm
+14666 ; capteur   2 ; 65.92 ; mm
+14678 ; capteur   3 ; 42.12 ; mm
+14689 ; capteur   4 ; 46.02 ; mm
+14700 ; temperature ; 29.77 ; °C
+14713 ; capteur   1 ; 49.84 ; mm
+14726 ; capteur   2 ; 65.26 ; mm
+14738 ; capteur   3 ; 40.80 ; mm
+14750 ; capteur   4 ; 46.18 ; mm
+14760 ; temperature ; 29.69 ; °C
+14774 ; capteur   1 ; 50.68 ; mm
+14786 ; capteur   2 ; 65.78 ; mm
+14798 ; capteur   3 ; 40.66 ; mm
+14809 ; capteur   4 ; 46.54 ; mm
+14820 ; temperature ; 29.60 ; °C
+14833 ; capteur   1 ; 49.10 ; mm
+14846 ; capteur   2 ; 65.12 ; mm
+14858 ; capteur   3 ; 41.80 ; mm
+14870 ; capteur   4 ; 45.94 ; mm
+14880 ; temperature ; 29.60 ; °C
+14894 ; capteur   1 ; 49.80 ; mm
+14906 ; capteur   2 ; 66.78 ; mm
+14918 ; capteur   3 ; 40.40 ; mm
+14930 ; capteur   4 ; 44.96 ; mm
+14940 ; temperature ; 29.52 ; °C
+14953 ; capteur   1 ; 50.22 ; mm
+14966 ; capteur   2 ; 64.70 ; mm
+14978 ; capteur   3 ; 40.76 ; mm
+14990 ; capteur   4 ; 45.24 ; mm
+15000 ; temperature ; 29.52 ; °C
+15014 ; capteur   1 ; 49.50 ; mm
+15026 ; capteur   2 ; 63.68 ; mm
+15038 ; capteur   3 ; 40.60 ; mm
+15050 ; capteur   4 ; 45.42 ; mm
+15060 ; temperature ; 29.43 ; °C
+15074 ; capteur   1 ; 49.78 ; mm
+15085 ; capteur   2 ; 63.90 ; mm
+15098 ; capteur   3 ; 39.98 ; mm
+15110 ; capteur   4 ; 45.84 ; mm
+15120 ; temperature ; 29.43 ; °C
+15134 ; capteur   1 ; 48.46 ; mm
+15146 ; capteur   2 ; 64.44 ; mm
+15158 ; capteur   3 ; 39.82 ; mm
+15170 ; capteur   4 ; 45.60 ; mm
+15180 ; temperature ; 29.43 ; °C
+15194 ; capteur   1 ; 48.08 ; mm
+15205 ; capteur   2 ; 64.84 ; mm
+15218 ; capteur   3 ; 40.12 ; mm
+15230 ; capteur   4 ; 44.30 ; mm
+15240 ; temperature ; 29.43 ; °C
+15254 ; capteur   1 ; 47.60 ; mm
+15266 ; capteur   2 ; 64.28 ; mm
+15278 ; capteur   3 ; 39.16 ; mm
+15290 ; capteur   4 ; 44.04 ; mm
+15300 ; temperature ; 29.35 ; °C
+15314 ; capteur   1 ; 48.90 ; mm
+15325 ; capteur   2 ; 63.52 ; mm
+15337 ; capteur   3 ; 39.62 ; mm
+15350 ; capteur   4 ; 45.78 ; mm
+15360 ; temperature ; 29.35 ; °C
+15374 ; capteur   1 ; 48.28 ; mm
+15386 ; capteur   2 ; 63.34 ; mm
+15398 ; capteur   3 ; 39.28 ; mm
+15410 ; capteur   4 ; 43.72 ; mm
+15420 ; temperature ; 29.35 ; °C
+15434 ; capteur   1 ; 48.26 ; mm
+15446 ; capteur   2 ; 63.26 ; mm
+15457 ; capteur   3 ; 38.94 ; mm
+15470 ; capteur   4 ; 43.70 ; mm
+15480 ; temperature ; 29.35 ; °C
+15494 ; capteur   1 ; 47.44 ; mm
+15506 ; capteur   2 ; 63.30 ; mm
+15518 ; capteur   3 ; 38.72 ; mm
+15530 ; capteur   4 ; 44.42 ; mm
+15540 ; temperature ; 29.35 ; °C
+15554 ; capteur   1 ; 47.44 ; mm
+15566 ; capteur   2 ; 63.14 ; mm
+15577 ; capteur   3 ; 38.18 ; mm
+15590 ; capteur   4 ; 43.90 ; mm
+15600 ; temperature ; 29.35 ; °C
+15614 ; capteur   1 ; 48.36 ; mm
+15626 ; capteur   2 ; 63.18 ; mm
+15638 ; capteur   3 ; 37.54 ; mm
+15650 ; capteur   4 ; 43.18 ; mm
+15660 ; temperature ; 29.35 ; °C
+15674 ; capteur   1 ; 48.08 ; mm
+15686 ; capteur   2 ; 62.70 ; mm
+15698 ; capteur   3 ; 37.80 ; mm
+15709 ; capteur   4 ; 43.48 ; mm
+15720 ; temperature ; 29.43 ; °C
+15734 ; capteur   1 ; 47.32 ; mm
+15746 ; capteur   2 ; 62.78 ; mm
+15758 ; capteur   3 ; 37.90 ; mm
+15770 ; capteur   4 ; 43.26 ; mm
+15780 ; temperature ; 29.43 ; °C
+15794 ; capteur   1 ; 47.16 ; mm
+15806 ; capteur   2 ; 61.84 ; mm
+15818 ; capteur   3 ; 36.86 ; mm
+15829 ; capteur   4 ; 42.78 ; mm
+15840 ; temperature ; 29.43 ; °C
+15854 ; capteur   1 ; 47.62 ; mm
+15866 ; capteur   2 ; 61.46 ; mm
+15878 ; capteur   3 ; 37.12 ; mm
+15890 ; capteur   4 ; 43.42 ; mm
+15900 ; temperature ; 29.43 ; °C
+15914 ; capteur   1 ; 46.94 ; mm
+15926 ; capteur   2 ; 62.16 ; mm
+15938 ; capteur   3 ; 37.00 ; mm
+15949 ; capteur   4 ; 41.92 ; mm
+15960 ; temperature ; 29.43 ; °C
+15973 ; capteur   1 ; 47.02 ; mm
+15986 ; capteur   2 ; 61.86 ; mm
+15998 ; capteur   3 ; 36.86 ; mm
+16010 ; capteur   4 ; 41.38 ; mm
+16020 ; temperature ; 29.52 ; °C
+16034 ; capteur   1 ; 45.76 ; mm
+16046 ; capteur   2 ; 61.62 ; mm
+16058 ; capteur   3 ; 37.22 ; mm
+16070 ; capteur   4 ; 41.24 ; mm
+16080 ; temperature ; 29.52 ; °C
+16093 ; capteur   1 ; 47.38 ; mm
+16106 ; capteur   2 ; 61.66 ; mm
+16118 ; capteur   3 ; 37.28 ; mm
+16130 ; capteur   4 ; 41.94 ; mm
+16140 ; temperature ; 29.52 ; °C
+16154 ; capteur   1 ; 47.34 ; mm
+16166 ; capteur   2 ; 62.02 ; mm
+16178 ; capteur   3 ; 35.86 ; mm
+16190 ; capteur   4 ; 40.18 ; mm
+16200 ; temperature ; 29.52 ; °C
+16213 ; capteur   1 ; 46.98 ; mm
+16225 ; capteur   2 ; 61.72 ; mm
+16238 ; capteur   3 ; 36.44 ; mm
+16250 ; capteur   4 ; 40.96 ; mm
+16260 ; temperature ; 29.60 ; °C
+16274 ; capteur   1 ; 45.84 ; mm
+16286 ; capteur   2 ; 61.46 ; mm
+16298 ; capteur   3 ; 36.48 ; mm
+16310 ; capteur   4 ; 40.40 ; mm
+16320 ; temperature ; 29.60 ; °C
+16334 ; capteur   1 ; 46.16 ; mm
+16345 ; capteur   2 ; 61.40 ; mm
+16358 ; capteur   3 ; 36.06 ; mm
+16370 ; capteur   4 ; 40.66 ; mm
+16380 ; temperature ; 29.60 ; °C
+16394 ; capteur   1 ; 45.62 ; mm
+16406 ; capteur   2 ; 61.46 ; mm
+16418 ; capteur   3 ; 36.64 ; mm
+16430 ; capteur   4 ; 41.64 ; mm
+16440 ; temperature ; 29.60 ; °C
+16454 ; capteur   1 ; 44.48 ; mm
+16465 ; capteur   2 ; 60.90 ; mm
+16477 ; capteur   3 ; 34.92 ; mm
+16490 ; capteur   4 ; 40.22 ; mm
+16500 ; temperature ; 29.69 ; °C
+16514 ; capteur   1 ; 45.58 ; mm
+16526 ; capteur   2 ; 61.38 ; mm
+16538 ; capteur   3 ; 37.50 ; mm
+16550 ; capteur   4 ; 41.78 ; mm
+16560 ; temperature ; 29.69 ; °C
+16574 ; capteur   1 ; 46.42 ; mm
+16586 ; capteur   2 ; 59.64 ; mm
+16597 ; capteur   3 ; 34.74 ; mm
+16610 ; capteur   4 ; 42.16 ; mm
+16620 ; temperature ; 29.69 ; °C
+16634 ; capteur   1 ; 45.72 ; mm
+16646 ; capteur   2 ; 59.96 ; mm
+16658 ; capteur   3 ; 34.86 ; mm
+16670 ; capteur   4 ; 40.54 ; mm
+16680 ; temperature ; 29.69 ; °C
+16694 ; capteur   1 ; 44.38 ; mm
+16706 ; capteur   2 ; 60.16 ; mm
+16717 ; capteur   3 ; 35.26 ; mm
+16730 ; capteur   4 ; 40.88 ; mm
+16740 ; temperature ; 29.77 ; °C
+16754 ; capteur   1 ; 44.70 ; mm
+16766 ; capteur   2 ; 61.10 ; mm
+16778 ; capteur   3 ; 34.58 ; mm
+16790 ; capteur   4 ; 39.94 ; mm
+16800 ; temperature ; 29.77 ; °C
+16814 ; capteur   1 ; 45.82 ; mm
+16826 ; capteur   2 ; 59.06 ; mm
+16837 ; capteur   3 ; 34.70 ; mm
+16849 ; capteur   4 ; 39.62 ; mm
+16860 ; temperature ; 29.77 ; °C
+16874 ; capteur   1 ; 44.86 ; mm
+16886 ; capteur   2 ; 60.82 ; mm
+16898 ; capteur   3 ; 33.72 ; mm
+16910 ; capteur   4 ; 39.24 ; mm
+16920 ; temperature ; 29.77 ; °C
+16934 ; capteur   1 ; 44.76 ; mm
+16946 ; capteur   2 ; 59.72 ; mm
+16958 ; capteur   3 ; 33.94 ; mm
+16969 ; capteur   4 ; 39.42 ; mm
+16980 ; temperature ; 29.77 ; °C
+16994 ; capteur   1 ; 44.66 ; mm
+17006 ; capteur   2 ; 59.72 ; mm
+17018 ; capteur   3 ; 33.92 ; mm
+17030 ; capteur   4 ; 39.70 ; mm
+17040 ; temperature ; 29.77 ; °C
+17054 ; capteur   1 ; 44.42 ; mm
+17066 ; capteur   2 ; 59.74 ; mm
+17078 ; capteur   3 ; 34.24 ; mm
+17089 ; capteur   4 ; 38.08 ; mm
+17100 ; temperature ; 29.77 ; °C
+17113 ; capteur   1 ; 44.58 ; mm
+17126 ; capteur   2 ; 59.20 ; mm
+17138 ; capteur   3 ; 33.54 ; mm
+17150 ; capteur   4 ; 39.46 ; mm
+17160 ; temperature ; 29.77 ; °C
+17174 ; capteur   1 ; 44.26 ; mm
+17186 ; capteur   2 ; 59.26 ; mm
+17198 ; capteur   3 ; 32.80 ; mm
+17210 ; capteur   4 ; 38.94 ; mm
+17220 ; temperature ; 29.69 ; °C
+17233 ; capteur   1 ; 44.18 ; mm
+17246 ; capteur   2 ; 59.16 ; mm
+17258 ; capteur   3 ; 33.22 ; mm
+17270 ; capteur   4 ; 38.48 ; mm
+17280 ; temperature ; 29.69 ; °C
+17294 ; capteur   1 ; 44.30 ; mm
+17306 ; capteur   2 ; 59.30 ; mm
+17318 ; capteur   3 ; 32.18 ; mm
+17330 ; capteur   4 ; 37.06 ; mm
+17340 ; temperature ; 29.69 ; °C
+17353 ; capteur   1 ; 44.36 ; mm
+17365 ; capteur   2 ; 59.52 ; mm
+17378 ; capteur   3 ; 33.56 ; mm
+17390 ; capteur   4 ; 38.00 ; mm
+17400 ; temperature ; 29.60 ; °C
+17414 ; capteur   1 ; 43.02 ; mm
+17426 ; capteur   2 ; 58.98 ; mm
+17438 ; capteur   3 ; 32.56 ; mm
+17450 ; capteur   4 ; 36.40 ; mm
+17460 ; temperature ; 29.60 ; °C
+17474 ; capteur   1 ; 43.74 ; mm
+17485 ; capteur   2 ; 58.44 ; mm
+17498 ; capteur   3 ; 32.34 ; mm
+17510 ; capteur   4 ; 38.18 ; mm
+17520 ; temperature ; 29.60 ; °C
+17534 ; capteur   1 ; 43.42 ; mm
+17546 ; capteur   2 ; 58.66 ; mm
+17558 ; capteur   3 ; 32.04 ; mm
+17570 ; capteur   4 ; 37.58 ; mm
+17580 ; temperature ; 29.52 ; °C
+17594 ; capteur   1 ; 43.14 ; mm
+17605 ; capteur   2 ; 57.40 ; mm
+17618 ; capteur   3 ; 32.64 ; mm
+17630 ; capteur   4 ; 39.36 ; mm
+17640 ; temperature ; 29.52 ; °C
+17654 ; capteur   1 ; 42.98 ; mm
+17666 ; capteur   2 ; 59.14 ; mm
+17678 ; capteur   3 ; 31.70 ; mm
+17690 ; capteur   4 ; 39.46 ; mm
+17700 ; temperature ; 29.43 ; °C
+17714 ; capteur   1 ; 43.34 ; mm
+17726 ; capteur   2 ; 60.12 ; mm
+17737 ; capteur   3 ; 30.88 ; mm
+17750 ; capteur   4 ; 36.12 ; mm
+17760 ; temperature ; 29.43 ; °C
+17774 ; capteur   1 ; 41.68 ; mm
+17786 ; capteur   2 ; 58.52 ; mm
+17798 ; capteur   3 ; 33.68 ; mm
+17810 ; capteur   4 ; 37.30 ; mm
+17820 ; temperature ; 29.43 ; °C
+17834 ; capteur   1 ; 42.96 ; mm
+17846 ; capteur   2 ; 59.36 ; mm
+17857 ; capteur   3 ; 32.36 ; mm
+17870 ; capteur   4 ; 36.62 ; mm
+17880 ; temperature ; 29.35 ; °C
+17894 ; capteur   1 ; 42.44 ; mm
+17906 ; capteur   2 ; 59.32 ; mm
+17918 ; capteur   3 ; 32.00 ; mm
+17930 ; capteur   4 ; 36.52 ; mm
+17940 ; temperature ; 29.35 ; °C
+17954 ; capteur   1 ; 42.52 ; mm
+17966 ; capteur   2 ; 59.72 ; mm
+17977 ; capteur   3 ; 33.08 ; mm
+17989 ; capteur   4 ; 36.84 ; mm
+18000 ; temperature ; 29.26 ; °C
+18014 ; capteur   1 ; 41.84 ; mm
+18026 ; capteur   2 ; 59.52 ; mm
+18038 ; capteur   3 ; 32.98 ; mm
+18050 ; capteur   4 ; 37.04 ; mm
+18060 ; temperature ; 29.26 ; °C
+18074 ; capteur   1 ; 40.42 ; mm
+18086 ; capteur   2 ; 58.80 ; mm
+18098 ; capteur   3 ; 30.34 ; mm
+18109 ; capteur   4 ; 37.06 ; mm
+18120 ; temperature ; 29.18 ; °C
+18134 ; capteur   1 ; 42.06 ; mm
+18146 ; capteur   2 ; 59.30 ; mm
+18158 ; capteur   3 ; 30.22 ; mm
+18170 ; capteur   4 ; 36.08 ; mm
+18180 ; temperature ; 29.18 ; °C
+18194 ; capteur   1 ; 42.78 ; mm
+18206 ; capteur   2 ; 58.14 ; mm
+18218 ; capteur   3 ; 30.80 ; mm
+18229 ; capteur   4 ; 37.58 ; mm
+18241 ; temperature ; 29.09 ; °C
+18253 ; capteur   1 ; 42.18 ; mm
+18266 ; capteur   2 ; 57.86 ; mm
+18278 ; capteur   3 ; 30.04 ; mm
+18290 ; capteur   4 ; 37.02 ; mm
+18300 ; temperature ; 29.09 ; °C
+18314 ; capteur   1 ; 40.14 ; mm
+18326 ; capteur   2 ; 57.86 ; mm
+18338 ; capteur   3 ; 31.46 ; mm
+18350 ; capteur   4 ; 36.20 ; mm
+18360 ; temperature ; 29.09 ; °C
+18373 ; capteur   1 ; 38.84 ; mm
+18386 ; capteur   2 ; 57.26 ; mm
+18398 ; capteur   3 ; 30.36 ; mm
+18410 ; capteur   4 ; 35.70 ; mm
+18420 ; temperature ; 29.01 ; °C
+18434 ; capteur   1 ; 40.72 ; mm
+18446 ; capteur   2 ; 57.82 ; mm
+18458 ; capteur   3 ; 30.00 ; mm
+18470 ; capteur   4 ; 37.38 ; mm
+18480 ; temperature ; 29.01 ; °C
+18493 ; capteur   1 ; 40.34 ; mm
+18505 ; capteur   2 ; 58.16 ; mm
+18518 ; capteur   3 ; 30.34 ; mm
+18530 ; capteur   4 ; 37.72 ; mm
+18540 ; temperature ; 28.92 ; °C
+18554 ; capteur   1 ; 39.90 ; mm
+18566 ; capteur   2 ; 56.86 ; mm
+18578 ; capteur   3 ; 30.14 ; mm
+18590 ; capteur   4 ; 34.74 ; mm
+18600 ; temperature ; 28.92 ; °C
+18614 ; capteur   1 ; 39.56 ; mm
+18625 ; capteur   2 ; 56.42 ; mm
+18638 ; capteur   3 ; 31.26 ; mm
+18650 ; capteur   4 ; 37.06 ; mm
+18660 ; temperature ; 28.84 ; °C
+18674 ; capteur   1 ; 39.50 ; mm
+18686 ; capteur   2 ; 58.12 ; mm
+18698 ; capteur   3 ; 29.56 ; mm
+18710 ; capteur   4 ; 36.48 ; mm
+18720 ; temperature ; 28.84 ; °C
+18734 ; capteur   1 ; 38.80 ; mm
+18745 ; capteur   2 ; 56.94 ; mm
+18758 ; capteur   3 ; 29.50 ; mm
+18770 ; capteur   4 ; 35.02 ; mm
+18780 ; temperature ; 28.84 ; °C
+18794 ; capteur   1 ; 39.70 ; mm
+18806 ; capteur   2 ; 56.94 ; mm
+18818 ; capteur   3 ; 31.02 ; mm
+18830 ; capteur   4 ; 34.82 ; mm
+18840 ; temperature ; 28.84 ; °C
+18854 ; capteur   1 ; 39.88 ; mm
+18866 ; capteur   2 ; 56.26 ; mm
+18877 ; capteur   3 ; 29.62 ; mm
+18890 ; capteur   4 ; 34.34 ; mm
+18900 ; temperature ; 28.84 ; °C
+18914 ; capteur   1 ; 38.48 ; mm
+18926 ; capteur   2 ; 55.88 ; mm
+18938 ; capteur   3 ; 28.42 ; mm
+18950 ; capteur   4 ; 35.40 ; mm
+18960 ; temperature ; 28.76 ; °C
+18974 ; capteur   1 ; 39.42 ; mm
+18986 ; capteur   2 ; 57.36 ; mm
+18997 ; capteur   3 ; 28.84 ; mm
+19010 ; capteur   4 ; 34.78 ; mm
+19020 ; temperature ; 28.76 ; °C
+19034 ; capteur   1 ; 38.44 ; mm
+19046 ; capteur   2 ; 56.62 ; mm
+19058 ; capteur   3 ; 29.46 ; mm
+19070 ; capteur   4 ; 33.22 ; mm
+19080 ; temperature ; 28.76 ; °C
+19094 ; capteur   1 ; 39.26 ; mm
+19106 ; capteur   2 ; 56.26 ; mm
+19117 ; capteur   3 ; 28.46 ; mm
+19129 ; capteur   4 ; 34.88 ; mm
+19140 ; temperature ; 28.76 ; °C
+19154 ; capteur   1 ; 39.52 ; mm
+19166 ; capteur   2 ; 56.02 ; mm
+19178 ; capteur   3 ; 28.88 ; mm
+19190 ; capteur   4 ; 33.92 ; mm
+19200 ; temperature ; 28.76 ; °C
+19214 ; capteur   1 ; 38.80 ; mm
+19226 ; capteur   2 ; 56.26 ; mm
+19238 ; capteur   3 ; 28.42 ; mm
+19249 ; capteur   4 ; 34.06 ; mm
+19260 ; temperature ; 28.76 ; °C
+19274 ; capteur   1 ; 38.72 ; mm
+19286 ; capteur   2 ; 55.88 ; mm
+19298 ; capteur   3 ; 29.16 ; mm
+19310 ; capteur   4 ; 35.60 ; mm
+19320 ; temperature ; 28.76 ; °C
+19334 ; capteur   1 ; 39.20 ; mm
+19346 ; capteur   2 ; 55.02 ; mm
+19358 ; capteur   3 ; 30.40 ; mm
+19369 ; capteur   4 ; 33.76 ; mm
+19381 ; temperature ; 28.76 ; °C
+19393 ; capteur   1 ; 38.50 ; mm
+19406 ; capteur   2 ; 56.54 ; mm
+19418 ; capteur   3 ; 29.26 ; mm
+19430 ; capteur   4 ; 34.96 ; mm
+19440 ; temperature ; 28.76 ; °C
+19454 ; capteur   1 ; 37.80 ; mm
+19466 ; capteur   2 ; 55.46 ; mm
+19478 ; capteur   3 ; 29.72 ; mm
+19490 ; capteur   4 ; 35.12 ; mm
+19500 ; temperature ; 28.76 ; °C
+19513 ; capteur   1 ; 38.10 ; mm
+19526 ; capteur   2 ; 56.54 ; mm
+19538 ; capteur   3 ; 29.64 ; mm
+19550 ; capteur   4 ; 35.96 ; mm
+19560 ; temperature ; 28.76 ; °C
+19574 ; capteur   1 ; 36.36 ; mm
+19586 ; capteur   2 ; 54.88 ; mm
+19598 ; capteur   3 ; 28.84 ; mm
+19610 ; capteur   4 ; 35.72 ; mm
+19620 ; temperature ; 28.67 ; °C
+19633 ; capteur   1 ; 37.56 ; mm
+19645 ; capteur   2 ; 56.18 ; mm
+19658 ; capteur   3 ; 29.70 ; mm
+19670 ; capteur   4 ; 33.84 ; mm
+19680 ; temperature ; 28.67 ; °C
+19694 ; capteur   1 ; 37.08 ; mm
+19706 ; capteur   2 ; 55.30 ; mm
+19718 ; capteur   3 ; 29.50 ; mm
+19730 ; capteur   4 ; 33.88 ; mm
+19740 ; temperature ; 28.67 ; °C
+19754 ; capteur   1 ; 38.28 ; mm
+19765 ; capteur   2 ; 54.94 ; mm
+19778 ; capteur   3 ; 29.68 ; mm
+19790 ; capteur   4 ; 34.40 ; mm
+19800 ; temperature ; 28.59 ; °C
+19814 ; capteur   1 ; 37.52 ; mm
+19826 ; capteur   2 ; 55.24 ; mm
+19838 ; capteur   3 ; 28.66 ; mm
+19850 ; capteur   4 ; 34.42 ; mm
+19860 ; temperature ; 28.59 ; °C
+19874 ; capteur   1 ; 36.54 ; mm
+19885 ; capteur   2 ; 55.02 ; mm
+19898 ; capteur   3 ; 28.32 ; mm
+19910 ; capteur   4 ; 33.36 ; mm
+19920 ; temperature ; 28.59 ; °C
+19934 ; capteur   1 ; 36.30 ; mm
+19946 ; capteur   2 ; 54.76 ; mm
+19958 ; capteur   3 ; 27.88 ; mm
+19970 ; capteur   4 ; 34.82 ; mm
+19980 ; temperature ; 28.50 ; °C
+19994 ; capteur   1 ; 36.00 ; mm
+20006 ; capteur   2 ; 55.42 ; mm
+20017 ; capteur   3 ; 29.72 ; mm
+20030 ; capteur   4 ; 34.48 ; mm
+20040 ; temperature ; 28.42 ; °C
+20054 ; capteur   1 ; 35.84 ; mm
+20066 ; capteur   2 ; 55.64 ; mm
+20078 ; capteur   3 ; 29.78 ; mm
+20090 ; capteur   4 ; 34.46 ; mm
+20100 ; temperature ; 28.42 ; °C
+20114 ; capteur   1 ; 35.28 ; mm
+20126 ; capteur   2 ; 54.44 ; mm
+20137 ; capteur   3 ; 28.62 ; mm
+20150 ; capteur   4 ; 34.72 ; mm
+20160 ; temperature ; 28.42 ; °C
+20174 ; capteur   1 ; 35.70 ; mm
+20186 ; capteur   2 ; 53.72 ; mm
+20198 ; capteur   3 ; 28.98 ; mm
+20210 ; capteur   4 ; 35.82 ; mm
+20220 ; temperature ; 28.34 ; °C
+20234 ; capteur   1 ; 35.24 ; mm
+20246 ; capteur   2 ; 55.60 ; mm
+20257 ; capteur   3 ; 29.06 ; mm
+20269 ; capteur   4 ; 35.50 ; mm
+20280 ; temperature ; 28.34 ; °C
+20294 ; capteur   1 ; 36.08 ; mm
+20306 ; capteur   2 ; 54.48 ; mm
+20318 ; capteur   3 ; 29.72 ; mm
+20330 ; capteur   4 ; 34.80 ; mm
+20340 ; temperature ; 28.34 ; °C
+20354 ; capteur   1 ; 35.42 ; mm
+20366 ; capteur   2 ; 53.88 ; mm
+20378 ; capteur   3 ; 31.80 ; mm
+20389 ; capteur   4 ; 34.84 ; mm
+20400 ; temperature ; 28.25 ; °C
+20414 ; capteur   1 ; 35.72 ; mm
+20426 ; capteur   2 ; 54.80 ; mm
+20438 ; capteur   3 ; 29.80 ; mm
+20450 ; capteur   4 ; 33.38 ; mm
+20460 ; temperature ; 28.25 ; °C
+20474 ; capteur   1 ; 35.18 ; mm
+20486 ; capteur   2 ; 54.58 ; mm
+20498 ; capteur   3 ; 31.18 ; mm
+20509 ; capteur   4 ; 35.44 ; mm
+20520 ; temperature ; 28.25 ; °C
+20533 ; capteur   1 ; 35.60 ; mm
+20546 ; capteur   2 ; 54.64 ; mm
+20558 ; capteur   3 ; 29.74 ; mm
+20570 ; capteur   4 ; 33.14 ; mm
+20580 ; temperature ; 28.25 ; °C
+20594 ; capteur   1 ; 34.42 ; mm
+20606 ; capteur   2 ; 54.38 ; mm
+20618 ; capteur   3 ; 31.20 ; mm
+20630 ; capteur   4 ; 34.56 ; mm
+20640 ; temperature ; 28.25 ; °C
+20653 ; capteur   1 ; 34.86 ; mm
+20666 ; capteur   2 ; 53.44 ; mm
+20678 ; capteur   3 ; 30.14 ; mm
+20690 ; capteur   4 ; 33.64 ; mm
+20700 ; temperature ; 28.25 ; °C
+20714 ; capteur   1 ; 34.10 ; mm
+20726 ; capteur   2 ; 53.88 ; mm
+20738 ; capteur   3 ; 30.68 ; mm
+20750 ; capteur   4 ; 34.66 ; mm
+20760 ; temperature ; 28.25 ; °C
+20773 ; capteur   1 ; 36.16 ; mm
+20785 ; capteur   2 ; 53.20 ; mm
+20798 ; capteur   3 ; 29.70 ; mm
+20810 ; capteur   4 ; 32.68 ; mm
+20820 ; temperature ; 28.25 ; °C
+20834 ; capteur   1 ; 35.08 ; mm
+20846 ; capteur   2 ; 53.98 ; mm
+20858 ; capteur   3 ; 30.56 ; mm
+20870 ; capteur   4 ; 32.32 ; mm
+20880 ; temperature ; 28.25 ; °C
+20894 ; capteur   1 ; 35.74 ; mm
+20905 ; capteur   2 ; 52.24 ; mm
+20918 ; capteur   3 ; 29.58 ; mm
+20930 ; capteur   4 ; 33.10 ; mm
+20940 ; temperature ; 28.25 ; °C
+20954 ; capteur   1 ; 35.38 ; mm
+20966 ; capteur   2 ; 53.18 ; mm
+20978 ; capteur   3 ; 31.04 ; mm
+20990 ; capteur   4 ; 33.76 ; mm
+21000 ; temperature ; 28.25 ; °C
+21014 ; capteur   1 ; 34.28 ; mm
+21025 ; capteur   2 ; 53.76 ; mm
+21038 ; capteur   3 ; 29.68 ; mm
+21050 ; capteur   4 ; 32.66 ; mm
+21060 ; temperature ; 28.25 ; °C
+21074 ; capteur   1 ; 35.34 ; mm
+21086 ; capteur   2 ; 52.54 ; mm
+21098 ; capteur   3 ; 32.14 ; mm
+21110 ; capteur   4 ; 33.70 ; mm
+21120 ; temperature ; 28.34 ; °C
+21134 ; capteur   1 ; 35.42 ; mm
+21145 ; capteur   2 ; 53.00 ; mm
+21157 ; capteur   3 ; 30.24 ; mm
+21170 ; capteur   4 ; 31.28 ; mm
+21180 ; temperature ; 28.34 ; °C
+21194 ; capteur   1 ; 34.58 ; mm
+21206 ; capteur   2 ; 52.38 ; mm
+21218 ; capteur   3 ; 30.02 ; mm
+21230 ; capteur   4 ; 30.58 ; mm
+21240 ; temperature ; 28.34 ; °C
+21254 ; capteur   1 ; 33.70 ; mm
+21266 ; capteur   2 ; 52.28 ; mm
+21277 ; capteur   3 ; 29.96 ; mm
+21290 ; capteur   4 ; 33.04 ; mm
+21300 ; temperature ; 28.34 ; °C
+21314 ; capteur   1 ; 35.08 ; mm
+21326 ; capteur   2 ; 53.58 ; mm
+21338 ; capteur   3 ; 29.26 ; mm
+21350 ; capteur   4 ; 30.20 ; mm
+21360 ; temperature ; 28.34 ; °C
+21374 ; capteur   1 ; 33.44 ; mm
+21386 ; capteur   2 ; 51.96 ; mm
+21397 ; capteur   3 ; 30.60 ; mm
+21410 ; capteur   4 ; 31.26 ; mm
+21420 ; temperature ; 28.42 ; °C
+21434 ; capteur   1 ; 32.60 ; mm
+21446 ; capteur   2 ; 51.48 ; mm
+21458 ; capteur   3 ; 30.52 ; mm
+21470 ; capteur   4 ; 31.08 ; mm
+21480 ; temperature ; 28.42 ; °C
+21494 ; capteur   1 ; 32.26 ; mm
+21506 ; capteur   2 ; 51.86 ; mm
+21518 ; capteur   3 ; 30.12 ; mm
+21529 ; capteur   4 ; 31.20 ; mm
+21540 ; temperature ; 28.42 ; °C
+21554 ; capteur   1 ; 33.10 ; mm
+21566 ; capteur   2 ; 51.38 ; mm
+21578 ; capteur   3 ; 30.18 ; mm
+21590 ; capteur   4 ; 30.20 ; mm
+21600 ; temperature ; 28.42 ; °C
+21614 ; capteur   1 ; 33.58 ; mm
+21626 ; capteur   2 ; 51.84 ; mm
+21638 ; capteur   3 ; 30.32 ; mm
+21649 ; capteur   4 ; 31.64 ; mm
+21660 ; temperature ; 28.42 ; °C
+21673 ; capteur   1 ; 32.48 ; mm
+21686 ; capteur   2 ; 50.86 ; mm
+21698 ; capteur   3 ; 30.22 ; mm
+21710 ; capteur   4 ; 28.90 ; mm
+21720 ; temperature ; 28.42 ; °C
+21734 ; capteur   1 ; 33.00 ; mm
+21746 ; capteur   2 ; 51.72 ; mm
+21758 ; capteur   3 ; 30.16 ; mm
+21770 ; capteur   4 ; 28.70 ; mm
+21780 ; temperature ; 28.50 ; °C
+21793 ; capteur   1 ; 34.22 ; mm
+21806 ; capteur   2 ; 51.06 ; mm
+21818 ; capteur   3 ; 29.94 ; mm
+21830 ; capteur   4 ; 30.06 ; mm
+21840 ; temperature ; 28.42 ; °C
+21854 ; capteur   1 ; 32.00 ; mm
+21866 ; capteur   2 ; 51.08 ; mm
+21878 ; capteur   3 ; 29.02 ; mm
+21890 ; capteur   4 ; 30.00 ; mm
+21900 ; temperature ; 28.42 ; °C
+21913 ; capteur   1 ; 33.18 ; mm
+21926 ; capteur   2 ; 50.82 ; mm
+21938 ; capteur   3 ; 29.68 ; mm
+21950 ; capteur   4 ; 29.34 ; mm
+21960 ; temperature ; 28.42 ; °C
+21974 ; capteur   1 ; 32.96 ; mm
+21986 ; capteur   2 ; 51.08 ; mm
+21998 ; capteur   3 ; 29.38 ; mm
+22010 ; capteur   4 ; 30.06 ; mm
+22020 ; temperature ; 28.42 ; °C
+22034 ; capteur   1 ; 32.18 ; mm
+22045 ; capteur   2 ; 49.92 ; mm
+22058 ; capteur   3 ; 31.38 ; mm
+22070 ; capteur   4 ; 29.26 ; mm
+22080 ; temperature ; 28.42 ; °C
+22094 ; capteur   1 ; 31.34 ; mm
+22106 ; capteur   2 ; 51.18 ; mm
+22118 ; capteur   3 ; 31.54 ; mm
+22130 ; capteur   4 ; 30.44 ; mm
+22140 ; temperature ; 28.42 ; °C
+22154 ; capteur   1 ; 33.72 ; mm
+22165 ; capteur   2 ; 51.16 ; mm
+22178 ; capteur   3 ; 30.14 ; mm
+22190 ; capteur   4 ; 29.42 ; mm
+22200 ; temperature ; 28.34 ; °C
+22214 ; capteur   1 ; 31.94 ; mm
+22226 ; capteur   2 ; 50.06 ; mm
+22238 ; capteur   3 ; 29.68 ; mm
+22250 ; capteur   4 ; 30.10 ; mm
+22260 ; temperature ; 28.42 ; °C
+22274 ; capteur   1 ; 32.90 ; mm
+22285 ; capteur   2 ; 51.02 ; mm
+22297 ; capteur   3 ; 31.98 ; mm
+22310 ; capteur   4 ; 28.54 ; mm
+22320 ; temperature ; 28.34 ; °C
+22334 ; capteur   1 ; 31.88 ; mm
+22346 ; capteur   2 ; 50.06 ; mm
+22358 ; capteur   3 ; 30.16 ; mm
+22370 ; capteur   4 ; 29.36 ; mm
+22380 ; temperature ; 28.42 ; °C
+22394 ; capteur   1 ; 32.68 ; mm
+22406 ; capteur   2 ; 50.10 ; mm
+22417 ; capteur   3 ; 31.70 ; mm
+22430 ; capteur   4 ; 29.40 ; mm
+22440 ; temperature ; 28.42 ; °C
+22454 ; capteur   1 ; 34.78 ; mm
+22466 ; capteur   2 ; 48.54 ; mm
+22478 ; capteur   3 ; 32.08 ; mm
+22490 ; capteur   4 ; 29.02 ; mm
+22500 ; temperature ; 28.42 ; °C
+22514 ; capteur   1 ; 32.94 ; mm
+22526 ; capteur   2 ; 49.96 ; mm
+22537 ; capteur   3 ; 31.32 ; mm
+22550 ; capteur   4 ; 28.44 ; mm
+22560 ; temperature ; 28.42 ; °C
+22574 ; capteur   1 ; 32.08 ; mm
+22586 ; capteur   2 ; 49.44 ; mm
+22598 ; capteur   3 ; 30.96 ; mm
+22610 ; capteur   4 ; 30.34 ; mm
+22620 ; temperature ; 28.42 ; °C
+22634 ; capteur   1 ; 31.90 ; mm
+22646 ; capteur   2 ; 49.62 ; mm
+22658 ; capteur   3 ; 29.58 ; mm
+22669 ; capteur   4 ; 30.96 ; mm
+22680 ; temperature ; 28.50 ; °C
+22694 ; capteur   1 ; 33.24 ; mm
+22706 ; capteur   2 ; 49.92 ; mm
+22718 ; capteur   3 ; 30.30 ; mm
+22730 ; capteur   4 ; 30.98 ; mm
+22740 ; temperature ; 28.50 ; °C
+22754 ; capteur   1 ; 33.40 ; mm
+22766 ; capteur   2 ; 49.00 ; mm
+22778 ; capteur   3 ; 30.24 ; mm
+22789 ; capteur   4 ; 31.76 ; mm
+22800 ; temperature ; 28.50 ; °C
+22813 ; capteur   1 ; 36.08 ; mm
+22826 ; capteur   2 ; 49.34 ; mm
+22838 ; capteur   3 ; 30.64 ; mm
+22850 ; capteur   4 ; 30.82 ; mm
+22860 ; temperature ; 28.50 ; °C
+22874 ; capteur   1 ; 32.50 ; mm
+22886 ; capteur   2 ; 47.74 ; mm
+22898 ; capteur   3 ; 31.16 ; mm
+22909 ; capteur   4 ; 29.54 ; mm
+22920 ; temperature ; 28.59 ; °C
+22933 ; capteur   1 ; 33.24 ; mm
+22946 ; capteur   2 ; 48.94 ; mm
+22958 ; capteur   3 ; 29.42 ; mm
+22970 ; capteur   4 ; 29.06 ; mm
+22980 ; temperature ; 28.59 ; °C
+22994 ; capteur   1 ; 32.40 ; mm
+23006 ; capteur   2 ; 48.80 ; mm
+23018 ; capteur   3 ; 29.76 ; mm
+23030 ; capteur   4 ; 30.06 ; mm
+23040 ; temperature ; 28.59 ; °C
+23053 ; capteur   1 ; 32.72 ; mm
+23066 ; capteur   2 ; 48.96 ; mm
+23078 ; capteur   3 ; 30.08 ; mm
+23090 ; capteur   4 ; 29.18 ; mm
+23100 ; temperature ; 28.67 ; °C
+23114 ; capteur   1 ; 33.20 ; mm
+23126 ; capteur   2 ; 47.76 ; mm
+23138 ; capteur   3 ; 28.58 ; mm
+23150 ; capteur   4 ; 28.74 ; mm
+23160 ; temperature ; 28.67 ; °C
+23174 ; capteur   1 ; 34.08 ; mm
+23185 ; capteur   2 ; 47.90 ; mm
+23198 ; capteur   3 ; 28.88 ; mm
+23210 ; capteur   4 ; 27.14 ; mm
+23220 ; temperature ; 28.67 ; °C
+23234 ; capteur   1 ; 31.08 ; mm
+23246 ; capteur   2 ; 48.22 ; mm
+23258 ; capteur   3 ; 29.88 ; mm
+23270 ; capteur   4 ; 28.26 ; mm
+23280 ; temperature ; 28.76 ; °C
+23294 ; capteur   1 ; 32.86 ; mm
+23305 ; capteur   2 ; 48.18 ; mm
+23318 ; capteur   3 ; 29.28 ; mm
+23330 ; capteur   4 ; 27.98 ; mm
+23340 ; temperature ; 28.76 ; °C
+23354 ; capteur   1 ; 34.46 ; mm
+23366 ; capteur   2 ; 49.26 ; mm
+23378 ; capteur   3 ; 29.70 ; mm
+23390 ; capteur   4 ; 25.94 ; mm
+23400 ; temperature ; 28.76 ; °C
+23414 ; capteur   1 ; 32.32 ; mm
+23425 ; capteur   2 ; 47.54 ; mm
+23437 ; capteur   3 ; 27.40 ; mm
+23450 ; capteur   4 ; 26.18 ; mm
+23460 ; temperature ; 28.84 ; °C
+23474 ; capteur   1 ; 33.08 ; mm
+23486 ; capteur   2 ; 47.16 ; mm
+23498 ; capteur   3 ; 29.24 ; mm
+23510 ; capteur   4 ; 27.32 ; mm
+23520 ; temperature ; 28.84 ; °C
+23534 ; capteur   1 ; 33.28 ; mm
+23546 ; capteur   2 ; 48.18 ; mm
+23557 ; capteur   3 ; 29.34 ; mm
+23570 ; capteur   4 ; 26.72 ; mm
+23580 ; temperature ; 28.92 ; °C
+23594 ; capteur   1 ; 32.46 ; mm
+23606 ; capteur   2 ; 48.18 ; mm
+23618 ; capteur   3 ; 29.90 ; mm
+23630 ; capteur   4 ; 26.98 ; mm
+23640 ; temperature ; 28.92 ; °C
+23654 ; capteur   1 ; 32.28 ; mm
+23666 ; capteur   2 ; 47.78 ; mm
+23677 ; capteur   3 ; 30.48 ; mm
+23690 ; capteur   4 ; 26.68 ; mm
+23700 ; temperature ; 28.92 ; °C
+23714 ; capteur   1 ; 33.12 ; mm
+23726 ; capteur   2 ; 48.00 ; mm
+23738 ; capteur   3 ; 27.60 ; mm
+23750 ; capteur   4 ; 26.46 ; mm
+23760 ; temperature ; 29.01 ; °C
+23774 ; capteur   1 ; 34.74 ; mm
+23786 ; capteur   2 ; 48.68 ; mm
+23798 ; capteur   3 ; 28.80 ; mm
+23809 ; capteur   4 ; 25.52 ; mm
+23820 ; temperature ; 29.01 ; °C
+23834 ; capteur   1 ; 33.42 ; mm
+23846 ; capteur   2 ; 46.38 ; mm
+23858 ; capteur   3 ; 28.04 ; mm
+23870 ; capteur   4 ; 24.90 ; mm
+23880 ; temperature ; 29.09 ; °C
+23894 ; capteur   1 ; 35.76 ; mm
+23906 ; capteur   2 ; 47.40 ; mm
+23918 ; capteur   3 ; 27.44 ; mm
+23929 ; capteur   4 ; 25.94 ; mm
+23940 ; temperature ; 29.09 ; °C
+23953 ; capteur   1 ; 32.86 ; mm
+23966 ; capteur   2 ; 47.66 ; mm
+23978 ; capteur   3 ; 28.22 ; mm
+23990 ; capteur   4 ; 25.08 ; mm
+24000 ; temperature ; 29.09 ; °C
+24014 ; capteur   1 ; 35.68 ; mm
+24026 ; capteur   2 ; 49.00 ; mm
+24038 ; capteur   3 ; 28.12 ; mm
+24049 ; capteur   4 ; 25.40 ; mm
+24060 ; temperature ; 29.18 ; °C
+24073 ; capteur   1 ; 34.90 ; mm
+24086 ; capteur   2 ; 48.68 ; mm
+24098 ; capteur   3 ; 27.98 ; mm
+24110 ; capteur   4 ; 25.76 ; mm
+24120 ; temperature ; 29.18 ; °C
+24134 ; capteur   1 ; 36.14 ; mm
+24146 ; capteur   2 ; 48.64 ; mm
+24158 ; capteur   3 ; 27.88 ; mm
+24170 ; capteur   4 ; 25.20 ; mm
+24180 ; temperature ; 29.26 ; °C
+24193 ; capteur   1 ; 36.06 ; mm
+24206 ; capteur   2 ; 48.10 ; mm
+24218 ; capteur   3 ; 27.72 ; mm
+24230 ; capteur   4 ; 25.12 ; mm
+24240 ; temperature ; 29.26 ; °C
+24254 ; capteur   1 ; 35.78 ; mm
+24266 ; capteur   2 ; 48.28 ; mm
+24278 ; capteur   3 ; 26.92 ; mm
+24290 ; capteur   4 ; 23.56 ; mm
+24300 ; temperature ; 29.26 ; °C
+24314 ; capteur   1 ; 35.76 ; mm
+24325 ; capteur   2 ; 47.90 ; mm
+24338 ; capteur   3 ; 28.14 ; mm
+24350 ; capteur   4 ; 24.80 ; mm
+24360 ; temperature ; 29.35 ; °C
+24374 ; capteur   1 ; 34.48 ; mm
+24386 ; capteur   2 ; 46.74 ; mm
+24398 ; capteur   3 ; 27.02 ; mm
+24410 ; capteur   4 ; 25.82 ; mm
+24420 ; temperature ; 29.35 ; °C
+24434 ; capteur   1 ; 35.08 ; mm
+24445 ; capteur   2 ; 47.36 ; mm
+24458 ; capteur   3 ; 27.96 ; mm
+24470 ; capteur   4 ; 23.92 ; mm
+24480 ; temperature ; 29.43 ; °C
+24494 ; capteur   1 ; 35.10 ; mm
+24506 ; capteur   2 ; 46.58 ; mm
+24518 ; capteur   3 ; 26.82 ; mm
+24530 ; capteur   4 ; 24.30 ; mm
+24540 ; temperature ; 29.43 ; °C
+24554 ; capteur   1 ; 34.64 ; mm
+24565 ; capteur   2 ; 47.48 ; mm
+24577 ; capteur   3 ; 26.22 ; mm
+24590 ; capteur   4 ; 25.16 ; mm
+24600 ; temperature ; 29.43 ; °C
+24614 ; capteur   1 ; 33.92 ; mm
+24626 ; capteur   2 ; 45.56 ; mm
+24638 ; capteur   3 ; 27.08 ; mm
+24650 ; capteur   4 ; 24.88 ; mm
+24660 ; temperature ; 29.52 ; °C
+24674 ; capteur   1 ; 34.42 ; mm
+24686 ; capteur   2 ; 46.64 ; mm
+24697 ; capteur   3 ; 27.20 ; mm
+24710 ; capteur   4 ; 28.66 ; mm
+24720 ; temperature ; 29.52 ; °C
+24734 ; capteur   1 ; 34.58 ; mm
+24746 ; capteur   2 ; 45.10 ; mm
+24758 ; capteur   3 ; 26.72 ; mm
+24770 ; capteur   4 ; 30.82 ; mm
+24780 ; temperature ; 29.52 ; °C
+24794 ; capteur   1 ; 34.74 ; mm
+24806 ; capteur   2 ; 45.24 ; mm
+24817 ; capteur   3 ; 25.38 ; mm
+24830 ; capteur   4 ; 31.36 ; mm
+24840 ; temperature ; 29.60 ; °C
+24854 ; capteur   1 ; 35.38 ; mm
+24866 ; capteur   2 ; 45.30 ; mm
+24878 ; capteur   3 ; 27.34 ; mm
+24890 ; capteur   4 ; 31.32 ; mm
+24900 ; temperature ; 29.60 ; °C
+24914 ; capteur   1 ; 34.80 ; mm
+24926 ; capteur   2 ; 44.74 ; mm
+24938 ; capteur   3 ; 28.02 ; mm
+24949 ; capteur   4 ; 32.46 ; mm
+24960 ; temperature ; 29.60 ; °C
+24974 ; capteur   1 ; 35.50 ; mm
+24986 ; capteur   2 ; 45.52 ; mm
+24998 ; capteur   3 ; 25.60 ; mm
+25010 ; capteur   4 ; 32.56 ; mm
+25020 ; temperature ; 29.60 ; °C
+25034 ; capteur   1 ; 34.60 ; mm
+25046 ; capteur   2 ; 43.60 ; mm
+25058 ; capteur   3 ; 27.20 ; mm
+25069 ; capteur   4 ; 31.98 ; mm
+25080 ; temperature ; 29.69 ; °C
+25093 ; capteur   1 ; 34.16 ; mm
+25106 ; capteur   2 ; 43.82 ; mm
+25118 ; capteur   3 ; 26.76 ; mm
+25130 ; capteur   4 ; 30.12 ; mm
+25140 ; temperature ; 29.69 ; °C
+25154 ; capteur   1 ; 34.06 ; mm
+25166 ; capteur   2 ; 45.40 ; mm
+25178 ; capteur   3 ; 26.16 ; mm
+25190 ; capteur   4 ; 30.66 ; mm
+25200 ; temperature ; 29.69 ; °C
+25213 ; capteur   1 ; 31.72 ; mm
+25226 ; capteur   2 ; 45.14 ; mm
+25238 ; capteur   3 ; 27.52 ; mm
+25250 ; capteur   4 ; 27.28 ; mm
+25260 ; temperature ; 29.69 ; °C
+25274 ; capteur   1 ; 34.10 ; mm
+25286 ; capteur   2 ; 45.08 ; mm
+25298 ; capteur   3 ; 25.76 ; mm
+25310 ; capteur   4 ; 29.46 ; mm
+25320 ; temperature ; 29.69 ; °C
+25333 ; capteur   1 ; 35.14 ; mm
+25346 ; capteur   2 ; 44.42 ; mm
+25358 ; capteur   3 ; 27.30 ; mm
+25370 ; capteur   4 ; 29.42 ; mm
+25380 ; temperature ; 29.77 ; °C
+25394 ; capteur   1 ; 31.68 ; mm
+25406 ; capteur   2 ; 44.26 ; mm
+25418 ; capteur   3 ; 25.48 ; mm
+25430 ; capteur   4 ; 28.72 ; mm
+25440 ; temperature ; 29.77 ; °C
+25454 ; capteur   1 ; 33.24 ; mm
+25465 ; capteur   2 ; 44.56 ; mm
+25478 ; capteur   3 ; 26.70 ; mm
+25490 ; capteur   4 ; 27.98 ; mm
+25500 ; temperature ; 29.77 ; °C
+25514 ; capteur   1 ; 32.66 ; mm
+25526 ; capteur   2 ; 44.70 ; mm
+25538 ; capteur   3 ; 28.64 ; mm
+25550 ; capteur   4 ; 28.80 ; mm
+25560 ; temperature ; 29.86 ; °C
+25574 ; capteur   1 ; 34.16 ; mm
+25585 ; capteur   2 ; 44.74 ; mm
+25598 ; capteur   3 ; 26.86 ; mm
+25610 ; capteur   4 ; 27.20 ; mm
+25620 ; temperature ; 29.86 ; °C
+25634 ; capteur   1 ; 32.92 ; mm
+25646 ; capteur   2 ; 44.62 ; mm
+25658 ; capteur   3 ; 25.94 ; mm
+25670 ; capteur   4 ; 26.78 ; mm
+25680 ; temperature ; 29.86 ; °C
+25694 ; capteur   1 ; 33.84 ; mm
+25705 ; capteur   2 ; 44.02 ; mm
+25717 ; capteur   3 ; 25.76 ; mm
+25730 ; capteur   4 ; 27.88 ; mm
+25740 ; temperature ; 29.94 ; °C
+25754 ; capteur   1 ; 34.14 ; mm
+25766 ; capteur   2 ; 43.52 ; mm
+25778 ; capteur   3 ; 25.72 ; mm
+25790 ; capteur   4 ; 31.76 ; mm
+25800 ; temperature ; 29.94 ; °C
+25814 ; capteur   1 ; 35.26 ; mm
+25826 ; capteur   2 ; 44.92 ; mm
+25837 ; capteur   3 ; 25.10 ; mm
+25850 ; capteur   4 ; 31.36 ; mm
+25860 ; temperature ; 29.94 ; °C
+25874 ; capteur   1 ; 36.30 ; mm
+25886 ; capteur   2 ; 42.88 ; mm
+25898 ; capteur   3 ; 25.20 ; mm
+25910 ; capteur   4 ; 31.82 ; mm
+25920 ; temperature ; 29.94 ; °C
+25934 ; capteur   1 ; 35.38 ; mm
+25946 ; capteur   2 ; 42.52 ; mm
+25957 ; capteur   3 ; 25.76 ; mm
+25969 ; capteur   4 ; 31.70 ; mm
+25980 ; temperature ; 29.94 ; °C
+25994 ; capteur   1 ; 35.92 ; mm
+26006 ; capteur   2 ; 44.10 ; mm
+26018 ; capteur   3 ; 24.82 ; mm
+26030 ; capteur   4 ; 31.12 ; mm
+26040 ; temperature ; 30.03 ; °C
+26054 ; capteur   1 ; 35.28 ; mm
+26066 ; capteur   2 ; 43.16 ; mm
+26078 ; capteur   3 ; 24.72 ; mm
+26089 ; capteur   4 ; 31.08 ; mm
+26100 ; temperature ; 30.03 ; °C
+26114 ; capteur   1 ; 35.20 ; mm
+26126 ; capteur   2 ; 44.60 ; mm
+26138 ; capteur   3 ; 25.12 ; mm
+26150 ; capteur   4 ; 31.36 ; mm
+26160 ; temperature ; 30.03 ; °C
+26174 ; capteur   1 ; 35.46 ; mm
+26186 ; capteur   2 ; 44.02 ; mm
+26198 ; capteur   3 ; 24.22 ; mm
+26209 ; capteur   4 ; 31.74 ; mm
+26220 ; temperature ; 30.03 ; °C
+26233 ; capteur   1 ; 34.52 ; mm
+26246 ; capteur   2 ; 42.86 ; mm
+26258 ; capteur   3 ; 24.48 ; mm
+26270 ; capteur   4 ; 30.46 ; mm
+26280 ; temperature ; 30.03 ; °C
+26294 ; capteur   1 ; 35.08 ; mm
+26306 ; capteur   2 ; 43.38 ; mm
+26318 ; capteur   3 ; 24.14 ; mm
+26329 ; capteur   4 ; 30.26 ; mm
+26340 ; temperature ; 30.03 ; °C
+26353 ; capteur   1 ; 35.44 ; mm
+26366 ; capteur   2 ; 43.30 ; mm
+26378 ; capteur   3 ; 24.56 ; mm
+26390 ; capteur   4 ; 28.82 ; mm
+26400 ; temperature ; 30.03 ; °C
+26414 ; capteur   1 ; 34.32 ; mm
+26426 ; capteur   2 ; 41.50 ; mm
+26438 ; capteur   3 ; 23.32 ; mm
+26450 ; capteur   4 ; 28.26 ; mm
+26460 ; temperature ; 30.03 ; °C
+26473 ; capteur   1 ; 34.36 ; mm
+26486 ; capteur   2 ; 42.54 ; mm
+26498 ; capteur   3 ; 24.32 ; mm
+26510 ; capteur   4 ; 30.60 ; mm
+26520 ; temperature ; 30.03 ; °C
+26534 ; capteur   1 ; 33.62 ; mm
+26546 ; capteur   2 ; 43.00 ; mm
+26558 ; capteur   3 ; 24.36 ; mm
+26570 ; capteur   4 ; 29.42 ; mm
+26580 ; temperature ; 30.03 ; °C
+26594 ; capteur   1 ; 33.50 ; mm
+26605 ; capteur   2 ; 42.48 ; mm
+26618 ; capteur   3 ; 22.86 ; mm
+26630 ; capteur   4 ; 26.72 ; mm
+26640 ; temperature ; 30.03 ; °C
+26654 ; capteur   1 ; 32.86 ; mm
+26666 ; capteur   2 ; 41.88 ; mm
+26678 ; capteur   3 ; 24.50 ; mm
+26690 ; capteur   4 ; 28.90 ; mm
+26700 ; temperature ; 30.03 ; °C
+26714 ; capteur   1 ; 32.54 ; mm
+26725 ; capteur   2 ; 41.66 ; mm
+26738 ; capteur   3 ; 22.26 ; mm
+26750 ; capteur   4 ; 28.04 ; mm
+26760 ; temperature ; 29.94 ; °C
+26774 ; capteur   1 ; 33.26 ; mm
+26786 ; capteur   2 ; 42.48 ; mm
+26798 ; capteur   3 ; 24.08 ; mm
+26810 ; capteur   4 ; 27.72 ; mm
+26820 ; temperature ; 29.94 ; °C
+26834 ; capteur   1 ; 32.92 ; mm
+26845 ; capteur   2 ; 41.96 ; mm
+26857 ; capteur   3 ; 22.56 ; mm
+26870 ; capteur   4 ; 27.54 ; mm
+26880 ; temperature ; 29.86 ; °C
+26894 ; capteur   1 ; 32.70 ; mm
+26906 ; capteur   2 ; 40.80 ; mm
+26918 ; capteur   3 ; 23.88 ; mm
+26930 ; capteur   4 ; 26.04 ; mm
+26940 ; temperature ; 29.77 ; °C
+26954 ; capteur   1 ; 33.04 ; mm
+26966 ; capteur   2 ; 42.26 ; mm
+26977 ; capteur   3 ; 23.40 ; mm
+26990 ; capteur   4 ; 26.94 ; mm
+27000 ; temperature ; 29.77 ; °C
+27014 ; capteur   1 ; 32.82 ; mm
+27026 ; capteur   2 ; 41.38 ; mm
+27038 ; capteur   3 ; 23.72 ; mm
+27050 ; capteur   4 ; 26.84 ; mm
+27060 ; temperature ; 29.69 ; °C
+27074 ; capteur   1 ; 33.12 ; mm
+27086 ; capteur   2 ; 42.40 ; mm
+27097 ; capteur   3 ; 23.06 ; mm
+27110 ; capteur   4 ; 27.60 ; mm
+27120 ; temperature ; 29.60 ; °C
+27134 ; capteur   1 ; 32.40 ; mm
+27146 ; capteur   2 ; 41.58 ; mm
+27158 ; capteur   3 ; 22.90 ; mm
+27170 ; capteur   4 ; 25.72 ; mm
+27180 ; temperature ; 29.52 ; °C
+27194 ; capteur   1 ; 31.98 ; mm
+27206 ; capteur   2 ; 41.46 ; mm
+27218 ; capteur   3 ; 22.66 ; mm
+27229 ; capteur   4 ; 27.86 ; mm
+27240 ; temperature ; 29.43 ; °C
+27254 ; capteur   1 ; 33.00 ; mm
+27266 ; capteur   2 ; 41.48 ; mm
+27278 ; capteur   3 ; 26.02 ; mm
+27290 ; capteur   4 ; 25.64 ; mm
+27300 ; temperature ; 29.35 ; °C
+27314 ; capteur   1 ; 33.50 ; mm
+27326 ; capteur   2 ; 40.52 ; mm
+27338 ; capteur   3 ; 27.46 ; mm
+27349 ; capteur   4 ; 25.78 ; mm
+27360 ; temperature ; 29.26 ; °C
+27373 ; capteur   1 ; 32.96 ; mm
+27386 ; capteur   2 ; 41.62 ; mm
+27398 ; capteur   3 ; 25.58 ; mm
+27410 ; capteur   4 ; 26.18 ; mm
+27420 ; temperature ; 29.26 ; °C
+27434 ; capteur   1 ; 33.42 ; mm
+27446 ; capteur   2 ; 40.68 ; mm
+27458 ; capteur   3 ; 28.20 ; mm
+27469 ; capteur   4 ; 25.40 ; mm
+27480 ; temperature ; 29.18 ; °C
+27493 ; capteur   1 ; 33.64 ; mm
+27506 ; capteur   2 ; 40.12 ; mm
+27518 ; capteur   3 ; 25.86 ; mm
+27530 ; capteur   4 ; 24.60 ; mm
+27540 ; temperature ; 29.09 ; °C
+27554 ; capteur   1 ; 32.44 ; mm
+27566 ; capteur   2 ; 41.48 ; mm
+27578 ; capteur   3 ; 26.30 ; mm
+27590 ; capteur   4 ; 25.82 ; mm
+27600 ; temperature ; 29.01 ; °C
+27613 ; capteur   1 ; 31.78 ; mm
+27626 ; capteur   2 ; 40.84 ; mm
+27638 ; capteur   3 ; 25.18 ; mm
+27650 ; capteur   4 ; 24.62 ; mm
+27660 ; temperature ; 28.92 ; °C
+27674 ; capteur   1 ; 32.54 ; mm
+27686 ; capteur   2 ; 41.18 ; mm
+27698 ; capteur   3 ; 25.54 ; mm
+27710 ; capteur   4 ; 25.44 ; mm
+27720 ; temperature ; 28.84 ; °C
+27734 ; capteur   1 ; 35.86 ; mm
+27745 ; capteur   2 ; 40.86 ; mm
+27758 ; capteur   3 ; 24.54 ; mm
+27770 ; capteur   4 ; 23.92 ; mm
+27780 ; temperature ; 28.76 ; °C
+27794 ; capteur   1 ; 32.58 ; mm
+27806 ; capteur   2 ; 40.90 ; mm
+27818 ; capteur   3 ; 25.06 ; mm
+27830 ; capteur   4 ; 24.06 ; mm
+27840 ; temperature ; 28.67 ; °C
+27854 ; capteur   1 ; 36.76 ; mm
+27865 ; capteur   2 ; 41.42 ; mm
+27878 ; capteur   3 ; 26.28 ; mm
+27890 ; capteur   4 ; 23.70 ; mm
+27900 ; temperature ; 28.59 ; °C
+27914 ; capteur   1 ; 35.86 ; mm
+27926 ; capteur   2 ; 40.06 ; mm
+27938 ; capteur   3 ; 24.58 ; mm
+27950 ; capteur   4 ; 24.72 ; mm
+27960 ; temperature ; 28.59 ; °C
+27974 ; capteur   1 ; 36.90 ; mm
+27985 ; capteur   2 ; 39.96 ; mm
+27997 ; capteur   3 ; 24.30 ; mm
+28010 ; capteur   4 ; 23.30 ; mm
+28020 ; temperature ; 28.50 ; °C
+28034 ; capteur   1 ; 35.24 ; mm
+28046 ; capteur   2 ; 39.44 ; mm
+28058 ; capteur   3 ; 25.48 ; mm
+28070 ; capteur   4 ; 22.88 ; mm
+28080 ; temperature ; 28.42 ; °C
+28094 ; capteur   1 ; 35.92 ; mm
+28106 ; capteur   2 ; 41.20 ; mm
+28117 ; capteur   3 ; 24.00 ; mm
+28130 ; capteur   4 ; 22.34 ; mm
+28140 ; temperature ; 28.42 ; °C
+28154 ; capteur   1 ; 36.04 ; mm
+28166 ; capteur   2 ; 39.70 ; mm
+28178 ; capteur   3 ; 24.22 ; mm
+28190 ; capteur   4 ; 23.50 ; mm
+28200 ; temperature ; 28.42 ; °C
+28214 ; capteur   1 ; 34.94 ; mm
+28226 ; capteur   2 ; 40.18 ; mm
+28237 ; capteur   3 ; 24.38 ; mm
+28250 ; capteur   4 ; 22.26 ; mm
+28260 ; temperature ; 28.42 ; °C
+28274 ; capteur   1 ; 33.92 ; mm
+28286 ; capteur   2 ; 41.92 ; mm
+28298 ; capteur   3 ; 23.30 ; mm
+28310 ; capteur   4 ; 22.30 ; mm
+28320 ; temperature ; 28.42 ; °C
+28334 ; capteur   1 ; 34.48 ; mm
+28346 ; capteur   2 ; 39.92 ; mm
+28358 ; capteur   3 ; 22.40 ; mm
+28369 ; capteur   4 ; 22.32 ; mm
+28380 ; temperature ; 28.42 ; °C
+28394 ; capteur   1 ; 34.38 ; mm
+28406 ; capteur   2 ; 40.74 ; mm
+28418 ; capteur   3 ; 24.18 ; mm
+28430 ; capteur   4 ; 23.36 ; mm
+28440 ; temperature ; 28.42 ; °C
+28454 ; capteur   1 ; 34.18 ; mm
+28466 ; capteur   2 ; 40.38 ; mm
+28478 ; capteur   3 ; 24.86 ; mm
+28489 ; capteur   4 ; 21.44 ; mm
+28500 ; temperature ; 28.42 ; °C
+28513 ; capteur   1 ; 34.44 ; mm
+28526 ; capteur   2 ; 40.52 ; mm
+28538 ; capteur   3 ; 25.20 ; mm
+28550 ; capteur   4 ; 22.20 ; mm
+28560 ; temperature ; 28.42 ; °C
+28574 ; capteur   1 ; 34.94 ; mm
+28586 ; capteur   2 ; 40.56 ; mm
+28598 ; capteur   3 ; 25.12 ; mm
+28609 ; capteur   4 ; 22.30 ; mm
+28620 ; temperature ; 28.42 ; °C
+28633 ; capteur   1 ; 40.76 ; mm
