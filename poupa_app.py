@@ -16,8 +16,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 COULEURS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9242b4"]
 test = True
-st.set_page_config(page_title="Poupa",
-                   layout="wide")
+st.set_page_config(page_title="Poupa")
 
 
 def donnees_brutes(fic):
@@ -127,35 +126,26 @@ def trouver_pente(x, y, i, intervalle, info_coeff_max, x_len, ax):
         return trouver_pente(x[intervalle:], y[intervalle:], i + 1, intervalle, info_coeff_max, x_len, ax)
 
 
-def dessiner_tableau(donnees, canv, titles):
-    table = ttk.Treeview(canv, height=5)
-
-    table['column'] = ("capteur", "p_max", "t0", "t1")
-    table.column("#0", width=0, stretch=False)
-    table.column("capteur", anchor='center', width=100)
-    table.column("p_max", anchor='center', width=130)
-    table.column("t0", anchor='center', width=100)
-    table.column("t1", anchor='center', width=100)
-
-    table.heading("#0", text="", anchor='center')
-    table.heading("capteur", text="Capteur", anchor='center')
-    table.heading("p_max", text="pente max (mm/min)", anchor='center')
-    table.heading("t0", text="Début croissance", anchor='center')
-    table.heading("t1", text="Fin croissance", anchor='center')
-
-    i = 0
-    print(donnees)
-    for pente in donnees:
-        pente.pop(1)
-        pente.insert(0, titles[i])
-        table.insert(parent='', index='end', iid=str(i), text='', values=pente)
-        i += 1
-    table.pack()
+def dessiner_tableau(donnees, titles):
+    st.header("Tableau de données")
+    container = st.container()
+    with container:
+        i = 0
+        print(donnees)
+        data = []
+        for pente in donnees:
+            pente.pop(1)
+            pente.insert(0, titles[i])
+            data.insert(i, pente)
+            i += 1
+        print(data)
+        df = pd.DataFrame(data, columns=("Capteur", "pente max (mm/min)", "Début pousse (min)", "Fin pousse (min)"))
+        st.dataframe(df)
 
 
 # lecture du fichier de données et tracé
 def dessiner_courbes(fichier, titres):
-    st.title("Poupa")
+    st.header("Courbes")
     touty = donnees_brutes(fichier)
     # infos_pente_courbes -> [[a, b, t0, t1], ....]
     infos_pente_courbes = []
@@ -166,8 +156,9 @@ def dessiner_courbes(fichier, titres):
             max_values.append(np.amax(touty[2 * i + 1][0] - touty[2 * i + 1]))
 
     with st.container():
-        col1, col2, col3 = st.columns(3)
-        col4, col5, col6 = st.columns(3)
+        col1, col2 = st.columns(2)
+        col3, col4 = st.columns(2)
+        col5, col6 = st.columns(2)
         tab_col = [col1, col2, col3, col4, col5, col6]
         # pour chaque graph, on fait une transaltation vers la droite et vers le bas pour que les courbes commences à
         # (0, 0) puis on les dessines elles et leur pente max et on trouve le t0 et t1
@@ -225,7 +216,22 @@ def dessiner_courbes(fichier, titres):
             st.pyplot(fig)
 
     # tableau des infos
+    dessiner_tableau(infos_pente_courbes, titres)
+
+
+def accueil():
+    st.title('Poupa')
+    with st.container():
+        file_input = st.text_input('Fichier de données')
+        tab_cpt = []
+        for i in range(4):
+            capteur_input = st.text_input('Capteur %d' % (i+1))
+            tab_cpt.append(capteur_input)
+        button = st.button('Lancer')
+        if button:
+            dessiner_courbes('data\\' + file_input, tab_cpt)
 
 
 if test:
-    dessiner_courbes('data\PP03-001.TXT', [1, 2, 3, 4])
+    accueil()
+    # dessiner_courbes('data\PP03-001.TXT', [1, 2, 3, 4])
