@@ -4,7 +4,6 @@ import math
 import pandas as pd
 import streamlit as st
 import numpy as np
-from scipy.stats import *
 import matplotlib.pyplot as plt
 from codecs import *
 import csv
