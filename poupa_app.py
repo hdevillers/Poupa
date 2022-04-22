@@ -1,5 +1,4 @@
 import pages.experience_view
-import pages.home
 from models import *
 from multipage import MultiPage
 

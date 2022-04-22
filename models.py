@@ -2,11 +2,10 @@ import streamlit as st
 import mysql.connector
 import pandas as pd
 import numpy as np
-from scipy.stats import *
-import matplotlib.pyplot as plt
-from codecs import *
 import csv
 import re
+from matplotlib import pyplot as plt
+from matplotlib.backends.backend_pdf import PdfPages
 
 
 @st.experimental_singleton
@@ -85,13 +84,12 @@ class User:
 
 class Experience:
     nom_table = "experiences"
-
-    COULEURS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9242b4"]
+    tab_figures = []
     test = True
 
     def __init__(self, id_boitier, date, lieu, operateur, fichier_donnees=None, fichier_resultat=None,
                  remarque=None):
-        self.identificateur = str(id_boitier) + "_" + str(date)+"_"+operateur
+        self.identificateur = str(id_boitier) + "_" + str(date) + "_" + operateur
         self.id_boitier = id_boitier
         self.date = date
         self.lieu = lieu
@@ -99,6 +97,9 @@ class Experience:
         self.fichier_donnees = fichier_donnees
         self.fichier_resultat = fichier_resultat
         self.remarque = remarque
+
+    def get_id(self):
+        return self.identificateur
 
     def create_experience(self):
         query = f"INSERT INTO {self.nom_table} (id, id_boitier, date, lieu, operateur, fichier_donnees, " \
@@ -108,10 +109,12 @@ class Experience:
         print(values)
         insert_into(query, values)
 
-    def donnees_brutes(self, fic):
+    COULEURS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9242b4"]
+
+    def donnees_brutes(self):
         # on trouve en entrée le nom du fichier à lire
 
-        f = open('data\\' + fic, "r")
+        f = open('data\\' + self.fichier_donnees, "r")
         my_reader = csv.reader(f)
         stot = [[], [], [], [], [], [], [], [], [], [], ]
         w = []
@@ -169,7 +172,7 @@ class Experience:
         return round(t0, 2)
 
     def find_t1(self, coor_current, x, y, intervalle):
-        ''' trouve t1 a partir de l'endroit ou on a trouvé la pente max, renvoi t1 arrondie .2'''
+        """ trouve t1 a partir de l'endroit ou on a trouvé la pente max, renvoi t1 arrondie .2"""
         x_current = coor_current
         y_current = coor_current
         while x_current + intervalle < len(y):
@@ -180,7 +183,7 @@ class Experience:
                 return round(x[x_current], 2)
 
     def trouver_pente(self, x, y, i, intervalle, info_coeff_max, x_len, ax):
-        ''' trouve la pente maximum, la dessine, puis renvoi [a, b, t0] '''
+        """ trouve la pente maximum, la dessine, puis renvoi [a, b, t0] """
         if len(y) < intervalle or len(x) < intervalle:
             a, b = self.reg_lin([x[0], x[-1]],
                                 [y[0], y[-1]])
@@ -222,10 +225,17 @@ class Experience:
             df = pd.DataFrame(data, columns=("Capteur", "pente max (mm/min)", "Début pousse (min)", "Fin pousse (min)"))
             st.dataframe(df)
 
-    # lecture du fichier de données et tracé
+            fig = plt.figure()
+            ax = plt.subplot(111)
+            ax.axis('off')
+            ax.table(cellText=df.values, colLabels=df.columns, bbox=[0, 0, 1, 1])
+            self.tab_figures.append(fig)
+
+        # lecture du fichier de données et tracé
+
     def dessiner_courbes(self, titres):
         st.header("Courbes")
-        touty = self.donnees_brutes(self.fichier_donnees)
+        touty = self.donnees_brutes()
         # infos_pente_courbes -> [[a, b, t0, t1], ....]
         infos_pente_courbes = []
         # on cherche les valeurs maximum de chaque graph pour les mettre à la meme echelle
@@ -277,11 +287,13 @@ class Experience:
                         ax.grid(which='minor', alpha=0.2, linestyle='--')
 
                         st.pyplot(fig_courbe)
+                        self.tab_figures.append(fig_courbe)
 
                     else:
                         fig, ax = plt.subplots()
                         st.write("""Pas de données""")
                         st.pyplot(fig)
+                        self.tab_figures.append(fig)
                     # info_courbe("Capteur n°" + str(i + 1), 'temps (min)', 'pousse (mm)', fig_courbe_vide)
                     # fig_courbe_vide.grid()
 
@@ -303,6 +315,7 @@ class Experience:
                 # fig_temp.plot(touty[8], touty[9], color=COULEURS[4])
                 plt.ylim(ymin=10)
                 self.info_courbe("temperature", 'temps (min)', 'température  (°c)')
+                self.tab_figures.append(fig)
 
             # toutes les courbes
             # fig_all = fig.add_subplot(236)
@@ -320,9 +333,17 @@ class Experience:
                 ax.grid(which='both')
                 ax.grid(which='minor', alpha=0.2, linestyle='--')
                 st.pyplot(fig)
+                self.tab_figures.append(fig)
 
         # tableau des infos
         self.dessiner_tableau(infos_pente_courbes, titres)
+
+    @st.cache
+    def generate_pdf(self):
+        pp = PdfPages(f"{self.get_id()}.pdf")
+        for fig in self.tab_figures:
+            pp.savefig(fig)
+        pp.close()
 
 
 class Capteur:
@@ -335,6 +356,12 @@ class Capteur:
         self.id_levain = id_levain
         self.remarque = remarque
         self.fichier_donnees = fichier_donnees
+
+    def get_type(self):
+        return self.type_capteur
+
+    def get_id_experience(self):
+        return self.id_experience
 
     def create_capteur(self):
         query = f"INSERT INTO {self.nom_table} ( type_capteur, id_experience, nom_farine, id_levain, remarque, " \
