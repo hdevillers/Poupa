@@ -25,8 +25,8 @@ def run_query(query, tuple_values):
         return cur.fetchall()
 
 
-def get_all(attribute, nom_table):
-    query = f"SELECT {attribute} FROM {nom_table}"
+def get_all(nom_table):
+    query = f"SELECT * FROM {nom_table}"
     return run_query(query, None)
 
 

@@ -9,7 +9,6 @@ test = True
 
 app = MultiPage()
 
-st.title("Poupa")
 
 # app.add_page("Accueil", home.app())
 app.add_page("Novelle Experience", pages.experience_view.app)
