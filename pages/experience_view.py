@@ -1,12 +1,13 @@
-import streamlit as st
 import random
 import models
 from models import *
+import multipage_streamlit as mt
 
 test = True
 
 
 def app():
+
     with open("css\\experience.css", "r") as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
@@ -51,20 +52,15 @@ def app():
                 tab_cpt.append((f"Capteur_{i + 1}", selectfarine, selectlevain, input_remarque))
                 tab_titre_cpt.append(selectfarine + "-" + selectlevain)
 
-        button = st.form_submit_button('Lancer')
-    if button:
+        if st.form_submit_button('Lancer'):
 
-        print(tab_titre_cpt)
-        experience = Experience(int(selectbox_boitiers), input_date, input_lieu, input_operateur,
-                                file_input)
-        # experience.create_experience()
-        for infos in tab_cpt:
-            cpt = Capteur(infos[0], experience.get_id(), infos[1], infos[2], infos[3])
-            # cpt.create_capteur()
+            # print(tab_titre_cpt)
+            experience = Experience(int(selectbox_boitiers), input_date, input_lieu, input_operateur, tab_titre_cpt,
+                                    file_input)
+            st.session_state['experience'] = experience
+            st.sidebar.write(st.session_state)
+            # experience.create_experience()
+            for infos in tab_cpt:
+                cpt = Capteur(infos[0], experience.get_id(), infos[1], infos[2], infos[3])
 
-        # experience = Experience(1, 1, '21/04/2022', 'Inrae Montpellier', 'fmabille',  file_input)
-        experience.dessiner_courbes(tab_titre_cpt)
 
-        download = st.button("Télécharger résultats")
-        if download:
-            experience.generate_pdf()

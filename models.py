@@ -87,13 +87,14 @@ class Experience:
     tab_figures = []
     test = True
 
-    def __init__(self, id_boitier, date, lieu, operateur, fichier_donnees=None, fichier_resultat=None,
+    def __init__(self, id_boitier, date, lieu, operateur, titres_cpt, fichier_donnees=None, fichier_resultat=None,
                  remarque=None):
         self.identificateur = str(id_boitier) + "_" + str(date) + "_" + operateur
         self.id_boitier = id_boitier
         self.date = date
         self.lieu = lieu
         self.operateur = operateur
+        self.titres_cpt = titres_cpt
         self.fichier_donnees = fichier_donnees
         self.fichier_resultat = fichier_resultat
         self.remarque = remarque
@@ -211,7 +212,7 @@ class Experience:
                 print("a   ={:8.3f}\nb   ={:8.3f}\n".format(a, b))
             return self.trouver_pente(x[intervalle:], y[intervalle:], i + 1, intervalle, info_coeff_max, x_len, ax)
 
-    def dessiner_tableau(self, donnees, titles):
+    def dessiner_tableau(self, donnees):
         st.header("Tableau de données")
         container = st.container()
         with container:
@@ -219,7 +220,7 @@ class Experience:
             data = []
             for pente in donnees:
                 pente.pop(1)
-                pente.insert(0, titles[i])
+                pente.insert(0, self.titres_cpt[i])
                 data.insert(i, pente)
                 i += 1
             df = pd.DataFrame(data, columns=("Capteur", "pente max (mm/min)", "Début pousse (min)", "Fin pousse (min)"))
@@ -233,18 +234,18 @@ class Experience:
 
         # lecture du fichier de données et tracé
 
-    def dessiner_courbes(self, titres):
-        st.header("Courbes")
-        touty = self.donnees_brutes()
-        # infos_pente_courbes -> [[a, b, t0, t1], ....]
-        infos_pente_courbes = []
-        # on cherche les valeurs maximum de chaque graph pour les mettre à la meme echelle
-        max_values = []
-        for i in range(4):
-            if len(touty[2 * i]) > 3:
-                max_values.append(np.amax(touty[2 * i + 1][0] - touty[2 * i + 1]))
-
+    def dessiner_courbes(self):
         with st.container():
+            st.header("Courbes")
+            touty = self.donnees_brutes()
+            # infos_pente_courbes -> [[a, b, t0, t1], ....]
+            infos_pente_courbes = []
+            # on cherche les valeurs maximum de chaque graph pour les mettre à la meme echelle
+            max_values = []
+            for i in range(4):
+                if len(touty[2 * i]) > 3:
+                    max_values.append(np.amax(touty[2 * i + 1][0] - touty[2 * i + 1]))
+
             col1, col2 = st.columns(2)
             col3, col4 = st.columns(2)
             col5, col6 = st.columns(2)
@@ -260,10 +261,11 @@ class Experience:
                         fig_courbe, ax = plt.subplots()
                         liss = self.lissage(touty[2 * i], touty[2 * i + 1], 5)
 
-                        self.info_courbe(titres[i], 'temps (min)', 'pousse (mm)')
+                        self.info_courbe(self.titres_cpt[i], 'temps (min)', 'pousse (mm)')
                         intervalle = 45
 
-                        i_max, info_pente = self.trouver_pente(liss[0], liss[1], 0, intervalle, [0, 0, 0], len(liss[0]),
+                        i_max, info_pente = self.trouver_pente(liss[0], liss[1], 0, intervalle, [0, 0, 0],
+                                                               len(liss[0]),
                                                                ax)
                         infos_pente_courbes.append(info_pente)
                         infos_pente_courbes[i].append(self.find_t1(i_max, liss[0], liss[1], intervalle))
@@ -335,10 +337,10 @@ class Experience:
                 st.pyplot(fig)
                 self.tab_figures.append(fig)
 
-        # tableau des infos
-        self.dessiner_tableau(infos_pente_courbes, titres)
+            # tableau des infos
+            self.dessiner_tableau(infos_pente_courbes)
+            print(self.tab_figures)
 
-    @st.cache
     def generate_pdf(self):
         pp = PdfPages(f"{self.get_id()}.pdf")
         for fig in self.tab_figures:
