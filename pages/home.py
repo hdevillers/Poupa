@@ -1,11 +1,11 @@
 import streamlit as st
-
+import pages.connexion
 import models
 
 
 def app():
-    st.header("Bienvenu !")
-    all_exp = models.get_all("experiences")
+    st.header("Bienvenu " + st.session_state['prenom_nom'])
+    all_exp = models.get_by("experiences", "operateur", st.session_state['login'])
     for experience in all_exp:
         with st.container():
             st.subheader(experience[0])
@@ -20,4 +20,3 @@ def app():
                     st.write(f"farine utilisé = {capteur[2]}")
                     st.write(f"levain utilisé = {capteur[3]}")
                 i += 1
-

@@ -60,7 +60,9 @@ def app():
             st.session_state['experience'] = experience
             st.sidebar.write(st.session_state)
             # experience.create_experience()
+            list_of_capteurs = []
             for infos in tab_cpt:
                 cpt = Capteur(infos[0], experience.get_id(), infos[1], infos[2], infos[3])
-
+                list_of_capteurs.append(cpt)
+            st.session_state[f'capteures'] = list_of_capteurs
 

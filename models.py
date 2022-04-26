@@ -81,6 +81,12 @@ class User:
         self.prenom = prenom
         self.mdp = mdp
 
+    def create_user(self):
+        query = f"INSERT INTO {self.nom_table} (login, nom, prenom, mot_de_passe) VALUES (%s, %s, %s, %s)"
+        values = (self.login, self.nom, self.prenom, self.mdp)
+        print(values)
+        insert_into(query, values)
+
 
 class Experience:
     nom_table = "experiences"
