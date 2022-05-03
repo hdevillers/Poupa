@@ -1,9 +1,10 @@
 import streamlit as st
 import models
 import hashlib
-import poupa_app
+import time
+from typing import Dict
 from mysql.connector import Error
-import multipage_streamlit as mt
+from hydralit import HydraApp, HydraHeadApp
 
 
 def make_hashes(password):
@@ -16,56 +17,91 @@ def check_hashes(password, hashed_text):
     return False
 
 
-def app():
+class ConnexionPage(HydraHeadApp):
+    def __init__(self, title='', **kwargs):
+        self.__dict__.update(kwargs)
+        self.title = title
 
-    app_connexion = mt.MultiPage()
-    app_connexion.add("Connexion", connect)
-    app_connexion.add("Inscription", inscription)
-    app_connexion.run_expander()
-
-
-def connect():
-    with st.form("form connexion"):
+    def run(self):
         st.subheader("Login Section")
 
-        username = st.text_input("User Name")
-        password = st.text_input("Mot de passe", type='password')
-        if st.form_submit_button("Login"):
-            # if password == '12345':
-            user = models.get_by('users', 'login', username)
-            result = ""
+        form_data = self._create_login_form()
+        if form_data['submitted']:
+            self._do_login(form_data)
 
-            if user:
-                result = check_hashes(str(st.secrets["seed"] + password), user[0][3])
-            else:
-                st.error("Utilisateur inconnus")
-            if result:
-                st.success(f"Connecté en tant que {user[0][1]} {user[0][2]}")
-                st.session_state['login'] = user[0][0]
-                st.session_state['prenom_nom'] = str(user[0][2] + " " + user[0][1])
-                poupa_app.run()
-            else:
-                st.error("Mauvais mot de passe :P")
+    def _create_login_form(self) -> Dict:
+        login_form = st.form(key="login_form")
+
+        form_state = {'username': login_form.text_input('Username'),
+                      'password': login_form.text_input('Password', type="password"),
+                      'submitted': login_form.form_submit_button('Login')}
+
+        if st.button("Créer un compte", key='signupbtn'):
+            self.set_access(-1, 'guest')
+
+            self.do_redirect()
+
+        return form_state
+
+    def _do_login(self, form_data):
+        access, nom, prenom = self._check_access(form_data['username'], form_data['password'])
+        if access:
+            st.success(f"Connecté en tant que {nom} {prenom}")
+            st.session_state['login'] = form_data['username']
+            st.session_state['prenom_nom'] = str(nom + " " + prenom)
+            with st.spinner("now redirecting to application...."):
+                time.sleep(1)
+
+                self.set_access(1, st.session_state['login'])
+
+                # Do the kick to the home page
+                self.do_redirect()
+        else:
+            st.error("Mauvais mot de passe :P")
+
+    def _check_access(self, login, mdp):
+        user = models.get_by('users', 'login', login)
+        if user:
+            return check_hashes(str(st.secrets["seed"] + mdp), user[0][3]), user[0][1], user[0][2]
+        else:
+            st.error("Utilisateur inconnus")
 
 
-def inscription():
-    with st.form("form inscription"):
-        st.subheader("Insciption")
-        username = st.text_input("User Name", key='inscription_username')
-        nom = st.text_input("Nom")
-        prenom = st.text_input("Prénom")
-        password = st.text_input("Mot de passe", type='password', key='password_inscription')
-        confirm_password = st.text_input("Confirmation du mot de passe", type='password')
+class InscriptionPage(HydraHeadApp):
+    def __init__(self, title='', **kwargs):
+        self.__dict__.update(kwargs)
+        self.title = title
 
-        if st.form_submit_button("Valider"):
-            if password == confirm_password:
-                hash_password = make_hashes(st.secrets['seed']+password)
-                user = models.User(username, hash_password, nom, prenom)
-                try:
-                    user.create_user()
-                except Error as err:
-                    st.error(err.msg)
-                    raise
-                st.success("Utilisateur créé avec succé ! Maintenant connctez-vous")
-            else:
-                st.error("Les mots de passes doivent être identiques")
+    def run(self):
+        form_data = self._create_signup_form()
+
+        if form_data['submitted']:
+            self._do_signup(form_data)
+
+    def _create_signup_form(self) -> Dict:
+        login_form = st.form(key="login_form")
+
+        form_state = {'username': login_form.text_input('Username'),
+                      'nom': login_form.text_input('Nom'),
+                      'prenom': login_form.text_input('Prénom'),
+                      'password': login_form.text_input('Password', type="password"),
+                      'password2': login_form.text_input('Confirm Password', type="password"),
+                      'submitted': login_form.form_submit_button('Sign Up')}
+        return form_state
+
+    def _do_signup(self, form_data):
+        if form_data['password'] == form_data['password2']:
+            hash_password = make_hashes(st.secrets['seed'] + form_data['password'])
+            user = models.User(form_data['username'], hash_password, form_data['nom'], form_data['prenom'])
+            try:
+                user.create_user()
+            except Error as err:
+                st.error(err.msg)
+                raise
+            with st.spinner("🤓 now redirecting to login...."):
+                time.sleep(2)
+
+                self.do_redirect()
+        else:
+            st.error("Les mots de passes doivent être identiques")
+

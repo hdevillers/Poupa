@@ -8,17 +8,16 @@ from matplotlib import pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
 
-@st.experimental_singleton
 def init_connection():
     return mysql.connector.connect(**st.secrets["mysql"])
 
 
 test = True
-conn = init_connection()
 
 
 @st.experimental_memo(ttl=10)
 def run_query(query, tuple_values):
+    conn = init_connection()
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
         return cur.fetchall()
@@ -35,8 +34,30 @@ def get_by(nom_table, selector, value):
     return run_query(query, tuple_values)
 
 
+"""def get_by(nom_table, selectors, values):
+    where_clause = ""
+    i = 0
+    for selector in selectors:
+        where_clause += f"{selector}= %s"
+        if i < len(selectors) - 1:
+            where_clause += " AND "
+        i += 1
+    query = f"SELECT * FROM {nom_table} WHERE {where_clause}"
+    tuple_values = (values,)
+    return run_query(query, tuple_values)"""
+
+
 @st.experimental_memo(ttl=10)
 def insert_into(query, tuple_values):
+    conn = init_connection()
+    with conn.cursor() as cur:
+        cur.execute(query, tuple_values)
+        conn.commit()
+
+
+@st.experimental_memo(ttl=10)
+def update(query, tuple_values):
+    conn = init_connection()
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
         conn.commit()
@@ -95,6 +116,7 @@ class Experience:
 
     def __init__(self, id_boitier, date, lieu, operateur, titres_cpt, fichier_donnees=None, fichier_resultat=None,
                  remarque=None):
+        self.touty = []
         self.identificateur = str(id_boitier) + "_" + str(date) + "_" + operateur
         self.id_boitier = id_boitier
         self.date = date
@@ -113,14 +135,19 @@ class Experience:
                 f"fichier_resultat, remarque) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         values = (self.identificateur, self.id_boitier, self.date, self.lieu, self.operateur, self.fichier_donnees,
                   self.fichier_resultat, self.remarque)
-        print(values)
         insert_into(query, values)
+
+    def update_experience(self):
+        query = f"UPDATE {self.nom_table} SET id_boitier=%s, date=%s, lieu=%s, operateur=%s, fichier_donnees=%s, " \
+                f"fichier_resultat=%s, remarque=%s WHERE id = %s "
+        values = (self.id_boitier, self.date, self.lieu, self.operateur, self.fichier_donnees,
+                  self.fichier_resultat, self.remarque, self.identificateur, )
+        update(query, values)
 
     COULEURS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9242b4"]
 
     def donnees_brutes(self):
         # on trouve en entrée le nom du fichier à lire
-
         f = open('data\\' + self.fichier_donnees, "r")
         my_reader = csv.reader(f)
         stot = [[], [], [], [], [], [], [], [], [], [], ]
@@ -243,14 +270,14 @@ class Experience:
     def dessiner_courbes(self):
         with st.container():
             st.header("Courbes")
-            touty = self.donnees_brutes()
+            self.touty = self.donnees_brutes()
             # infos_pente_courbes -> [[a, b, t0, t1], ....]
             infos_pente_courbes = []
             # on cherche les valeurs maximum de chaque graph pour les mettre à la meme echelle
             max_values = []
             for i in range(4):
-                if len(touty[2 * i]) > 3:
-                    max_values.append(np.amax(touty[2 * i + 1][0] - touty[2 * i + 1]))
+                if len(self.touty[2 * i]) > 3:
+                    max_values.append(np.amax(self.touty[2 * i + 1][0] - self.touty[2 * i + 1]))
 
             col1, col2 = st.columns(2)
             col3, col4 = st.columns(2)
@@ -260,12 +287,13 @@ class Experience:
             # commencent à (0, 0) puis on les dessines elles et leur pente max et on trouve le t0 et t1
             for i in range(4):
                 with tab_col[i]:
-                    if len(touty[2 * i]) > 3:
-                        touty[2 * i] = (touty[2 * i] - touty[2 * i][0]) / 60
-                        touty[2 * i + 1] = touty[2 * i + 1][0] - touty[2 * i + 1]
+                    if len(self.touty[2 * i]) > 3:
+
+                        self.touty[2 * i] = (self.touty[2 * i] - self.touty[2 * i][0]) / 60
+                        self.touty[2 * i + 1] = self.touty[2 * i + 1][0] - self.touty[2 * i + 1]
 
                         fig_courbe, ax = plt.subplots()
-                        liss = self.lissage(touty[2 * i], touty[2 * i + 1], 5)
+                        liss = self.lissage(self.touty[2 * i], self.touty[2 * i + 1], 5)
 
                         self.info_courbe(self.titres_cpt[i], 'temps (min)', 'pousse (mm)')
                         intervalle = 45
@@ -286,7 +314,7 @@ class Experience:
 
                         ax.plot(liss[0], liss[1], color=self.COULEURS[i])
 
-                        listOf_Xticks = np.arange(0, max(touty[2 * i]), 20)
+                        listOf_Xticks = np.arange(0, max(self.touty[2 * i]), 20)
                         ax.set_xticks(listOf_Xticks, minor=True)
                         listOf_Yticks = np.arange(0, max(max_values), 2)
                         ax.set_yticks(listOf_Yticks, minor=True)
@@ -308,12 +336,12 @@ class Experience:
             # courbe des températures
             with col5:
                 fig, ax = plt.subplots()
-                touty[8] = (touty[8] - touty[8][0]) / 60
-                ax.plot(touty[8], touty[9])
+                self.touty[8] = (self.touty[8] - self.touty[8][0]) / 60
+                ax.plot(self.touty[8], self.touty[9])
 
-                listOf_Xticks = np.arange(0, max(touty[8]), 20)
+                listOf_Xticks = np.arange(0, max(self.touty[8]), 20)
                 ax.set_xticks(listOf_Xticks, minor=True)
-                listOf_Yticks = np.arange(0, max(touty[9]), 2)
+                listOf_Yticks = np.arange(0, max(self.touty[9]), 2)
                 ax.set_yticks(listOf_Yticks, minor=True)
 
                 ax.grid(which='both')
@@ -330,10 +358,10 @@ class Experience:
             with col6:
                 fig, ax = plt.subplots()
                 for i in range(4):
-                    arr = self.lissage(touty[2 * i], touty[2 * i + 1], 5)
+                    arr = self.lissage(self.touty[2 * i], self.touty[2 * i + 1], 5)
                     ax.plot(arr[0], arr[1])
                 self.info_courbe("Capteurs", 'temps (min)', 'pousse (mm)')
-                listOf_Xticks = np.arange(0, max(touty[8]), 20)
+                listOf_Xticks = np.arange(0, max(self.touty[8]), 20)
                 ax.set_xticks(listOf_Xticks, minor=True)
                 listOf_Yticks = np.arange(0, max(max_values), 2)
                 ax.set_yticks(listOf_Yticks, minor=True)
@@ -353,28 +381,91 @@ class Experience:
             pp.savefig(fig)
         pp.close()
 
+    def generate_csv_cpt(self):
+        tab_file = []
+        for i in range(4):
+            if len(self.touty[2 * i]) > 3:
+                file = 'data\\capteurs\\' + self.identificateur + "Capteur_" + str(i + 1) + '.csv'
+                tab_file.append(file)
+                with open(file, 'w') as csvfile:
+                    print(csvfile)
+                    filewriter = csv.writer(csvfile, delimiter=",", quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                    filewriter.writerow(self.touty[2 * i])
+                    filewriter.writerow(self.touty[2 * i + 1])
+        return tab_file
+
 
 class Capteur:
     nom_table = "capteurs"
 
     def __init__(self, type_capteur, id_experience, nom_farine, id_levain, remarque=None, fichier_donnees=None):
-        self.type_capteur = type_capteur
-        self.id_experience = id_experience
-        self.nom_farine = nom_farine
-        self.id_levain = id_levain
-        self.remarque = remarque
-        self.fichier_donnees = fichier_donnees
+        self._type_capteur = type_capteur
+        self._id_experience = id_experience
+        self._nom_farine = nom_farine
+        self._id_levain = id_levain
+        self._remarque = remarque
+        self._fichier_donnees = fichier_donnees
 
     def get_type(self):
-        return self.type_capteur
+        return self._type_capteur
 
     def get_id_experience(self):
-        return self.id_experience
+        return self._id_experience
+
+    def get_farine(self):
+        return self._nom_farine
+
+    def get_levain(self):
+        return self._id_levain
 
     def create_capteur(self):
         query = f"INSERT INTO {self.nom_table} ( type_capteur, id_experience, nom_farine, id_levain, remarque, " \
                 f"fichier_donnees) VALUES (%s, %s, %s, %s, %s, %s)"
-        values = (self.type_capteur, self.id_experience, self.nom_farine, self.id_levain, self.remarque,
-                  self.fichier_donnees,)
+        values = (self._type_capteur, self._id_experience, self._nom_farine, self._id_levain, self._remarque,
+                  self._fichier_donnees,)
         print(values)
         insert_into(query, values)
+
+    def update_capteur(self):
+        query = f"UPDATE {self.nom_table} SET nom_farine=%s, id_levain=%s, remarque=%s, " \
+                f"fichier_donnees=%s) WHERE type_capteur = %s AND id_experience = %s "
+        values = (self._nom_farine, self._id_levain, self._remarque,
+                  self._fichier_donnees, self._type_capteur, self._id_experience,)
+        update(query, values)
+
+    def __str__(self):
+        return f"{self._type_capteur}: farine = {self._nom_farine}, levain = {self._id_levain}"
+
+    def get_fichier_donnes(self):
+        return self._fichier_donnees
+
+    def set_fichier_donnees(self, file):
+        self._fichier_donnees = file
+
+    @staticmethod
+    def get_capteur_by_pk(type_cpt, id_exp):
+        query = f"SELECT * FROM capteurs WHERE type_capteur = %s AND id_experience = %s"
+        tuple_values = (type_cpt, id_exp)
+        return run_query(query, tuple_values)
+
+    @staticmethod
+    def get_capteur_by(selector, value):
+        capteurs = []
+        tab = get_by("capteurs", selector, value)
+        for capteur in tab:
+            capteurs.append(Capteur(capteur[0], capteur[1], capteur[2], capteur[3], capteur[4], capteur[5]))
+        return capteurs
+
+
+class MergeCapteur:
+    def __init__(self, list_files):
+        self.list_files = list_files
+        self.list_cpt = []
+
+    def donnees_brutes(self):
+        for file in self.list_files:
+            f = open(file, 'r')
+            my_reader = csv.reader(f)
+            for row in my_reader:
+                self.list_cpt.append(row)
+        print(self.list_cpt)
