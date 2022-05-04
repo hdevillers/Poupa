@@ -4,5 +4,5 @@ streamlit
 numpy
 matplotlib
 scipy
-mysql-connector-python=
+mysql-connector-python
 hydralit
