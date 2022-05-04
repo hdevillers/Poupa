@@ -37,4 +37,3 @@ class MergePage(HydraHeadApp):
                     st.error("Veuillez choiri au moins 2 capteurs")
                 else:
                     merge_cpt = models.MergeCapteur(list_file)
-                    merge_cpt.donnees_brutes()

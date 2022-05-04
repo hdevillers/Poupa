@@ -7,6 +7,8 @@ import re
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
+import models
+
 
 def init_connection():
     return mysql.connector.connect(**st.secrets["mysql"])
@@ -79,18 +81,68 @@ class Farine:
         self.mouture = mouture
         self.cendre = cendre
 
+    def create_farine(self):
+        query = f"INSERT INTO {self.nom_table} (nom, cereale, mouture, cendre) VALUES (%s, %s, %s, %s)"
+        values = (self.nom, self.cereal, self.mouture, self.cendre)
+        insert_into(query, values)
+
+    @staticmethod
+    def get_farines():
+        farines_from_bd = models.get_all("farines")
+        farines = []
+        for farine in farines_from_bd:
+            farines.append(Farine(farine[0], farine[1], farine[2], farine[3]))
+        return farines
+
+    def __str__(self):
+        fstring = f"{self.nom}: "
+        if self.cereal is not None:
+            fstring += f"cereale = {self.cereal}  "
+        if self.mouture is not None:
+            fstring += f"mouture = {self.mouture}  "
+        if self.cendre is not None:
+            fstring += f"cendre = {self.cendre}  "
+        return fstring
+
 
 class Levain:
     nom_table = "levains"
 
     def __init__(self, espece, generation, origine=None, cereale=None, hydratation=None, bacterie=None):
-        self.identificateur = espece + "-" + generation
+        self.identificateur = espece + "-" + str(generation)
         self.espece = espece
         self.generation = generation
         self.origine = origine
         self.cereale = cereale
         self.hydratation = hydratation
         self.bacterie = bacterie
+
+    def create_levain(self):
+        query = f"INSERT INTO {self.nom_table} (id, espece, generation, origine, cereale, hydratation, bacterie) VALUES " \
+                f"(%s, %s, %s, %s, %s, %s, %s)"
+        values = (self.identificateur, self.espece, self.generation, self.origine, self.cereale, self.hydratation,
+                  self.bacterie)
+        insert_into(query, values)
+
+    @staticmethod
+    def get_levains():
+        levains_from_bd = models.get_all("levains")
+        levains = []
+        for levain in levains_from_bd:
+            levains.append(Levain(levain[1], levain[2], levain[3], levain[4], levain[5], levain[6]))
+        return levains
+
+    def __str__(self):
+        lstring = f"{self.identificateur}: "
+        if self.origine is not None:
+            lstring += f"origine = {self.origine}  "
+        if self.cereale is not None:
+            lstring += f"cereale = {self.cereale}  "
+        if self.hydratation is not None:
+            lstring += f"hydratation = {str(self.hydratation)}  "
+        if self.bacterie is not None:
+            lstring += f"bactérie = {self.bacterie}"
+        return lstring
 
 
 class User:
@@ -461,11 +513,9 @@ class MergeCapteur:
     def __init__(self, list_files):
         self.list_files = list_files
         self.list_cpt = []
-
-    def donnees_brutes(self):
         for file in self.list_files:
-            f = open(file, 'r')
-            my_reader = csv.reader(f)
-            for row in my_reader:
-                self.list_cpt.append(row)
+            my_data = pd.read_csv(file, sep=",")
+            self.list_cpt.append(my_data)
         print(self.list_cpt)
+
+
