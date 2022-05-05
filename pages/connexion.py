@@ -57,7 +57,8 @@ class ConnexionPage(HydraHeadApp):
                 # Do the kick to the home page
                 self.do_redirect()
         else:
-            st.error("Mauvais mot de passe :P")
+            if nom is not None:
+                st.error("Mauvais mot de passe :P")
 
     def _check_access(self, login, mdp):
         user = models.get_by('users', 'login', login)
@@ -65,6 +66,7 @@ class ConnexionPage(HydraHeadApp):
             return check_hashes(str(st.secrets["seed"] + mdp), user[0][3]), user[0][1], user[0][2]
         else:
             st.error("Utilisateur inconnus")
+            return False, None, None
 
 
 class InscriptionPage(HydraHeadApp):

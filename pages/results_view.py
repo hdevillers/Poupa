@@ -1,7 +1,6 @@
 import random
 import models
 from models import *
-import multipage_streamlit as mt
 from hydralit import HydraHeadApp
 
 

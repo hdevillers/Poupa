@@ -4,7 +4,6 @@ import streamlit
 
 import models
 from models import *
-import multipage_streamlit as mt
 from hydralit import HydraHeadApp
 
 test = True
