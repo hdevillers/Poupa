@@ -82,7 +82,7 @@ class Farine:
         self.cendre = cendre
 
     def create_farine(self):
-        query = f"INSERT INTO {self.nom_table} (nom, cereale, mouture, cendre) VALUES (%s, %s, %s, %s)"
+        query = f"INSERT INTO {self.nom_table} (nom, cereale, type_mouture, cendre) VALUES (%s, %s, %s, %s)"
         values = (self.nom, self.cereal, self.mouture, self.cendre)
         insert_into(query, values)
 
@@ -103,6 +103,9 @@ class Farine:
         if self.cendre is not None:
             fstring += f"cendre = {self.cendre}  "
         return fstring
+
+    def get_farine_as_df(self):
+        columns = ['Nom']
 
 
 class Levain:
