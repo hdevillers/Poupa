@@ -75,76 +75,127 @@ class Boitier:
 class Farine:
     nom_table = "farines"
 
-    def __init__(self, nom, cereal=None, mouture=None, cendre=None):
-        self.nom = nom
+    def __init__(self, alias=None, cereal=None, mouture=None, cendre=None, origine=None):
+        self.id_farine = None
+        self.alias = alias
+        self.origine = origine
         self.cereal = cereal
         self.mouture = mouture
         self.cendre = cendre
 
     def create_farine(self):
-        query = f"INSERT INTO {self.nom_table} (nom, cereale, type_mouture, cendre) VALUES (%s, %s, %s, %s)"
-        values = (self.nom, self.cereal, self.mouture, self.cendre)
+        query = f"INSERT INTO {self.nom_table} (alias, cereale, type_mouture, cendre, origine) VALUES " \
+                f"(%s, %s, %s, %s, %s)"
+        values = (self.alias, self.cereal, self.mouture, self.cendre, self.origine)
         insert_into(query, values)
 
     @staticmethod
-    def get_farines():
-        farines_from_bd = models.get_all("farines")
+    def get_farines(selector=None, value=None):
+        if selector is not None and value is not None:
+            farines_from_bd = models.get_by(Farine.nom_table, selector, value)
+        else:
+            farines_from_bd = models.get_all(Farine.nom_table)
         farines = []
         for farine in farines_from_bd:
-            farines.append(Farine(farine[0], farine[1], farine[2], farine[3]))
+            f = Farine(farine[1], farine[2], farine[3], farine[4])
+            farines.append(f)
+            f.set_id(farine[0])
         return farines
 
-    def __str__(self):
-        fstring = f"{self.nom}: "
-        if self.cereal is not None:
-            fstring += f"cereale = {self.cereal}  "
-        if self.mouture is not None:
-            fstring += f"mouture = {self.mouture}  "
-        if self.cendre is not None:
-            fstring += f"cendre = {self.cendre}  "
-        return fstring
+    def set_id(self, id_farine):
+        self.id_farine = id_farine
 
-    def get_farine_as_df(self):
-        columns = ['Nom']
+    def __str__(self):
+        fstring = f"Farine n°{self.id_farine}: "
+        if self.alias is not None:
+            fstring += f"alias = {self.alias}   "
+        if self.cereal is not None:
+            fstring += f"cereale = {self.cereal}   "
+        if self.mouture is not None:
+            fstring += f"mouture = {self.mouture}   "
+        if self.cendre is not None:
+            fstring += f"cendre = {self.cendre}   "
+        return fstring
 
 
 class Levain:
     nom_table = "levains"
 
-    def __init__(self, espece, generation, origine=None, cereale=None, hydratation=None, bacterie=None):
-        self.identificateur = espece + "-" + str(generation)
-        self.espece = espece
-        self.generation = generation
+    def __init__(self, alias, farine, origine=None, cereale=None, hydratation=None, microbiome=None):
+        self.id = None
+        self.alias = alias
+        self.farine = farine
         self.origine = origine
         self.cereale = cereale
         self.hydratation = hydratation
-        self.bacterie = bacterie
+        self.microbiome = microbiome
 
     def create_levain(self):
-        query = f"INSERT INTO {self.nom_table} (id, espece, generation, origine, cereale, hydratation, bacterie) VALUES " \
-                f"(%s, %s, %s, %s, %s, %s, %s)"
-        values = (self.identificateur, self.espece, self.generation, self.origine, self.cereale, self.hydratation,
-                  self.bacterie)
+        query = f"INSERT INTO {self.nom_table} (alias, farine, origine, cereale, hydratation, microbiome) VALUES " \
+                f"(%s, %s, %s, %s, %s, %s)"
+        values = (self.alias, self.farine, self.origine, self.cereale, self.hydratation,
+                  self.microbiome)
         insert_into(query, values)
 
+    def set_id(self, id_levain):
+        self.id = id_levain
+
     @staticmethod
-    def get_levains():
-        levains_from_bd = models.get_all("levains")
+    def get_levains(selector=None, value=None):
+        if selector is not None and value is not None:
+            levains_from_bd = models.get_by(Levain.nom_table, selector, value)
+        else:
+            levains_from_bd = models.get_all(Levain.nom_table)
         levains = []
         for levain in levains_from_bd:
-            levains.append(Levain(levain[1], levain[2], levain[3], levain[4], levain[5], levain[6]))
+            l = Levain(levain[1], levain[2], levain[3], levain[4], levain[5], levain[6])
+            levains.append(l)
+            l.set_id(levain[0])
         return levains
 
     def __str__(self):
-        lstring = f"{self.identificateur}: "
+        lstring = f"Levains n°{self.id}: "
+        if self.alias is not None:
+            lstring += f"alias = {self.alias}  "
         if self.origine is not None:
             lstring += f"origine = {self.origine}  "
         if self.cereale is not None:
             lstring += f"cereale = {self.cereale}  "
         if self.hydratation is not None:
             lstring += f"hydratation = {str(self.hydratation)}  "
-        if self.bacterie is not None:
-            lstring += f"bactérie = {self.bacterie}"
+        if self.microbiome is not None:
+            lstring += f"bactérie = {self.microbiome}"
+        return lstring
+
+
+class Levure:
+    nom_table = "levures"
+
+    def __init__(self, espece, origine=None):
+        self.espece = espece
+        self.origine = origine
+
+    def create_levure(self):
+        query = f"INSERT INTO {self.nom_table} (espece, origine) VALUES ( %s, %s)"
+        values = (self.espece, self.origine)
+        models.insert_into(query, values)
+
+    @staticmethod
+    def get_levures(selector=None, value=None):
+        if selector is not None and value is not None:
+            levures_from_bd = models.get_by(Levure.nom_table, selector, value)
+        else:
+            levures_from_bd = models.get_all(Levure.nom_table)
+        levures = []
+        for levure in levures_from_bd:
+            l = Levure(levure[0], levure[1])
+            levures.append(l)
+        return levures
+
+    def __str__(self):
+        lstring = f"Levure {self.espece}: "
+        if self.origine is not None:
+            lstring += f"origine = {self.origine}  "
         return lstring
 
 
@@ -163,14 +214,64 @@ class User:
         print(values)
         insert_into(query, values)
 
+    @staticmethod
+    def get_users(selector=None, value=None):
+        users = []
+        if selector is not None and value is not None:
+            users_from_bd = models.get_by(User.nom_table, selector, value)
+        else:
+            users_from_bd = models.get_all(User.nom_table)
+        for user in users_from_bd:
+            u = User(user[0], user[1], user[2], user[3])
+            users.append(u)
+        return users
+
+
+class Projet:
+    nom_table = "projets"
+
+    def __init__(self, directeur):
+        self.directeur = directeur
+        self.participants = []
+        self.id_projet = None
+
+    def set_id(self, id_p):
+        self.id_projet = id_p
+
+    @staticmethod
+    def get_projets(selector, value):
+        if selector is not None and value is not None:
+            projets_from_bd = models.get_by(Projet.nom_table, selector, value)
+        else:
+            projets_from_bd = models.get_all(Projet.nom_table)
+        projets = []
+        for projet in projets_from_bd:
+            p = Projet(projet[1])
+            projets.append(p)
+            p.set_id(projet[0])
+        return projets
+
+    def get_participants(self):
+        query = f"SELECT login FROM participer_projet pp JOIN users u ON u.login=pp.login_utilisateur WHERE " \
+                f"id_projet={self.id_projet}"
+        participants_from_bd = models.run_query(query, None)
+        participants = []
+        for participant in participants_from_bd:
+            u = User(participant[0], participant[1], participant[2], participant[3])
+            participants.append(u)
+        return participants
+
+    def get_project_experiences(self):
+        return Experience.get_experiences("projet", self.id_projet)
+
 
 class Experience:
     nom_table = "experiences"
     tab_figures = []
     test = True
 
-    def __init__(self, id_boitier, date, lieu, operateur, titres_cpt, fichier_donnees=None, fichier_resultat=None,
-                 remarque=None):
+    def __init__(self, id_boitier, date, lieu, operateur, titres_cpt, projet=None, fichier_donnees=None,
+                 fichier_resultat=None, remarque=None):
         self.touty = []
         self.identificateur = str(id_boitier) + "_" + str(date) + "_" + operateur
         self.id_boitier = id_boitier
@@ -178,6 +279,7 @@ class Experience:
         self.lieu = lieu
         self.operateur = operateur
         self.titres_cpt = titres_cpt
+        self.projet = projet
         self.fichier_donnees = fichier_donnees
         self.fichier_resultat = fichier_resultat
         self.remarque = remarque
@@ -186,18 +288,35 @@ class Experience:
         return self.identificateur
 
     def create_experience(self):
-        query = f"INSERT INTO {self.nom_table} (id, id_boitier, date, lieu, operateur, fichier_donnees, " \
-                f"fichier_resultat, remarque) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-        values = (self.identificateur, self.id_boitier, self.date, self.lieu, self.operateur, self.fichier_donnees,
-                  self.fichier_resultat, self.remarque)
+        query = f"INSERT INTO {self.nom_table} (id, projet, id_boitier, date, lieu, operateur, fichier_donnees, " \
+                f"fichier_resultat, remarque) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        values = (self.identificateur, self.projet, self.id_boitier, self.date, self.lieu, self.operateur,
+                  self.fichier_donnees, self.fichier_resultat, self.remarque)
         insert_into(query, values)
 
     def update_experience(self):
-        query = f"UPDATE {self.nom_table} SET id_boitier=%s, date=%s, lieu=%s, operateur=%s, fichier_donnees=%s, " \
-                f"fichier_resultat=%s, remarque=%s WHERE id = %s "
-        values = (self.id_boitier, self.date, self.lieu, self.operateur, self.fichier_donnees,
-                  self.fichier_resultat, self.remarque, self.identificateur, )
+        query = f"UPDATE {self.nom_table} SET projet=%s, id_boitier=%s, date=%s, lieu=%s, operateur=%s, " \
+                f"fichier_donnees=%s, fichier_resultat=%s, remarque=%s WHERE id = %s "
+        values = (self.projet, self.id_boitier, self.date, self.lieu, self.operateur, self.fichier_donnees,
+                  self.fichier_resultat, self.remarque, self.identificateur,)
         update(query, values)
+
+    def __str__(self):
+        estring = f"{self.identificateur}     lieu = {self.lieu}"
+        return estring
+
+    @staticmethod
+    def get_experiences(selector=None, value=None):
+        if selector is not None and value is not None:
+            experiences_from_bd = models.get_by(Experience.nom_table, selector, value)
+        else:
+            experiences_from_bd = models.get_all(Experience.nom_table)
+        experiences = []
+        for experience in experiences_from_bd:
+            e = Experience(experience[0], experience[1], experience[2], experience[3], experience[4], experience[5],
+                           experience[6], experience[7], experience[8])
+            experiences.append(e)
+        return experiences
 
     COULEURS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9242b4"]
 
@@ -453,11 +572,12 @@ class Experience:
 class Capteur:
     nom_table = "capteurs"
 
-    def __init__(self, type_capteur, id_experience, nom_farine, id_levain, remarque=None, fichier_donnees=None):
+    def __init__(self, type_capteur, id_experience, id_farine, id_levain, levure, remarque=None, fichier_donnees=None):
         self._type_capteur = type_capteur
         self._id_experience = id_experience
-        self._nom_farine = nom_farine
+        self._id_farine = id_farine
         self._id_levain = id_levain
+        self.levure = levure
         self._remarque = remarque
         self._fichier_donnees = fichier_donnees
 
@@ -467,29 +587,43 @@ class Capteur:
     def get_id_experience(self):
         return self._id_experience
 
-    def get_farine(self):
-        return self._nom_farine
+    def get_id_farine(self):
+        return self._id_farine
 
     def get_levain(self):
         return self._id_levain
 
     def create_capteur(self):
-        query = f"INSERT INTO {self.nom_table} ( type_capteur, id_experience, nom_farine, id_levain, remarque, " \
-                f"fichier_donnees) VALUES (%s, %s, %s, %s, %s, %s)"
-        values = (self._type_capteur, self._id_experience, self._nom_farine, self._id_levain, self._remarque,
+        query = f"INSERT INTO {self.nom_table} ( type_capteur, id_experience, id_farine, id_levain, levure, remarque, " \
+                f"fichier_donnees) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        values = (self._type_capteur, self._id_experience, self._id_farine, self._id_levain, self._remarque,
                   self._fichier_donnees,)
         print(values)
         insert_into(query, values)
 
     def update_capteur(self):
-        query = f"UPDATE {self.nom_table} SET nom_farine=%s, id_levain=%s, remarque=%s, " \
+        query = f"UPDATE {self.nom_table} SET id_farine=%s, id_levain=%s, levure=%s, remarque=%s, " \
                 f"fichier_donnees=%s) WHERE type_capteur = %s AND id_experience = %s "
-        values = (self._nom_farine, self._id_levain, self._remarque,
+        values = (self._id_farine, self._id_levain, self.levure, self._remarque,
                   self._fichier_donnees, self._type_capteur, self._id_experience,)
         update(query, values)
 
     def __str__(self):
-        return f"{self._type_capteur}: farine = {self._nom_farine}, levain = {self._id_levain}"
+        cstring = f"**{self._type_capteur}**:\n"
+        if self._id_farine is not None:
+            farine = Farine.get_farines("id", self._id_farine)
+            cstring += str(farine[0]) + f"\n"
+        if self._id_levain is not None:
+            levain = Levain.get_levains("id", self._id_levain)
+            cstring += str(levain[0]) + f"\n"
+        if self.levure is not None:
+            levure = Levure.get_levures("espece", self.levure)
+            cstring += str(levure[0]) + f"\n"
+        if self._remarque is not None:
+            cstring += f"remarque = {self._remarque}\n"
+        if self._fichier_donnees is not None:
+            cstring += f"fichier de données = {self._fichier_donnees}"
+        return cstring
 
     def get_fichier_donnes(self):
         return self._fichier_donnees
@@ -504,11 +638,14 @@ class Capteur:
         return run_query(query, tuple_values)
 
     @staticmethod
-    def get_capteur_by(selector, value):
+    def get_capteurs(selector=None, value=None):
+        if selector is not None and value is not None:
+            capteurs_from_database = models.get_by(Capteur.nom_table, selector, value)
+        else:
+            capteurs_from_database = models.get_all(Capteur.nom_table)
         capteurs = []
-        tab = get_by("capteurs", selector, value)
-        for capteur in tab:
-            capteurs.append(Capteur(capteur[0], capteur[1], capteur[2], capteur[3], capteur[4], capteur[5]))
+        for capteur in capteurs_from_database:
+            capteurs.append(Capteur(capteur[0], capteur[1], capteur[2], capteur[3], capteur[4], capteur[5], capteur[6]))
         return capteurs
 
 
@@ -520,5 +657,3 @@ class MergeCapteur:
             my_data = pd.read_csv(file, sep=",")
             self.list_cpt.append(my_data)
         print(self.list_cpt)
-
-

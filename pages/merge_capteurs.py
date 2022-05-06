@@ -15,7 +15,7 @@ class MergePage(HydraHeadApp):
             list_checkbox = []
             i = 0
             for experience in all_exp:
-                list_cpt = models.Capteur.get_capteur_by("id_experience", experience[0])
+                list_cpt = models.Capteur.get_capteurs("id_experience", experience[0])
                 with st.container():
                     st.subheader(experience[0])
 
