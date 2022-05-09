@@ -7,7 +7,7 @@ import re
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
-import models
+
 
 
 def init_connection():
@@ -92,9 +92,9 @@ class Farine:
     @staticmethod
     def get_farines(selector=None, value=None):
         if selector is not None and value is not None:
-            farines_from_bd = models.get_by(Farine.nom_table, selector, value)
+            farines_from_bd = get_by(Farine.nom_table, selector, value)
         else:
-            farines_from_bd = models.get_all(Farine.nom_table)
+            farines_from_bd = get_all(Farine.nom_table)
         farines = []
         for farine in farines_from_bd:
             f = Farine(farine[1], farine[2], farine[3], farine[4])
@@ -143,12 +143,11 @@ class Levain:
     @staticmethod
     def get_levains(selector=None, value=None):
         if selector is not None and value is not None:
-            levains_from_bd = models.get_by(Levain.nom_table, selector, value)
+            levains_from_bd = get_by(Levain.nom_table, selector, value)
         else:
-            levains_from_bd = models.get_all(Levain.nom_table)
+            levains_from_bd = get_all(Levain.nom_table)
         levains = []
         for levain in levains_from_bd:
-            print(levain)
             l = Levain(levain[1], levain[2], levain[3], levain[4], levain[5], levain[6])
             levains.append(l)
             l.set_id(levain[0])
@@ -157,17 +156,17 @@ class Levain:
 
     def __str__(self):
         lstring = f"Levains n°{self.id}: "
-        if self.alias is not '':
+        if self.alias != '':
             lstring += f"alias = {self.alias}  "
-        if self.farine is not '':
+        if self.farine != '':
             lstring += f"farine = {Farine.get_farines('id',self.farine)[0]}"
-        if self.origine is not '':
+        if self.origine != '':
             lstring += f"origine = {self.origine}  "
-        if self.cereale is not '':
+        if self.cereale != '':
             lstring += f"cereale = {self.cereale}  "
-        if self.hydratation is not '':
+        if self.hydratation != '':
             lstring += f"hydratation = {str(self.hydratation)}  "
-        if self.microbiome is not '':
+        if self.microbiome != '':
             lstring += f"bactérie = {self.microbiome}"
         return lstring
 
@@ -182,14 +181,14 @@ class Levure:
     def create_levure(self):
         query = f"INSERT INTO {self.nom_table} (espece, origine) VALUES ( %s, %s)"
         values = (self.espece, self.origine)
-        models.insert_into(query, values)
+        insert_into(query, values)
 
     @staticmethod
     def get_levures(selector=None, value=None):
         if selector is not None and value is not None:
-            levures_from_bd = models.get_by(Levure.nom_table, selector, value)
+            levures_from_bd = get_by(Levure.nom_table, selector, value)
         else:
-            levures_from_bd = models.get_all(Levure.nom_table)
+            levures_from_bd = get_all(Levure.nom_table)
         levures = []
         for levure in levures_from_bd:
             l = Levure(levure[0], levure[1])
@@ -198,7 +197,7 @@ class Levure:
 
     def __str__(self):
         lstring = f"Levure {self.espece}: "
-        if self.origine is not '':
+        if self.origine != '':
             lstring += f"origine = {self.origine}  "
         return lstring
 
@@ -215,16 +214,15 @@ class User:
     def create_user(self):
         query = f"INSERT INTO {self.nom_table} (login, nom, prenom, mot_de_passe) VALUES (%s, %s, %s, %s)"
         values = (self.login, self.nom, self.prenom, self.mdp)
-        print(values)
         insert_into(query, values)
 
     @staticmethod
     def get_users(selector=None, value=None):
         users = []
         if selector is not None and value is not None:
-            users_from_bd = models.get_by(User.nom_table, selector, value)
+            users_from_bd = get_by(User.nom_table, selector, value)
         else:
-            users_from_bd = models.get_all(User.nom_table)
+            users_from_bd = get_all(User.nom_table)
         for user in users_from_bd:
             u = User(user[0], user[1], user[2], user[3])
             users.append(u)
@@ -245,9 +243,9 @@ class Projet:
     @staticmethod
     def get_projets(selector, value):
         if selector is not None and value is not None:
-            projets_from_bd = models.get_by(Projet.nom_table, selector, value)
+            projets_from_bd = get_by(Projet.nom_table, selector, value)
         else:
-            projets_from_bd = models.get_all(Projet.nom_table)
+            projets_from_bd = get_all(Projet.nom_table)
         projets = []
         for projet in projets_from_bd:
             p = Projet(projet[1])
@@ -258,7 +256,7 @@ class Projet:
     def get_participants(self):
         query = f"SELECT login FROM participer_projet pp JOIN users u ON u.login=pp.login_utilisateur WHERE " \
                 f"id_projet={self.id_projet}"
-        participants_from_bd = models.run_query(query, None)
+        participants_from_bd = run_query(query, None)
         participants = []
         for participant in participants_from_bd:
             u = User(participant[0], participant[1], participant[2], participant[3])
@@ -312,9 +310,9 @@ class Experience:
     @staticmethod
     def get_experiences(selector=None, value=None):
         if selector is not None and value is not None:
-            experiences_from_bd = models.get_by(Experience.nom_table, selector, value)
+            experiences_from_bd = get_by(Experience.nom_table, selector, value)
         else:
-            experiences_from_bd = models.get_all(Experience.nom_table)
+            experiences_from_bd = get_all(Experience.nom_table)
         experiences = []
         for experience in experiences_from_bd:
             e = Experience(id_boitier=experience[2], date=experience[4], lieu=experience[5], operateur=experience[3],
@@ -645,9 +643,9 @@ class Capteur:
     @staticmethod
     def get_capteurs(selector=None, value=None):
         if selector is not None and value is not None:
-            capteurs_from_database = models.get_by(Capteur.nom_table, selector, value)
+            capteurs_from_database = get_by(Capteur.nom_table, selector, value)
         else:
-            capteurs_from_database = models.get_all(Capteur.nom_table)
+            capteurs_from_database = get_all(Capteur.nom_table)
         capteurs = []
         for capteur in capteurs_from_database:
             capteurs.append(Capteur(capteur[0], capteur[1], capteur[2], capteur[3], capteur[4], capteur[5], capteur[6]))
