@@ -107,13 +107,13 @@ class Farine:
 
     def __str__(self):
         fstring = f"Farine n°{self.id_farine}: "
-        if self.alias is not None:
+        if self.alias is not '':
             fstring += f"alias = {self.alias}   "
-        if self.cereal is not None:
+        if self.cereal is not '':
             fstring += f"cereale = {self.cereal}   "
-        if self.mouture is not None:
+        if self.mouture is not '':
             fstring += f"mouture = {self.mouture}   "
-        if self.cendre is not None:
+        if self.cendre is not '':
             fstring += f"cendre = {self.cendre}   "
         return fstring
 
@@ -148,22 +148,26 @@ class Levain:
             levains_from_bd = models.get_all(Levain.nom_table)
         levains = []
         for levain in levains_from_bd:
+            print(levain)
             l = Levain(levain[1], levain[2], levain[3], levain[4], levain[5], levain[6])
             levains.append(l)
             l.set_id(levain[0])
+
         return levains
 
     def __str__(self):
         lstring = f"Levains n°{self.id}: "
-        if self.alias is not None:
+        if self.alias is not '':
             lstring += f"alias = {self.alias}  "
-        if self.origine is not None:
+        if self.farine is not '':
+            lstring += f"farine = {Farine.get_farines('id',self.farine)[0]}"
+        if self.origine is not '':
             lstring += f"origine = {self.origine}  "
-        if self.cereale is not None:
+        if self.cereale is not '':
             lstring += f"cereale = {self.cereale}  "
-        if self.hydratation is not None:
+        if self.hydratation is not '':
             lstring += f"hydratation = {str(self.hydratation)}  "
-        if self.microbiome is not None:
+        if self.microbiome is not '':
             lstring += f"bactérie = {self.microbiome}"
         return lstring
 
@@ -194,7 +198,7 @@ class Levure:
 
     def __str__(self):
         lstring = f"Levure {self.espece}: "
-        if self.origine is not None:
+        if self.origine is not '':
             lstring += f"origine = {self.origine}  "
         return lstring
 
@@ -270,7 +274,7 @@ class Experience:
     tab_figures = []
     test = True
 
-    def __init__(self, id_boitier, date, lieu, operateur, titres_cpt, projet=None, fichier_donnees=None,
+    def __init__(self, id_boitier, date, lieu, operateur, titres_cpt=None, projet=None, fichier_donnees=None,
                  fichier_resultat=None, remarque=None):
         self.touty = []
         self.identificateur = str(id_boitier) + "_" + str(date) + "_" + operateur
@@ -313,8 +317,9 @@ class Experience:
             experiences_from_bd = models.get_all(Experience.nom_table)
         experiences = []
         for experience in experiences_from_bd:
-            e = Experience(experience[0], experience[1], experience[2], experience[3], experience[4], experience[5],
-                           experience[6], experience[7], experience[8])
+            e = Experience(id_boitier=experience[2], date=experience[4], lieu=experience[5], operateur=experience[3],
+                           titres_cpt=None, projet=experience[1], fichier_donnees=experience[6],
+                           fichier_resultat=experience[7], remarque=experience[8])
             experiences.append(e)
         return experiences
 

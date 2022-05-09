@@ -47,12 +47,16 @@ class LevainPage(HydraHeadApp):
                 input_bacterie = st.text_input("Bactérie", max_chars=50)
                 st.write("Champs obligatoirs marqués d'un *")
                 if st.form_submit_button("Ajouter"):
+                    if input_hydratation < 0:
+                        hydratation_value = ''
+                    else:
+                        hydratation_value = input_hydratation
                     if select_farine == "---":
-                        farine_choosen = None
+                        farine_choosen = ''
                     else:
                         farine_choosen = select_farine
                     levain = models.Levain(input_alias, farine_choosen, input_origine, input_cereale,
-                                           input_hydratation, input_bacterie)
+                                           hydratation_value, input_bacterie)
                     levain.create_levain()
 
         with st.container():
