@@ -36,11 +36,11 @@ class LevainPage(HydraHeadApp):
         with st.expander("Ajouter un Levain"):
             with st.form("add_levain"):
                 farines = models.Farine.get_farines()
-                farines_id = ["---"]
+                farines_id = {"---": "---", }
                 for farine in farines:
-                    farines_id.append(farine.id_farine)
+                    farines_id[farine.id_farine] = str(farine)
                 input_alias = st.text_input("Alias", max_chars=50)
-                select_farine = st.selectbox("Numéro de la farine", options=farines_id)
+                select_farine = st.selectbox("Numéro de la farine", list(farines_id.items()), 0, format_func=lambda o: o[1])
                 input_origine = st.text_input("Origine", max_chars=100)
                 input_cereale = st.text_input("Céréale", max_chars=50)
                 input_hydratation = st.number_input("% Hydratation", max_value=999)
@@ -54,7 +54,8 @@ class LevainPage(HydraHeadApp):
                     if select_farine == "---":
                         farine_choosen = ''
                     else:
-                        farine_choosen = select_farine
+                        farine_choosen = select_farine[0]
+
                     levain = models.Levain(input_alias, farine_choosen, input_origine, input_cereale,
                                            hydratation_value, input_bacterie)
                     levain.create_levain()
