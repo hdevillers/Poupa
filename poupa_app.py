@@ -26,16 +26,28 @@ app.add_app("Farines", icon="🌾", app=FarinePage("Farines"))
 app.add_app("Levains", icon="🦠", app=LevainPage("Levains"))
 app.add_app("Levures", app=LevurePage("Levures"))
 
-app.add_app("Signup", icon="🛰️", app=pages.connexion.InscriptionPage("Signup"), is_unsecure=True, logout_label="Logout")
+app.add_app("Signup", icon="🛰️", app=pages.connexion.InscriptionPage("Signup"), is_unsecure=True,
+            logout_label="Logout")
 
 app.add_app("Login", app=pages.connexion.ConnexionPage("Login"), is_login=True, logout_label="Logout")
 
-menu_data = {
-    'Home': ['Accueil'],
-    'Nouvelle Expérience': ['Nouvelle Expérience'],
-    'Résultats': ['Résultats'],
-    'Fusion de capteurs': ['Fusion de capteurs'],
-    'Farines&Levain': ["Farines", "Levains", "Levures"], }
+user_access_level, username = app.check_access()
+
+if user_access_level > 1:
+    menu_data = {
+        'Home': ['Accueil'],
+        'Nouvelle Expérience': ['Nouvelle Expérience'],
+        'Résultats': ['Résultats'],
+        'Fusion de capteurs': ['Fusion de capteurs'],
+        'Farines&Levain': ["Farines", "Levains", "Levures"], }
+else:
+    menu_data = {
+        'Home': ['Accueil'],
+        'Nouvelle Expérience': ['Nouvelle Expérience'],
+        'Résultats': ['Résultats'],
+        'Fusion de capteurs': ['Fusion de capteurs'],
+        'Farines&Levain': ["Farines", "Levains", "Levures"],}
+
 over_theme = {'txc_inactive': '#FFFFFF'}
 
 app.run(menu_data)
