@@ -8,8 +8,6 @@ from matplotlib import pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 
 
-
-
 def init_connection():
     return mysql.connector.connect(**st.secrets["mysql"])
 
@@ -107,13 +105,13 @@ class Farine:
 
     def __str__(self):
         fstring = f"Farine n°{self.id_farine}: "
-        if self.alias is not '':
+        if self.alias != '':
             fstring += f"alias = {self.alias}   "
-        if self.cereal is not '':
+        if self.cereal != '':
             fstring += f"cereale = {self.cereal}   "
-        if self.mouture is not '':
+        if self.mouture != '':
             fstring += f"mouture = {self.mouture}   "
-        if self.cendre is not '':
+        if self.cendre != '':
             fstring += f"cendre = {self.cendre}   "
         return fstring
 
@@ -228,6 +226,9 @@ class User:
             users.append(u)
         return users
 
+    def __str__(self):
+        return self.login + " : " + self.nom + " " + self.prenom
+
 
 class Projet:
     nom_table = "projets"
@@ -269,12 +270,12 @@ class Projet:
 
 class Experience:
     nom_table = "experiences"
-    tab_figures = []
     test = True
 
     def __init__(self, id_boitier, date, lieu, operateur, titres_cpt=None, projet=None, fichier_donnees=None,
                  fichier_resultat=None, remarque=None):
         self.touty = []
+        self.tab_figs = []
         self.identificateur = str(id_boitier) + "_" + str(date) + "_" + operateur
         self.id_boitier = id_boitier
         self.date = date
@@ -285,21 +286,23 @@ class Experience:
         self.fichier_donnees = fichier_donnees
         self.fichier_resultat = fichier_resultat
         self.remarque = remarque
+        if test:
+            self.called = 0
 
     def get_id(self):
         return self.identificateur
 
     def create_experience(self):
-        query = f"INSERT INTO {self.nom_table} (id, projet, id_boitier, date, lieu, operateur, fichier_donnees, " \
+        query = f"INSERT INTO {self.nom_table} (id, projet, id_boitier, operateur, date, lieu, fichier_donnees, " \
                 f"fichier_resultat, remarque) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        values = (self.identificateur, self.projet, self.id_boitier, self.date, self.lieu, self.operateur,
+        values = (self.identificateur, self.projet, self.id_boitier, self.operateur, self.date, self.lieu,
                   self.fichier_donnees, self.fichier_resultat, self.remarque)
         insert_into(query, values)
 
     def update_experience(self):
-        query = f"UPDATE {self.nom_table} SET projet=%s, id_boitier=%s, date=%s, lieu=%s, operateur=%s, " \
+        query = f"UPDATE {self.nom_table} SET projet=%s, id_boitier=%s, operateur=%s, date=%s, lieu=%s,  " \
                 f"fichier_donnees=%s, fichier_resultat=%s, remarque=%s WHERE id = %s "
-        values = (self.projet, self.id_boitier, self.date, self.lieu, self.operateur, self.fichier_donnees,
+        values = (self.projet, self.id_boitier, self.operateur, self.date, self.lieu, self.fichier_donnees,
                   self.fichier_resultat, self.remarque, self.identificateur,)
         update(query, values)
 
@@ -440,11 +443,20 @@ class Experience:
             ax = plt.subplot(111)
             ax.axis('off')
             ax.table(cellText=df.values, colLabels=df.columns, bbox=[0, 0, 1, 1])
-            self.tab_figures.append(fig)
+            self.tab_figs.append(fig)
 
         # lecture du fichier de données et tracé
 
     def dessiner_courbes(self):
+        """ Dessine les courbes de l'experience \n
+        **Probleme** : est appelé une deuxieme fois par streamlit au moment de generer le pdf
+        pouvant occasionner une lenteur et remplie deux fois *tab_figures* \n
+        **Solution** : pour *tab_figures* on le vide à chaque fois que l'on execute dessiner_courbes mais je n'ai pas
+        de solution viable pour le fait qu'elle soit appelée deux fois pour l'instant """
+
+        print(f"I've been called {self.called} times")
+        self.called += 1
+        self.tab_figs = []
         with st.container():
             st.header("Courbes")
             self.touty = self.donnees_brutes()
@@ -500,13 +512,13 @@ class Experience:
                         ax.grid(which='minor', alpha=0.2, linestyle='--')
 
                         st.pyplot(fig_courbe)
-                        self.tab_figures.append(fig_courbe)
+                        self.tab_figs.append(fig_courbe)
 
                     else:
                         fig, ax = plt.subplots()
                         st.write("""Pas de données""")
                         st.pyplot(fig)
-                        self.tab_figures.append(fig)
+                        self.tab_figs.append(fig)
                     # info_courbe("Capteur n°" + str(i + 1), 'temps (min)', 'pousse (mm)', fig_courbe_vide)
                     # fig_courbe_vide.grid()
 
@@ -528,7 +540,7 @@ class Experience:
                 # fig_temp.plot(touty[8], touty[9], color=COULEURS[4])
                 plt.ylim(ymin=10)
                 self.info_courbe("temperature", 'temps (min)', 'température  (°c)')
-                self.tab_figures.append(fig)
+                self.tab_figs.append(fig)
 
             # toutes les courbes
             # fig_all = fig.add_subplot(236)
@@ -546,15 +558,14 @@ class Experience:
                 ax.grid(which='both')
                 ax.grid(which='minor', alpha=0.2, linestyle='--')
                 st.pyplot(fig)
-                self.tab_figures.append(fig)
+                self.tab_figs.append(fig)
 
             # tableau des infos
             self.dessiner_tableau(infos_pente_courbes)
-            print(self.tab_figures)
 
     def generate_pdf(self):
         pp = PdfPages(f"{self.get_id()}.pdf")
-        for fig in self.tab_figures:
+        for fig in self.tab_figs:
             pp.savefig(fig)
         pp.close()
 
@@ -599,7 +610,7 @@ class Capteur:
     def create_capteur(self):
         query = f"INSERT INTO {self.nom_table} ( type_capteur, id_experience, id_farine, id_levain, levure, remarque, " \
                 f"fichier_donnees) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        values = (self._type_capteur, self._id_experience, self._id_farine, self._id_levain, self._remarque,
+        values = (self._type_capteur, self._id_experience, self._id_farine, self._id_levain, self.levure, self._remarque,
                   self._fichier_donnees,)
         print(values)
         insert_into(query, values)
