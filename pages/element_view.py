@@ -19,10 +19,20 @@ class FarinePage(HydraHeadApp):
                 st.write("Champs obligatoires marqués d'un *")
                 if st.form_submit_button("Ajouter"):
                     farine = models.Farine(input_alias, input_cereale, input_mouture, input_cendre, input_origine)
-                    farine.create_farine()
+                    if self.session_state.allow_access > 1:
+                        farine.create_farine()
+                    else:
+                        if "farines" not in st.session_state:
+                            st.session_state['farines'] = []
+                        st.session_state['farines'].append(farine)
 
         with st.container():
-            all_farines = models.Farine.get_farines()
+            all_farines = []
+            if self.session_state.allow_access > 1:
+                all_farines = models.Farine.get_farines()
+            if "farines" in st.session_state:
+                all_farines = st.session_state['farines']
+
             for farine in all_farines:
                 st.write(str(farine))
 
@@ -35,7 +45,12 @@ class LevainPage(HydraHeadApp):
     def run(self):
         with st.expander("Ajouter un Levain"):
             with st.form("add_levain"):
-                farines = models.Farine.get_farines()
+                farines = []
+                if self.session_state.allow_access > 1:
+                    farines = models.Farine.get_farines()
+                if "farines" in st.session_state:
+                    farines = st.session_state['farines']
+
                 farines_id = {"---": "---", }
                 for farine in farines:
                     farines_id[farine.id_farine] = str(farine)
@@ -58,10 +73,20 @@ class LevainPage(HydraHeadApp):
 
                     levain = models.Levain(input_alias, farine_choosen, input_origine, input_cereale,
                                            hydratation_value, input_bacterie)
-                    levain.create_levain()
+                    if self.session_state.allow_access > 1:
+                        levain.create_levain()
+                    else:
+                        if "levains" not in st.session_state:
+                            st.success["levains"] = []
+
+                        st.success["levains"].append(levain)
 
         with st.container():
-            all_levains = models.Levain.get_levains()
+            all_levains = []
+            if self.session_state.allow_access > 1:
+                all_levains = models.Levain.get_levains()
+            if "levains" in st.session_state:
+                all_levains = st.session_state["levains"]
             for levain in all_levains:
                 st.write(str(levain))
 
@@ -80,9 +105,17 @@ class LevurePage(HydraHeadApp):
 
                 if st.form_submit_button("Ajouter"):
                     levure = models.Levure(input_espece, input_origine)
-                    levure.create_levure()
+                    if self.session_state.allow_access > 1:
+                        levure.create_levure()
+                    if "levures" not in st.session_state:
+                        st.session_state["levures"] = []
+                    st.session_state["levures"].append(levure)
 
         with st.container():
-            all_levures = models.Levure.get_levures()
+            all_levures = []
+            if self.session_state.allow_access > 1:
+                all_levures = models.Levure.get_levures()
+            if "levures" in st.session_state:
+                all_levures = st.session_state["levures"]
             for levure in all_levures:
                 st.write(str(levure))
