@@ -16,8 +16,8 @@ class ExperiencePage(HydraHeadApp):
 
     def run(self):
 
-        # with open("Poupa\\css\\experience.css", "r") as f:
-            # st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+        with open("C:\\Users\\rakow\\OneDrive\\Documents\\Poupa-Streamlit\\Poupa\\css\\experience.css", "r") as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
         st.title("Créer une experience")
         with st.form("form experience"):
