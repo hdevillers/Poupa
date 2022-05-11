@@ -53,7 +53,10 @@ class LevainPage(HydraHeadApp):
 
                 farines_id = {"---": "---", }
                 for farine in farines:
-                    farines_id[farine.id_farine] = str(farine)
+                    if self.session_state.allow_access > 1:
+                        farines_id[farine.id_farine] = str(farine)
+                    else:
+                        farines_id[farine] = str(farine)
                 input_alias = st.text_input("Alias", max_chars=50)
                 select_farine = st.selectbox("Numéro de la farine", list(farines_id.items()), 0, format_func=lambda o: o[1])
                 input_origine = st.text_input("Origine", max_chars=100)
@@ -73,13 +76,14 @@ class LevainPage(HydraHeadApp):
 
                     levain = models.Levain(input_alias, farine_choosen, input_origine, input_cereale,
                                            hydratation_value, input_bacterie)
+
                     if self.session_state.allow_access > 1:
                         levain.create_levain()
                     else:
                         if "levains" not in st.session_state:
-                            st.success["levains"] = []
+                            st.session_state["levains"] = []
 
-                        st.success["levains"].append(levain)
+                        st.session_state["levains"].append(levain)
 
         with st.container():
             all_levains = []

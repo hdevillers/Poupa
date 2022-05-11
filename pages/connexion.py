@@ -39,6 +39,7 @@ class ConnexionPage(HydraHeadApp):
         if st.button('Guest Login', key='guestbtn'):
             # set access level to a negative number to allow a kick to the unsecure_app set in the parent
             self.set_access(1, 'guest')
+            st.session_state["access_level"] = 1
             self.do_redirect()
 
         if st.button("Créer un compte", key='signupbtn'):
@@ -55,7 +56,7 @@ class ConnexionPage(HydraHeadApp):
             st.session_state['prenom_nom'] = str(nom + " " + prenom)
             with st.spinner("now redirecting to application...."):
                 time.sleep(1)
-
+                st.session_state["access_level"] = 2
                 self.set_access(2, st.session_state['login'], True)
 
                 # Do the kick to the home page

@@ -119,7 +119,7 @@ class Farine:
 class Levain:
     nom_table = "levains"
 
-    def __init__(self, alias, farine, origine=None, cereale=None, hydratation=None, microbiome=None):
+    def __init__(self, alias=None, farine=None, origine=None, cereale=None, hydratation=None, microbiome=None):
         self.id = None
         self.alias = alias
         self.farine = farine
@@ -157,7 +157,10 @@ class Levain:
         if self.alias != '':
             lstring += f"alias = {self.alias}  "
         if self.farine != '':
-            lstring += f"farine = {Farine.get_farines('id',self.farine)[0]}"
+            if st.session_state['access_level'] > 1:
+                lstring += f"farine = {Farine.get_farines('id', self.farine)[0]}"
+            else:
+                lstring += f"{str(self.farine)} "
         if self.origine != '':
             lstring += f"origine = {self.origine}  "
         if self.cereale != '':
@@ -276,12 +279,12 @@ class Experience:
                  fichier_resultat=None, remarque=None):
         self.touty = []
         self.tab_figs = []
+        self.titres_cpt = titres_cpt
         self.identificateur = str(id_boitier) + "_" + str(date) + "_" + operateur
         self.id_boitier = id_boitier
         self.date = date
         self.lieu = lieu
         self.operateur = operateur
-        self.titres_cpt = titres_cpt
         self.projet = projet
         self.fichier_donnees = fichier_donnees
         self.fichier_resultat = fichier_resultat
@@ -587,63 +590,75 @@ class Capteur:
     nom_table = "capteurs"
 
     def __init__(self, type_capteur, id_experience, id_farine, id_levain, levure, remarque=None, fichier_donnees=None):
-        self._type_capteur = type_capteur
-        self._id_experience = id_experience
-        self._id_farine = id_farine
-        self._id_levain = id_levain
+        self.type_capteur = type_capteur
+        self.id_experience = id_experience
+        self.id_farine = id_farine
+        self.id_levain = id_levain
         self.levure = levure
-        self._remarque = remarque
-        self._fichier_donnees = fichier_donnees
+        self.remarque = remarque
+        self.fichier_donnees = fichier_donnees
 
     def get_type(self):
-        return self._type_capteur
+        return self.type_capteur
 
     def get_id_experience(self):
-        return self._id_experience
+        return self.id_experience
 
     def get_id_farine(self):
-        return self._id_farine
+        return self.id_farine
 
     def get_levain(self):
-        return self._id_levain
+        return self.id_levain
 
     def create_capteur(self):
         query = f"INSERT INTO {self.nom_table} ( type_capteur, id_experience, id_farine, id_levain, levure, remarque, " \
                 f"fichier_donnees) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        values = (self._type_capteur, self._id_experience, self._id_farine, self._id_levain, self.levure, self._remarque,
-                  self._fichier_donnees,)
+        values = (self.type_capteur, self.id_experience, self.id_farine, self.id_levain, self.levure, self.remarque,
+                  self.fichier_donnees,)
         print(values)
         insert_into(query, values)
 
     def update_capteur(self):
         query = f"UPDATE {self.nom_table} SET id_farine=%s, id_levain=%s, levure=%s, remarque=%s, " \
                 f"fichier_donnees=%s) WHERE type_capteur = %s AND id_experience = %s "
-        values = (self._id_farine, self._id_levain, self.levure, self._remarque,
-                  self._fichier_donnees, self._type_capteur, self._id_experience,)
+        values = (self.id_farine, self.id_levain, self.levure, self.remarque,
+                  self.fichier_donnees, self.type_capteur, self.id_experience,)
         update(query, values)
 
     def __str__(self):
-        cstring = f"**{self._type_capteur}**:\n"
-        if self._id_farine is not None:
-            farine = Farine.get_farines("id", self._id_farine)
-            cstring += str(farine[0]) + f"\n"
-        if self._id_levain is not None:
-            levain = Levain.get_levains("id", self._id_levain)
-            cstring += str(levain[0]) + f"\n"
+        cstring = f"**{self.type_capteur}**:  \n"
+        if self.id_farine is not None:
+            if st.session_state['access_level'] > 1:
+                farine = Farine.get_farines("id", self.id_farine)
+                cstring += f" {str(farine[0])}  \n"
+            else:
+                cstring += f"{str(self.id_farine)} "
+        if self.id_levain is not None:
+            if st.session_state['access_level'] > 1:
+                levain = Levain.get_levains("id", self.id_levain)
+                cstring += f"{str(levain[0])}  \n"
+            else:
+                cstring += f"{str(self.id_levain)}  \n"
         if self.levure is not None:
-            levure = Levure.get_levures("espece", self.levure)
-            cstring += str(levure[0]) + f"\n"
-        if self._remarque is not None:
-            cstring += f"remarque = {self._remarque}\n"
-        if self._fichier_donnees is not None:
-            cstring += f"fichier de données = {self._fichier_donnees}"
+            if st.session_state['access_level'] > 1:
+                levure = Levure.get_levures("espece", self.levure)
+                cstring += f"{str(levure[0])}  \n"
+            else:
+                if "levures" in st.session_state:
+                    for levure in st.session_state["levures"]:
+                        if levure.espece == self.levure:
+                            cstring += f"{str(levure)}  \n"
+        if self.remarque is not None:
+            cstring += f"remarque = {self.remarque}  \n"
+        if self.fichier_donnees is not None:
+            cstring += f"fichier de données = {self.fichier_donnees}  \n"
         return cstring
 
     def get_fichier_donnes(self):
-        return self._fichier_donnees
+        return self.fichier_donnees
 
     def set_fichier_donnees(self, file):
-        self._fichier_donnees = file
+        self.fichier_donnees = file
 
     @staticmethod
     def get_capteur_by_pk(type_cpt, id_exp):

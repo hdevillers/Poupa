@@ -58,7 +58,11 @@ class ExperiencePage(HydraHeadApp):
                 list_of_farines = st.session_state["farines"]
             dict_farines = {"---": "---"}
             for farine in list_of_farines:
-                dict_farines[farine.id_farine] = str(farine)
+                if self.session_state.allow_access > 1:
+                    dict_farines[farine.id_farine] = str(farine)
+                else:
+                    dict_farines[farine] = str(farine)
+
             # Levains
             list_of_levains = []
             if self.session_state.allow_access > 1:
@@ -67,7 +71,11 @@ class ExperiencePage(HydraHeadApp):
                 list_of_levains = st.session_state["levains"]
             dict_levains = {"---": "---"}
             for levain in list_of_levains:
-                dict_levains[levain.id] = str(levain)
+                if self.session_state.allow_access > 1:
+                    dict_levains[levain.id] = str(levain)
+                else :
+                    dict_levains[levain] = str(levain)
+
             # Levures
             list_of_levures = []
             if self.session_state.allow_access > 1:
@@ -106,7 +114,7 @@ class ExperiencePage(HydraHeadApp):
                     experience = Experience(int(boitier_selected), input_date, input_lieu, input_operateur,
                                             tab_titre_cpt, None, file_input)
                     st.session_state['experience'] = experience
-                    st.sidebar.write(st.session_state)
+                    # st.sidebar.write(st.session_state)
                     list_of_capteurs = []
                     for infos in tab_cpt:
                         if infos[2] == '---':
@@ -122,7 +130,7 @@ class ExperiencePage(HydraHeadApp):
                         else:
                             levure_chosen = infos[4]
                         cpt = Capteur(infos[0], experience.get_id(), farine_chosen, levain_chosen, levure_chosen,
-                                      experience.get_id() + infos[0] + '.csv', infos[5])
+                                      infos[5], experience.get_id() + infos[0] + '.csv')
                         list_of_capteurs.append(cpt)
                     st.session_state[f'capteurs'] = list_of_capteurs
                     st.success("Résultats génerés ! Allez consulter la page Résultats")
