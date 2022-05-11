@@ -16,7 +16,7 @@ class ExperiencePage(HydraHeadApp):
 
     def run(self):
 
-        with open("css\\experience.css", "r") as f:
+        with open("Poupa\\pages\\css\\experience.css", "r") as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
         st.title("Créer une experience")
