@@ -64,7 +64,7 @@ class ExperiencePage(HydraHeadApp):
             if self.session_state.allow_access > 1:
                 list_of_levains = models.Levain.get_levains()
             if "levains" in st.session_state:
-                list_of_levains = st.session_state["farines"]
+                list_of_levains = st.session_state["levains"]
             dict_levains = {"---": "---"}
             for levain in list_of_levains:
                 dict_levains[levain.id] = str(levain)
@@ -73,7 +73,7 @@ class ExperiencePage(HydraHeadApp):
             if self.session_state.allow_access > 1:
                 list_of_levures = models.Levure.get_levures()
             if "levures" in st.session_state:
-                list_of_levures = st.session_state["farines"]
+                list_of_levures = st.session_state["levures"]
             dict_levures = {"---": "---"}
             for levure in list_of_levures:
                 dict_levures[levure.espece] = str(levure)
