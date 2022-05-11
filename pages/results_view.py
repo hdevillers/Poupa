@@ -24,18 +24,19 @@ class ResultPage(HydraHeadApp):
             if download:
                 experience.generate_pdf()
         with col2:
-            archiver = st.button("Enregistrer")
-            if archiver:
-                i = 0
-                if not models.get_by("experiences", "id", experience.get_id()):
-                    experience.create_experience()
-                else:
-                    experience.update_experience()
-                for cpt in st.session_state['capteurs']:
-                    files = experience.generate_csv_cpt()
-                    cpt.set_fichier_donnees(files[i])
-                    i += 1
-                    if not models.Capteur.get_capteur_by_pk(cpt.get_type(), cpt.get_id_experience()):
-                        cpt.create_capteur()
+            if self.session_state.allow_access > 1:
+                archiver = st.button("Enregistrer")
+                if archiver:
+                    i = 0
+                    if not models.get_by("experiences", "id", experience.get_id()):
+                        experience.create_experience()
                     else:
-                        cpt.update_capteur()
+                        experience.update_experience()
+                    for cpt in st.session_state['capteurs']:
+                        files = experience.generate_csv_cpt()
+                        cpt.set_fichier_donnees(files[i])
+                        i += 1
+                        if not models.Capteur.get_capteur_by_pk(cpt.get_type(), cpt.get_id_experience()):
+                            cpt.create_capteur()
+                        else:
+                            cpt.update_capteur()
