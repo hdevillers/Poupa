@@ -22,12 +22,16 @@ class ExperiencePage(HydraHeadApp):
         st.title("Créer une experience")
         with st.form("form experience"):
             st.subheader("Informations de l'experience")
-            list_of_poupa = models.get_all("boitiers")
-            list_id_poupa = []
-            for poupa in list_of_poupa:
-                list_id_poupa.append(poupa[0])
+            if self.session_state.allow_access > 1:
+                list_of_poupa = models.get_all("boitiers")
+                list_id_poupa = []
+                for poupa in list_of_poupa:
+                    list_id_poupa.append(poupa[0])
 
-            selectbox_boitiers = st.selectbox("Numéro du boitier utilisé*", list_id_poupa)
+                boitier_selected = st.selectbox("Numéro du boitier utilisé*", list_id_poupa)
+            else:
+                boitier_selected = st.number_input("Numéro du boitier utilisé*", max_value=999, min_value=1)
+
             if test:
                 file_input = st.text_input('Fichier de données*', value='PP03-001.TXT')
             else:
@@ -35,7 +39,10 @@ class ExperiencePage(HydraHeadApp):
 
             input_date = st.date_input("Date de l'experience*")
             input_lieu = st.text_input("Lieu de l'experience*")
-            input_operateur = st.text_input("Operateur/trice de l'experience*", value=st.session_state['login'])
+            if "login" in st.session_state:
+                input_operateur = st.text_input("Operateur/trice de l'experience*", value=st.session_state['login'])
+            else:
+                input_operateur = st.text_input("Operateur/trice de l'experience*")
 
             st.subheader("Capteurs")
             tab_titre_cpt = []
@@ -43,15 +50,30 @@ class ExperiencePage(HydraHeadApp):
 
             # Récupération des données des farines, levains et levures et création de dictionnaire pour les
             # selectbox
-            list_of_farine = models.Farine.get_farines()
+            # Farines
+            list_of_farines = []
+            if self.session_state.allow_access > 1:
+                list_of_farines = models.Farine.get_farines()
+            if "farines" in st.session_state:
+                list_of_farines = st.session_state["farines"]
             dict_farines = {"---": "---"}
-            for farine in list_of_farine:
+            for farine in list_of_farines:
                 dict_farines[farine.id_farine] = str(farine)
-            list_of_levain = models.Levain.get_levains()
+            # Levains
+            list_of_levains = []
+            if self.session_state.allow_access > 1:
+                list_of_levains = models.Levain.get_levains()
+            if "levains" in st.session_state:
+                list_of_levains = st.session_state["farines"]
             dict_levains = {"---": "---"}
-            for levain in list_of_levain:
+            for levain in list_of_levains:
                 dict_levains[levain.id] = str(levain)
-            list_of_levures = models.Levure.get_levures()
+            # Levures
+            list_of_levures = []
+            if self.session_state.allow_access > 1:
+                list_of_levures = models.Levure.get_levures()
+            if "levures" in st.session_state:
+                list_of_levures = st.session_state["farines"]
             dict_levures = {"---": "---"}
             for levure in list_of_levures:
                 dict_levures[levure.espece] = str(levure)
@@ -74,13 +96,15 @@ class ExperiencePage(HydraHeadApp):
                     tab_titre_cpt.append(input_alias)
 
             if st.form_submit_button('Lancer'):
-                operateur = models.get_by("users", "login", input_operateur)
-                if not operateur:
-                    st.error("Opérateur inconnus")
-                else:
-                    # print(tab_titre_cpt)
-                    experience = Experience(int(selectbox_boitiers), input_date, input_lieu, input_operateur,
-                                            tab_titre_cpt, '', file_input)
+                can_go = True
+                if self.session_state.allow_access > 1:
+                    operateur = models.get_by("users", "login", input_operateur)
+                    if not operateur:
+                        st.error("Opérateur inconnus")
+                        can_go = False
+                if can_go:
+                    experience = Experience(int(boitier_selected), input_date, input_lieu, input_operateur,
+                                            tab_titre_cpt, None, file_input)
                     st.session_state['experience'] = experience
                     st.sidebar.write(st.session_state)
                     list_of_capteurs = []
