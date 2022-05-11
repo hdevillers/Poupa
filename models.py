@@ -331,7 +331,7 @@ class Experience:
 
     def donnees_brutes(self):
         # on trouve en entrée le nom du fichier à lire
-        f = open('data\\' + self.fichier_donnees, "r")
+        f = open('data/' + self.fichier_donnees, "r")
         my_reader = csv.reader(f)
         stot = [[], [], [], [], [], [], [], [], [], [], ]
         w = []
