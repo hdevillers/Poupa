@@ -11,7 +11,8 @@ from pages.element_view import FarinePage, LevainPage, LevurePage
 
 test = True
 # if "login" in st.session_state and "prenom_nom" in st.session_state:
-app = HydraApp(title="Poupa",
+app = HydraApp(title="PouPa",
+               favicon="resources/bread.png",
                hide_streamlit_markers=True,
                use_navbar=True,
                navbar_sticky=False,
@@ -26,10 +27,10 @@ app.add_app("Farines", icon="🌾", app=FarinePage("Farines"))
 app.add_app("Levains", icon="🦠", app=LevainPage("Levains"))
 app.add_app("Levures", app=LevurePage("Levures"))
 
-app.add_app("Signup", icon="🛰️", app=pages.connexion.InscriptionPage("Signup"), is_unsecure=True,
+app.add_app("Signup", icon="🛰️", app=pages.connexion.InscriptionPage("Inscription"), is_unsecure=True,
             logout_label="Logout")
 
-app.add_app("Login", app=pages.connexion.ConnexionPage("Login"), is_login=True, logout_label="Logout")
+app.add_app("Login", app=pages.connexion.ConnexionPage("Connexion"), is_login=True, logout_label="Logout")
 
 user_access_level, username = app.check_access()
 
