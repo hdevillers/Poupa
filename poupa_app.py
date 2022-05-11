@@ -45,7 +45,6 @@ else:
         'Home': ['Accueil'],
         'Nouvelle Expérience': ['Nouvelle Expérience'],
         'Résultats': ['Résultats'],
-        'Fusion de capteurs': ['Fusion de capteurs'],
         'Farines&Levain': ["Farines", "Levains", "Levures"], }
 
 over_theme = {'txc_inactive': '#FFFFFF'}
