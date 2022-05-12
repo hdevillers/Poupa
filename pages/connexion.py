@@ -38,7 +38,7 @@ class ConnexionPage(HydraHeadApp):
 
         if st.button('Guest Login', key='guestbtn'):
             # set access level to a negative number to allow a kick to the unsecure_app set in the parent
-            self.set_access(1, 'guest')
+            self.set_access(1, 'guest', True)
             st.session_state["access_level"] = 1
             self.do_redirect()
 
