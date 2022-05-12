@@ -1,5 +1,4 @@
 import streamlit as st
-import pages.connexion
 import models
 from hydralit import HydraHeadApp
 

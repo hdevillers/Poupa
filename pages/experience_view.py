@@ -1,8 +1,3 @@
-import random
-
-import pandas as pd
-import streamlit as st
-
 import models
 from models import *
 from pages.element_view import FarinePage, LevainPage, LevurePage

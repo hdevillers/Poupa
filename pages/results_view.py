@@ -1,5 +1,3 @@
-import ast
-import random
 import models
 from models import *
 from hydralit import HydraHeadApp
@@ -20,9 +18,9 @@ class ResultPage(HydraHeadApp):
         if self.session_state.allow_access > 1:
             mssg_archiver = " ou les enregistrer dans la base de données pour les consulter plus tard en cliquant sur "\
                             "**'Archiver dans la base de données'** "
-        st.write(f"Vous pouvez consulter vos resutats sur cette page. Retrouvez ses informations dans la barre de droite"
-                 f"et les différents graphiques ci-dessous. Vous pouvez télécharger un pdf de votre résulter en cliquant"
-                 f"sur 'Télécharger les résultats'{mssg_archiver}.")
+        st.write(f"Vous pouvez consulter vos resutats sur cette page. Retrouvez ses informations dans la barre de "
+                 f"droite et les différents graphiques ci-dessous. Vous pouvez télécharger un pdf de votre résultat en "
+                 f"cliquant sur **'Télécharger les résultats'**{mssg_archiver}.")
         experience = st.session_state["experience"]
         with st.sidebar:
             st.header("Informations")
@@ -46,9 +44,7 @@ class ResultPage(HydraHeadApp):
 
         # Génération du pdf
         with col1:
-            download = st.button("Télécharger les résultats")
-            if download:
-                experience.generate_pdf()
+            download = st.button("Télécharger les résultats", on_click=experience.generate_pdf)
 
         # Enregistrement dans la base de données
         with col2:

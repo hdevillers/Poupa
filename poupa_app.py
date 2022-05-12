@@ -7,7 +7,6 @@ from hydralit import HydraApp
 from pages.merge_capteurs import MergePage
 from pages.element_view import FarinePage, LevainPage, LevurePage
 
-# st.set_page_config(page_title="Poupa")
 
 test = True
 # if "login" in st.session_state and "prenom_nom" in st.session_state:
