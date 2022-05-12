@@ -1,5 +1,6 @@
 import random
 
+import pandas as pd
 import streamlit as st
 
 import models
@@ -32,11 +33,7 @@ class ExperiencePage(HydraHeadApp):
             else:
                 boitier_selected = st.number_input("Numéro du boitier utilisé*", max_value=999, min_value=1)
 
-            if test:
-                file_input = st.text_input('Fichier de données*', value='PP03-001.TXT')
-            else:
-                file_input = st.text_input('Fichier de données*')
-
+            upload_file = st.file_uploader("Fichier de données*", type=["csv", "TXT"])
             input_date = st.date_input("Date de l'experience*")
             input_lieu = st.text_input("Lieu de l'experience*")
             if "login" in st.session_state:
@@ -73,7 +70,7 @@ class ExperiencePage(HydraHeadApp):
             for levain in list_of_levains:
                 if self.session_state.allow_access > 1:
                     dict_levains[levain.id] = str(levain)
-                else :
+                else:
                     dict_levains[levain] = str(levain)
 
             # Levures
@@ -105,6 +102,9 @@ class ExperiencePage(HydraHeadApp):
 
             if st.form_submit_button('Lancer'):
                 can_go = True
+                if upload_file is None or input_operateur is None or input_lieu is None:
+                    st.error("Tous les champs obligatoirs n'ont pas été remplis")
+                    can_go=False
                 if self.session_state.allow_access > 1:
                     operateur = models.get_by("users", "login", input_operateur)
                     if not operateur:
@@ -112,7 +112,7 @@ class ExperiencePage(HydraHeadApp):
                         can_go = False
                 if can_go:
                     experience = Experience(int(boitier_selected), input_date, input_lieu, input_operateur,
-                                            tab_titre_cpt, None, file_input)
+                                            tab_titre_cpt, None, upload_file)
                     st.session_state['experience'] = experience
                     # st.sidebar.write(st.session_state)
                     list_of_capteurs = []

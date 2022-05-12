@@ -331,8 +331,9 @@ class Experience:
 
     def donnees_brutes(self):
         # on trouve en entrée le nom du fichier à lire
-        f = open('data/' + self.fichier_donnees, "r")
-        my_reader = csv.reader(f)
+        # f = open('data/' + self.fichier_donnees, "r")
+        # my_reader = csv.reader(f)
+        my_reader = pd.read_csv(self.fichier_donnees).values.tolist()
         stot = [[], [], [], [], [], [], [], [], [], [], ]
         w = []
         glob = []
@@ -340,7 +341,6 @@ class Experience:
         for row in my_reader:
             # transformation de la chaine de caractère en nombre -> on enleve les char mais on garde les num de capteurs
             w.append([float(w) for w in re.findall(r'-?\d+\.?\d*', str(row))])
-
         for loop in w:
             # si len == 3 donc c'est un capteur
             if len(loop) == 3:
@@ -508,8 +508,8 @@ class Experience:
 
                         listOf_Xticks = np.arange(0, max(self.touty[2 * i]), 20)
                         ax.set_xticks(listOf_Xticks, minor=True)
-                        listOf_Yticks = np.arange(0, max(max_values), 2)
-                        ax.set_yticks(listOf_Yticks, minor=True)
+                        # listOf_Yticks = np.arange(0, max(max_values), 2)
+                        # ax.set_yticks(listOf_Yticks, minor=True)
 
                         ax.grid(which='both')
                         ax.grid(which='minor', alpha=0.2, linestyle='--')
