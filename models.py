@@ -277,8 +277,7 @@ class Experience:
 
     def __init__(self, id_boitier, date, lieu, operateur, titres_cpt=None, projet=None, fichier_donnees=None,
                  fichier_resultat=None, remarque=None):
-        self.touty = []
-        self.tab_figs = []
+
         self.titres_cpt = titres_cpt
         self.identificateur = str(id_boitier) + "_" + str(date) + "_" + operateur
         self.id_boitier = id_boitier
@@ -289,8 +288,10 @@ class Experience:
         self.fichier_donnees = fichier_donnees
         self.fichier_resultat = fichier_resultat
         self.remarque = remarque
-        if test:
-            self.called = 0
+        self._touty = []
+        self._tab_figs = []
+        self.max_values = []
+        self._first_time = True
 
     def get_id(self):
         return self.identificateur
@@ -446,7 +447,7 @@ class Experience:
             ax = plt.subplot(111)
             ax.axis('off')
             ax.table(cellText=df.values, colLabels=df.columns, bbox=[0, 0, 1, 1])
-            self.tab_figs.append(fig)
+            self._tab_figs.append(fig)
 
         # lecture du fichier de données et tracé
 
@@ -457,20 +458,19 @@ class Experience:
         **Solution** : pour *tab_figures* on le vide à chaque fois que l'on execute dessiner_courbes mais je n'ai pas
         de solution viable pour le fait qu'elle soit appelée deux fois pour l'instant """
 
-        print(f"I've been called {self.called} times")
-        self.called += 1
-        self.tab_figs = []
+        self._tab_figs = []
         with st.container():
             st.header("Courbes")
-            self.touty = self.donnees_brutes()
+            if self._first_time:
+                self._touty = self.donnees_brutes()
             # infos_pente_courbes -> [[a, b, t0, t1], ....]
             infos_pente_courbes = []
             # on cherche les valeurs maximum de chaque graph pour les mettre à la meme echelle
-            max_values = []
-            for i in range(4):
-                if len(self.touty[2 * i]) > 3:
-                    max_values.append(np.amax(self.touty[2 * i + 1][0] - self.touty[2 * i + 1]))
-
+            if self._first_time:
+                for i in range(4):
+                    if len(self._touty[2 * i]) > 3:
+                        self.max_values.append(np.amax(self._touty[2 * i + 1][0] - self._touty[2 * i + 1]))
+            st.write(self.max_values)
             col1, col2 = st.columns(2)
             col3, col4 = st.columns(2)
             col5, col6 = st.columns(2)
@@ -479,13 +479,13 @@ class Experience:
             # commencent à (0, 0) puis on les dessines elles et leur pente max et on trouve le t0 et t1
             for i in range(4):
                 with tab_col[i]:
-                    if len(self.touty[2 * i]) > 3:
-
-                        self.touty[2 * i] = (self.touty[2 * i] - self.touty[2 * i][0]) / 60
-                        self.touty[2 * i + 1] = self.touty[2 * i + 1][0] - self.touty[2 * i + 1]
+                    if len(self._touty[2 * i]) > 3:
+                        if self._first_time:
+                            self._touty[2 * i] = (self._touty[2 * i] - self._touty[2 * i][0]) / 60
+                            self._touty[2 * i + 1] = self._touty[2 * i + 1][0] - self._touty[2 * i + 1]
 
                         fig_courbe, ax = plt.subplots()
-                        liss = self.lissage(self.touty[2 * i], self.touty[2 * i + 1], 5)
+                        liss = self.lissage(self._touty[2 * i], self._touty[2 * i + 1], 5)
 
                         self.info_courbe(self.titres_cpt[i], 'temps (min)', 'pousse (mm)')
                         intervalle = 45
@@ -502,11 +502,11 @@ class Experience:
                                 linestyle='--', linewidth=0.5, label="t1")
                         # if i == 0:
                         #     fig_courbe.legend(bbox_to_anchor=(0.75, 1.15), ncol=2)
-                        plt.ylim(ymin=-3, ymax=max(max_values))
+                        plt.ylim(ymin=-3, ymax=max(self.max_values))
 
                         ax.plot(liss[0], liss[1], color=self.COULEURS[i])
 
-                        listOf_Xticks = np.arange(0, max(self.touty[2 * i]), 20)
+                        listOf_Xticks = np.arange(0, max(self._touty[2 * i]), 20)
                         ax.set_xticks(listOf_Xticks, minor=True)
                         # listOf_Yticks = np.arange(0, max(max_values), 2)
                         # ax.set_yticks(listOf_Yticks, minor=True)
@@ -515,25 +515,26 @@ class Experience:
                         ax.grid(which='minor', alpha=0.2, linestyle='--')
 
                         st.pyplot(fig_courbe)
-                        self.tab_figs.append(fig_courbe)
+                        self._tab_figs.append(fig_courbe)
 
                     else:
                         fig, ax = plt.subplots()
-                        st.write("""Pas de données""")
+                        ax.text(0.5, 0.5, "Pas de données")
                         st.pyplot(fig)
-                        self.tab_figs.append(fig)
+                        self._tab_figs.append(fig)
                     # info_courbe("Capteur n°" + str(i + 1), 'temps (min)', 'pousse (mm)', fig_courbe_vide)
                     # fig_courbe_vide.grid()
 
             # courbe des températures
             with col5:
                 fig, ax = plt.subplots()
-                self.touty[8] = (self.touty[8] - self.touty[8][0]) / 60
-                ax.plot(self.touty[8], self.touty[9])
+                if self._first_time:
+                    self._touty[8] = (self._touty[8] - self._touty[8][0]) / 60
+                ax.plot(self._touty[8], self._touty[9])
 
-                listOf_Xticks = np.arange(0, max(self.touty[8]), 20)
+                listOf_Xticks = np.arange(0, max(self._touty[8]), 20)
                 ax.set_xticks(listOf_Xticks, minor=True)
-                listOf_Yticks = np.arange(0, max(self.touty[9]), 2)
+                listOf_Yticks = np.arange(0, max(self._touty[9]), 2)
                 ax.set_yticks(listOf_Yticks, minor=True)
 
                 ax.grid(which='both')
@@ -543,46 +544,46 @@ class Experience:
                 # fig_temp.plot(touty[8], touty[9], color=COULEURS[4])
                 plt.ylim(ymin=10)
                 self.info_courbe("temperature", 'temps (min)', 'température  (°c)')
-                self.tab_figs.append(fig)
+                self._tab_figs.append(fig)
 
             # toutes les courbes
-            # fig_all = fig.add_subplot(236)
             with col6:
                 fig, ax = plt.subplots()
                 for i in range(4):
-                    arr = self.lissage(self.touty[2 * i], self.touty[2 * i + 1], 5)
+                    arr = self.lissage(self._touty[2 * i], self._touty[2 * i + 1], 5)
                     ax.plot(arr[0], arr[1])
                 self.info_courbe("Capteurs", 'temps (min)', 'pousse (mm)')
-                listOf_Xticks = np.arange(0, max(self.touty[8]), 20)
+                listOf_Xticks = np.arange(0, max(self._touty[8]), 20)
                 ax.set_xticks(listOf_Xticks, minor=True)
-                listOf_Yticks = np.arange(0, max(max_values), 2)
+                listOf_Yticks = np.arange(0, max(self.max_values), 2)
                 ax.set_yticks(listOf_Yticks, minor=True)
 
                 ax.grid(which='both')
                 ax.grid(which='minor', alpha=0.2, linestyle='--')
                 st.pyplot(fig)
-                self.tab_figs.append(fig)
+                self._tab_figs.append(fig)
 
             # tableau des infos
             self.dessiner_tableau(infos_pente_courbes)
+            self._first_time = False
 
     def generate_pdf(self):
         pp = PdfPages(f"{self.get_id()}.pdf")
-        for fig in self.tab_figs:
+        for fig in self._tab_figs:
             pp.savefig(fig)
         pp.close()
 
     def generate_csv_cpt(self):
         tab_file = []
         for i in range(4):
-            if len(self.touty[2 * i]) > 3:
+            if len(self._touty[2 * i]) > 3:
                 file = 'data\\capteurs\\' + self.identificateur + "Capteur_" + str(i + 1) + '.csv'
                 tab_file.append(file)
                 with open(file, 'w') as csvfile:
                     print(csvfile)
                     filewriter = csv.writer(csvfile, delimiter=",", quotechar='|', quoting=csv.QUOTE_MINIMAL)
-                    filewriter.writerow(self.touty[2 * i])
-                    filewriter.writerow(self.touty[2 * i + 1])
+                    filewriter.writerow(self._touty[2 * i])
+                    filewriter.writerow(self._touty[2 * i + 1])
         return tab_file
 
 
