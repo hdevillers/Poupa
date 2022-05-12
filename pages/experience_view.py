@@ -7,6 +7,7 @@ import models
 from models import *
 from pages.element_view import FarinePage, LevainPage, LevurePage
 from hydralit import HydraHeadApp
+from datetime import date
 
 test = True
 
@@ -17,14 +18,24 @@ class ExperiencePage(HydraHeadApp):
         self.title = title
 
     def run(self):
-
         with open("css/experience.css", "r") as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
         st.header("Créer une experience")
-        st.write(f"Bienvenue sur la page de création d'experience ! Personnalisez votre experience à votre guise et"
-                 f"appuyez sur **'Lancer'** pour générer les résultats. Rendez-vous ensuite sur la page **'Résultats'** "
-                 f"pour les consulter ")
+        st.write(f"Bienvenue sur la page de création d'experience ! Personnalisez votre experience à votre guise et "
+                 f"appuyez sur **'Lancer'** pour générer les résultats. Rendez-vous ensuite sur la page **'Résultats'**"
+                 f" pour les consulter ")
+
+        value_poupa = 1
+        value_date = date.today()
+        value_lieu = ""
+        value_operateur = ""
+        if "dic_previous" in st.session_state:
+            dp = st.session_state["dic_previous"]
+            value_poupa = dp["PouPa"]
+            value_date = dp["Date"]
+            value_lieu = dp["Lieu"]
+            value_operateur = dp["Operateur"]
 
         with st.sidebar:
             with st.expander("Ajouter une Farine"):
@@ -42,22 +53,28 @@ class ExperiencePage(HydraHeadApp):
                 for poupa in list_of_poupa:
                     list_id_poupa.append(poupa[0])
 
-                boitier_selected = st.selectbox("Numéro du boitier utilisé*", list_id_poupa)
+                boitier_selected = st.selectbox("Numéro du PouPa utilisé*", list_id_poupa, value=value_poupa)
             else:
-                boitier_selected = st.number_input("Numéro du boitier utilisé*", max_value=999, min_value=1)
+                boitier_selected = st.number_input("Numéro du PouPa utilisé*", max_value=999, min_value=1,
+                                                   value=value_poupa)
 
             upload_file = st.file_uploader("Fichier de données*", type=["csv", "TXT"])
-            input_date = st.date_input("Date de l'experience*")
-            input_lieu = st.text_input("Lieu de l'experience*")
+            input_date = st.date_input("Date de l'experience*", value=value_date)
+            input_lieu = st.text_input("Lieu de l'experience*", value=value_lieu)
             if "login" in st.session_state:
                 input_operateur = st.text_input("Operateur/trice de l'experience*", value=st.session_state['login'])
             else:
-                input_operateur = st.text_input("Operateur/trice de l'experience*")
+                input_operateur = st.text_input("Operateur/trice de l'experience*", value=value_operateur)
 
             st.subheader("Capteurs")
             tab_titre_cpt = []
             tab_cpt = []
 
+            dic_previous = {"PouPa" : boitier_selected,
+                            "Date": input_date,
+                            "Lieu": input_lieu,
+                            "Operateur": input_operateur}
+            st.session_state["dic_previous"] = dic_previous
             # Récupération des données des farines, levains et levures et création de dictionnaire pour les
             # selectbox
             # Farines
