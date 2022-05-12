@@ -27,6 +27,6 @@ class HomePage(HydraHeadApp):
                         i += 1
         else:
             st.warning(f"Vous êtes connecté(e) en **mode visiteur**, vous n'avez donc **pas accés** à la base de "
-                       f"données, les farines, levains et levures que vous créérez **seront perdus** si vous rechargez "
-                       f"la page ou qittez l'application ")
+                       f"données, les farines, levains et levures que vous créérez **seront perdus** si vous vous "
+                       f"deconnectez ou quittez l'application ")
 

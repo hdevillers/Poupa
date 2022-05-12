@@ -1,3 +1,4 @@
+import ast
 import random
 import models
 from models import *
@@ -10,11 +11,18 @@ class ResultPage(HydraHeadApp):
         self.title = title
 
     def run(self):
-        st.title('Résultat')
+        st.header('Résultat')
         if "experience" not in st.session_state:
             st.warning(f"**Renseignez une experience pour voir les résultats**")
             return
 
+        mssg_archiver = ''
+        if self.session_state.allow_access > 1:
+            mssg_archiver = " ou les enregistrer dans la base de données pour les consulter plus tard en cliquant sur "\
+                            "**'Archiver dans la base de données'** "
+        st.write(f"Vous pouvez consulter vos resutats sur cette page. Retrouvez ses informations dans la barre de droite"
+                 f"et les différents graphiques ci-dessous. Vous pouvez télécharger un pdf de votre résulter en cliquant"
+                 f"sur 'Télécharger les résultats'{mssg_archiver}.")
         experience = st.session_state["experience"]
         with st.sidebar:
             st.header("Informations")
@@ -45,7 +53,7 @@ class ResultPage(HydraHeadApp):
         # Enregistrement dans la base de données
         with col2:
             if self.session_state.allow_access > 1:
-                archiver = st.button("Enregistrer")
+                archiver = st.button("Archiver dans la base de données")
                 if archiver:
                     i = 0
                     if not models.get_by("experiences", "id", experience.get_id()):

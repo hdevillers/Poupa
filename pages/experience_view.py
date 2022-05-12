@@ -5,6 +5,7 @@ import streamlit as st
 
 import models
 from models import *
+from pages.element_view import FarinePage, LevainPage, LevurePage
 from hydralit import HydraHeadApp
 
 test = True
@@ -20,7 +21,19 @@ class ExperiencePage(HydraHeadApp):
         with open("css/experience.css", "r") as f:
             st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-        st.title("Créer une experience")
+        st.header("Créer une experience")
+        st.write(f"Bienvenue sur la page de création d'experience ! Personnalisez votre experience à votre guise et"
+                 f"appuyez sur **'Lancer'** pour générer les résultats. Rendez-vous ensuite sur la page **'Résultats'** "
+                 f"pour les consulter ")
+
+        with st.sidebar:
+            with st.expander("Ajouter une Farine"):
+                FarinePage.generate_form(self.session_state.allow_access)
+            with st.expander("Ajouter un Levain"):
+                LevainPage.generate_form(self.session_state.allow_access)
+            with st.expander("Ajouter une Levure"):
+                LevurePage.generate_form(self.session_state.allow_access)
+
         with st.form("form experience"):
             st.subheader("Informations de l'experience")
             if self.session_state.allow_access > 1:
@@ -103,8 +116,8 @@ class ExperiencePage(HydraHeadApp):
             if st.form_submit_button('Lancer'):
                 can_go = True
                 if upload_file is None or input_operateur is None or input_lieu is None:
-                    st.error("Tous les champs obligatoirs n'ont pas été remplis")
-                    can_go=False
+                    st.error("Certains champs obligatoires ne sont pas encore remplis.")
+                    can_go = False
                 if self.session_state.allow_access > 1:
                     operateur = models.get_by("users", "login", input_operateur)
                     if not operateur:
@@ -133,4 +146,4 @@ class ExperiencePage(HydraHeadApp):
                                       infos[5], experience.get_id() + infos[0] + '.csv')
                         list_of_capteurs.append(cpt)
                     st.session_state[f'capteurs'] = list_of_capteurs
-                    st.success("Résultats génerés ! Allez consulter la page Résultats")
+                    st.success(f"Résultats génerés ! **Allez consulter la page Résultats**")
