@@ -689,19 +689,21 @@ class MergeCapteur:
         self.list_files = list_files
         self.list_cpt = []
         fig, ax = plt.subplots()
-
+        max_values = []
+        max_len = []
         i = 0
         for file in self.list_files:
             my_data = pd.read_csv(file, sep=",").values.tolist()
             self.list_cpt.append(my_data)
-            ax.plot(self.list_cpt[i][0])
+            ax.plot(my_data[0])
             i += 1
+            max_values.append(max(my_data[0]))
+            max_len.append(len(my_data[0]))
 
-        st.write(self.list_cpt)
-        """listOf_Xticks = np.arange(0, max(self._touty[8]), 20)
+        listOf_Xticks = np.arange(0, max(max_len), 20)
         ax.set_xticks(listOf_Xticks, minor=True)
-        listOf_Yticks = np.arange(0, max(self.max_values), 2)
-        ax.set_yticks(listOf_Yticks, minor=True)"""
+        listOf_Yticks = np.arange(0, max(max_values), 2)
+        ax.set_yticks(listOf_Yticks, minor=True)
 
         ax.grid(which='both')
         ax.grid(which='minor', alpha=0.2, linestyle='--')
