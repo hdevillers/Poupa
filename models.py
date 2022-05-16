@@ -437,16 +437,21 @@ class Experience:
             data = []
             for pente in donnees:
                 pente.pop(1)
-                pente.insert(0, self.titres_cpt[i])
+                # pente.insert(0, self.titres_cpt[i])
                 data.insert(i, pente)
                 i += 1
-            df = pd.DataFrame(data, columns=("Capteur", "pente max (mm/min)", "Début pousse (min)", "Fin pousse (min)"))
+            df = pd.DataFrame(data, columns=("pente max (mm/min)", "Début pousse (min)", "Fin pousse (min)"))
             st.dataframe(df)
 
             fig = plt.figure()
             ax = plt.subplot(111)
             ax.axis('off')
-            ax.table(cellText=df.values, colLabels=df.columns, bbox=[0, 0, 1, 1])
+            st.write(len(self.titres_cpt))
+            tab = ax.table(cellText=df.values, rowLabels=self.titres_cpt, rowColours=["#abdbe3"] * len(donnees),
+                           colLabels=df.columns,
+                           colColours=["#abdbe3"] * len(donnees))
+            tab.auto_set_font_size(False)
+            tab.set_fontsize(10)
             self._tab_figs.append(fig)
 
         # lecture du fichier de données et tracé
@@ -470,7 +475,6 @@ class Experience:
                 for i in range(4):
                     if len(self._touty[2 * i]) > 3:
                         self.max_values.append(np.amax(self._touty[2 * i + 1][0] - self._touty[2 * i + 1]))
-            st.write(self.max_values)
             col1, col2 = st.columns(2)
             col3, col4 = st.columns(2)
             col5, col6 = st.columns(2)
@@ -508,8 +512,8 @@ class Experience:
 
                         listOf_Xticks = np.arange(0, max(self._touty[2 * i]), 20)
                         ax.set_xticks(listOf_Xticks, minor=True)
-                        # listOf_Yticks = np.arange(0, max(max_values), 2)
-                        # ax.set_yticks(listOf_Yticks, minor=True)
+                        listOf_Yticks = np.arange(0, max(self.max_values), 2)
+                        ax.set_yticks(listOf_Yticks, minor=True)
 
                         ax.grid(which='both')
                         ax.grid(which='minor', alpha=0.2, linestyle='--')
@@ -563,9 +567,10 @@ class Experience:
                 st.pyplot(fig)
                 self._tab_figs.append(fig)
 
+            self._first_time = False
             # tableau des infos
             self.dessiner_tableau(infos_pente_courbes)
-            self._first_time = False
+
 
     def generate_pdf(self):
         pp = PdfPages(f"{self.get_id()}.pdf")
@@ -683,7 +688,21 @@ class MergeCapteur:
     def __init__(self, list_files):
         self.list_files = list_files
         self.list_cpt = []
+        fig, ax = plt.subplots()
+
+        i = 0
         for file in self.list_files:
-            my_data = pd.read_csv(file, sep=",")
+            my_data = pd.read_csv(file, sep=",").values.tolist()
             self.list_cpt.append(my_data)
-        print(self.list_cpt)
+            ax.plot(self.list_cpt[i][0])
+            i += 1
+
+        st.write(self.list_cpt)
+        """listOf_Xticks = np.arange(0, max(self._touty[8]), 20)
+        ax.set_xticks(listOf_Xticks, minor=True)
+        listOf_Yticks = np.arange(0, max(self.max_values), 2)
+        ax.set_yticks(listOf_Yticks, minor=True)"""
+
+        ax.grid(which='both')
+        ax.grid(which='minor', alpha=0.2, linestyle='--')
+        st.pyplot(fig)

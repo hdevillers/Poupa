@@ -9,10 +9,10 @@ class MergePage(HydraHeadApp):
         self.title = title
 
     def run(self):
-        if self.session_state.allow_access >1 :
-            all_exp = models.get_by("experiences", 'operateur', st.session_state['login'])
+        with st.form('choose cpt'):
             list_cpt = []
-            with st.form('choose cpt'):
+            if self.session_state.allow_access > 1:
+                all_exp = models.get_by("experiences", 'operateur', st.session_state['login'])
                 list_checkbox = []
                 i = 0
                 for experience in all_exp:
@@ -24,19 +24,20 @@ class MergePage(HydraHeadApp):
                             cpt_checkbox = st.checkbox(str(capteur), key=f"chckbx{i}")
                             list_checkbox.append(cpt_checkbox)
                             i += 1
-
-                if st.form_submit_button("Fusionner"):
-                    print(list_checkbox)
-                    i = 0
-                    list_file = []
+            else:
+                list_cpt = st.file_uploader("Fichier des flacons à fusionner", accept_multiple_files=True)
+            if st.form_submit_button("Fusionner"):
+                i = 0
+                list_file = []
+                if self.session_state.allow_access > 1:
                     for cpt in list_cpt:
                         if list_checkbox[i]:
                             list_file.append(cpt.get_fichier_donnes())
                         i += 1
+                else:
+                    list_file = list_cpt
 
-                    if not list_file or len(list_file) == 1:
-                        st.error("Veuillez choiri au moins 2 capteurs")
-                    else:
-                        merge_cpt = models.MergeCapteur(list_file)
-        else:
-            st.warning("La fusion de capteurs n'est pas encore disponnible en mode hors ligne")
+                if not list_file or len(list_file) == 1:
+                    st.error("Veuillez choisir au moins 2 capteurs")
+                else:
+                    merge_cpt = models.MergeCapteur(list_file)
