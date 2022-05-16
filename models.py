@@ -447,6 +447,7 @@ class Experience:
             ax = plt.subplot(111)
             ax.axis('off')
             st.write(len(self.titres_cpt))
+            st.write(self.titres_cpt)
             tab = ax.table(cellText=df.values, rowLabels=self.titres_cpt, rowColours=["#abdbe3"] * len(donnees),
                            colLabels=df.columns,
                            colColours=["#abdbe3"] * len(donnees))
@@ -522,6 +523,7 @@ class Experience:
                         self._tab_figs.append(fig_courbe)
 
                     else:
+                        self.titres_cpt.pop(i)
                         fig, ax = plt.subplots()
                         ax.text(0.5, 0.5, "Pas de données")
                         st.pyplot(fig)

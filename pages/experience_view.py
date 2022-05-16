@@ -115,7 +115,7 @@ class ExperiencePage(HydraHeadApp):
             for i in range(4):
                 with list_col[i]:
                     st.write(f"**Capteur_{i + 1}**")
-                    input_alias = st.text_input("Alias", key=i)
+                    input_alias = st.text_input("Alias*", key=i, value=f"Capteur-{i+1}")
                     selectfarine = st.selectbox("Farine", list(dict_farines.items()), key=i, format_func=lambda o: o[1])
                     selectlevain = st.selectbox("Levain", list(dict_levains.items()), key=i, format_func=lambda o: o[1])
                     select_levure = st.selectbox("Levure", list(dict_levures.items()), key=i,
