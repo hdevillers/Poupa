@@ -447,8 +447,6 @@ class Experience:
             fig = plt.figure()
             ax = plt.subplot(111)
             ax.axis('off')
-            st.write(len(self.titres_cpt))
-            st.write(self.titres_cpt)
             tab = ax.table(cellText=df.values, rowLabels=self.titres_cpt, rowColours=["#abdbe3"] * len(donnees),
                            colLabels=df.columns,
                            colColours=["#abdbe3"] * len(donnees))
@@ -497,15 +495,18 @@ class Experience:
                         self.info_courbe(self.titres_cpt[i], 'temps (min)', 'pousse (mm)')
                         intervalle = 45
 
-                        i_max, info_pente = self.trouver_pente(liss[0], liss[1], 0, intervalle, [0, 0, 0],
-                                                               len(liss[0]), ax)
-                        infos_pente_courbes.append(info_pente)
-                        infos_pente_courbes[i].append(self.find_t1(i_max, liss[0], liss[1], intervalle))
+                        if max(self._touty[2 * i + 1]) > 3:
+                            i_max, info_pente = self.trouver_pente(liss[0], liss[1], 0, intervalle, [0, 0, 0],
+                                                                   len(liss[0]), ax)
+                            infos_pente_courbes.append(info_pente)
+                            infos_pente_courbes[i].append(self.find_t1(i_max, liss[0], liss[1], intervalle))
 
-                        ax.plot([infos_pente_courbes[i][2] for j in range(len(liss[0]))], np.arange(len(liss[0])),
-                                linestyle='--', linewidth=0.5, label="t0")
-                        ax.plot([infos_pente_courbes[i][3] for j in range(len(liss[0]))], np.arange(len(liss[0])),
-                                linestyle='--', linewidth=0.5, label="t1")
+                            ax.plot([infos_pente_courbes[i][2] for j in range(len(liss[0]))], np.arange(len(liss[0])),
+                                    linestyle='--', linewidth=0.5, label="t0")
+                            ax.plot([infos_pente_courbes[i][3] for j in range(len(liss[0]))], np.arange(len(liss[0])),
+                                    linestyle='--', linewidth=0.5, label="t1")
+                        else:
+                            infos_pente_courbes.append([0, 0, 0, 0])
                         # if i == 0:
                         #     fig_courbe.legend(bbox_to_anchor=(0.75, 1.15), ncol=2)
                         plt.ylim(ymin=-3, ymax=max(self.max_values))
