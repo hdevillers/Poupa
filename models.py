@@ -403,28 +403,41 @@ class Experience:
 
     def trouver_pente(self, x, y, i, intervalle, info_coeff_max, x_len, ax):
         """ trouve la pente maximum, la dessine, puis renvoi [a, b, t0] """
+        y_in_touty = self._touty_liss[-1]
         if len(y) < intervalle or len(x) < intervalle:
-            a, b = self.reg_lin([x[0], x[-1]],
-                                [y[0], y[-1]])
-            if info_coeff_max[0] < a:
-                info_coeff_max[0] = round(a, 3)
-                info_coeff_max[1] = b
-                info_coeff_max[2] = intervalle * (i + 1)
+            if x != [0] and y != [0]:
+                a, b = self.reg_lin([x[0], x[-1]],
+                                    [y[0], y[-1]])
+                if info_coeff_max[0] < a:
+                    info_coeff_max[0] = round(a, 3)
+                    info_coeff_max[1] = b
+                    info_coeff_max[2] = intervalle * (i + 1)
+                # x_len = x[0:intervalle] + intervalle * i
+            t0 = self.find_t0(info_coeff_max[0], info_coeff_max[1])
             penteX = np.arange(x_len)
             ax.plot(penteX, info_coeff_max[0] * penteX + info_coeff_max[1], color="#B4B100")
-            info_coeff_max.append(self.find_t0(info_coeff_max[0], info_coeff_max[1]))
+            info_coeff_max.append(t0)
             if test:
                 print("############### stop #################")
+                # ax.plot(penteX, [0] * len(x_len))
             coor_max = info_coeff_max[2]
             info_coeff_max.pop(2)
             return coor_max, info_coeff_max
         else:
+            previous = y[0]
+            for current in y_in_touty[(intervalle - 20) * i: (intervalle + 20) * (i + 1):10]:
+                if previous - current >= 8:
+                    if test:
+                        print("STOP FROM HERE")
+                    return self.trouver_pente([0], [0], i + 1, intervalle, info_coeff_max, x_len, ax)
+                previous = current
             a, b = self.reg_lin([x[0], x[intervalle]],
                                 [y[0], y[intervalle]])
             if info_coeff_max[0] < a:
                 info_coeff_max[0] = round(a, 3)
                 info_coeff_max[1] = b
                 info_coeff_max[2] = intervalle * (i + 1)
+                # x_len = x[0:intervalle] + intervalle * i
             if test:
                 print(i)
                 print("a   ={:8.3f}\nb   ={:8.3f}\n".format(a, b))
@@ -490,10 +503,10 @@ class Experience:
 
                         fig_courbe, ax = plt.subplots()
                         liss = self.lissage(self._touty[2 * i], self._touty[2 * i + 1], 5)
-                        # self._touty_liss.append(liss[1])
+                        self._touty_liss.append(liss[1])
 
                         self.info_courbe(self.titres_cpt[i], 'temps (min)', 'pousse (mm)')
-                        intervalle = 45
+                        intervalle = 60
 
                         if max(self._touty[2 * i + 1]) > 3:
                             i_max, info_pente = self.trouver_pente(liss[0], liss[1], 0, intervalle, [0, 0, 0],
