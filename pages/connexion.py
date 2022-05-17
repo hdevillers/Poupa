@@ -4,7 +4,7 @@ import hashlib
 import time
 from typing import Dict
 from mysql.connector import Error
-from hydralit import HydraApp, HydraHeadApp
+from hydralit import HydraHeadApp
 
 
 def make_hashes(password):

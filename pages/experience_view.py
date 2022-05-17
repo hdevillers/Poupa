@@ -65,7 +65,7 @@ class ExperiencePage(HydraHeadApp):
             tab_titre_cpt = []
             tab_cpt = []
 
-            dic_previous = {"PouPa" : boitier_selected,
+            dic_previous = {"PouPa": boitier_selected,
                             "Date": input_date,
                             "Lieu": input_lieu,
                             "Operateur": input_operateur}

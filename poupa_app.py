@@ -27,10 +27,9 @@ app.add_app("Farines", icon="🌾", app=FarinePage("Farines"))
 app.add_app("Levains", icon="🦠", app=LevainPage("Levains"))
 app.add_app("Levures", app=LevurePage("Levures"))
 
-app.add_app("Signup", icon="🛰️", app=pages.connexion.InscriptionPage("Inscription"), is_unsecure=True,
-            logout_label="Logout")
+app.add_app("Signup", icon="🛰️", app=pages.connexion.InscriptionPage("Inscription"), is_unsecure=True)
 
-app.add_app("Login", app=pages.connexion.ConnexionPage("Connexion"), is_login=True, logout_label="Logout")
+app.add_app("Login", app=pages.connexion.ConnexionPage("Connexion"), is_login=True)
 
 app.add_loader_app(myloading.MyLoadingApp())
 
