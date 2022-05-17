@@ -2,6 +2,7 @@ import time
 import streamlit as st
 from hydralit import HydraHeadApp
 from hydralit_components import HyLoader, Loaders
+import traceback, sys
 
 
 class MyLoadingApp(HydraHeadApp):
@@ -50,8 +51,11 @@ class MyLoadingApp(HydraHeadApp):
                 app_target.run()
 
         except Exception as e:
-            st.image("./resources/failure.png", width=100, )
             st.error(
                 'An error has occurred, someone will be punished for your inconvenience, we humbly request you try '
                 'again.')
+            if hasattr(e, 'message'):
+                print(e.message)
             st.error('Error details: {}'.format(e))
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            print("E=%s, F=%s, L=%s" % (str(e), traceback.extract_tb(exc_tb)[-1][0], traceback.extract_tb(exc_tb)[-1][1]) )
