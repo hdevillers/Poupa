@@ -289,6 +289,7 @@ class Experience:
         self.fichier_resultat = fichier_resultat
         self.remarque = remarque
         self._touty = []
+        self._touty_liss = []
         self._tab_figs = []
         self.max_values = []
         self._first_time = True
@@ -491,13 +492,13 @@ class Experience:
 
                         fig_courbe, ax = plt.subplots()
                         liss = self.lissage(self._touty[2 * i], self._touty[2 * i + 1], 5)
+                        # self._touty_liss.append(liss[1])
 
                         self.info_courbe(self.titres_cpt[i], 'temps (min)', 'pousse (mm)')
                         intervalle = 45
 
                         i_max, info_pente = self.trouver_pente(liss[0], liss[1], 0, intervalle, [0, 0, 0],
-                                                               len(liss[0]),
-                                                               ax)
+                                                               len(liss[0]), ax)
                         infos_pente_courbes.append(info_pente)
                         infos_pente_courbes[i].append(self.find_t1(i_max, liss[0], liss[1], intervalle))
 
@@ -523,7 +524,8 @@ class Experience:
                         self._tab_figs.append(fig_courbe)
 
                     else:
-                        self.titres_cpt.pop(i)
+                        if self._first_time:
+                            self.titres_cpt.pop(i)
                         fig, ax = plt.subplots()
                         ax.text(0.5, 0.5, "Pas de données")
                         st.pyplot(fig)
@@ -573,9 +575,8 @@ class Experience:
             # tableau des infos
             self.dessiner_tableau(infos_pente_courbes)
 
-
     def generate_pdf(self):
-        pp = PdfPages(f"{self.get_id()}.pdf")
+        pp = PdfPages(f"data\\results\\{self.get_id()}.pdf")
         for fig in self._tab_figs:
             pp.savefig(fig)
         pp.close()
@@ -584,7 +585,7 @@ class Experience:
         tab_file = []
         for i in range(4):
             if len(self._touty[2 * i]) > 3:
-                file = 'data\\capteurs\\' + self.identificateur + "Capteur_" + str(i + 1) + '.csv'
+                file = 'data\\capteurs\\' + self.identificateur + "_Capteur-" + str(i + 1) + '.csv'
                 tab_file.append(file)
                 with open(file, 'w') as csvfile:
                     print(csvfile)

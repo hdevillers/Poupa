@@ -6,6 +6,7 @@ from pages.results_view import ResultPage
 from hydralit import HydraApp
 from pages.merge_capteurs import MergePage
 from pages.element_view import FarinePage, LevainPage, LevurePage
+import myloading
 
 
 test = True
@@ -30,6 +31,8 @@ app.add_app("Signup", icon="🛰️", app=pages.connexion.InscriptionPage("Inscr
             logout_label="Logout")
 
 app.add_app("Login", app=pages.connexion.ConnexionPage("Connexion"), is_login=True, logout_label="Logout")
+
+app.add_loader_app(myloading.MyLoadingApp())
 
 user_access_level, username = app.check_access()
 
