@@ -127,7 +127,7 @@ class ExperiencePage(HydraHeadApp):
 
             if st.form_submit_button('Lancer'):
                 can_go = True
-                if upload_file is None or input_operateur is None or input_lieu is None:
+                if upload_file is None or input_operateur == "" or input_lieu == "":
                     st.error("Certains champs obligatoires ne sont pas encore remplis.")
                     can_go = False
                 if self.session_state.allow_access > 1:

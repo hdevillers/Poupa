@@ -11,7 +11,7 @@ import myloading
 
 test = True
 # if "login" in st.session_state and "prenom_nom" in st.session_state:
-app = HydraApp(title="PouPa",
+app = HydraApp(title="PouPâ",
                favicon="resources/bread.png",
                hide_streamlit_markers=True,
                use_navbar=True,
