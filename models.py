@@ -17,6 +17,15 @@ test = True
 
 @st.experimental_memo(ttl=10)
 def run_query(query, tuple_values):
+    """Prepare et execute une requête sql avec des parametres
+
+    Parameters
+    -----------
+    query : String
+        Requête préparée à executer
+
+    tuple_values : (Any)
+        Valeurs de la requête """
     conn = init_connection()
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
@@ -24,11 +33,31 @@ def run_query(query, tuple_values):
 
 
 def get_all(nom_table):
+    """Recupère toutes les lignes d'une table
+
+    :parameter
+    -----------
+    nom_table : String
+        Nom de la table
+    """
     query = f"SELECT * FROM {nom_table}"
     return run_query(query, None)
 
 
 def get_by(nom_table, selector, value):
+    """Récupère des lignes d'un tableau avec une condition
+
+    Parameters
+    -----------
+    nom_table: String
+        Nom de la table
+
+    selector: String
+        sélecteur de la condition de selection
+
+    value : String, None
+        valeur de la condition de selection
+    """
     query = f"SELECT * FROM {nom_table} WHERE {selector} = %s"
     tuple_values = (value,)
     return run_query(query, tuple_values)
@@ -49,6 +78,17 @@ def get_by(nom_table, selector, value):
 
 @st.experimental_memo(ttl=10)
 def insert_into(query, tuple_values):
+    """Insert une ligne dans une table
+
+    Parameters
+    -----------
+    query: String
+        Requête préparée à exécuter
+
+    tuple_values: (Any)
+        Tulpe des valeurs de requête
+    """
+
     conn = init_connection()
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
@@ -57,6 +97,14 @@ def insert_into(query, tuple_values):
 
 @st.experimental_memo(ttl=10)
 def update(query, tuple_values):
+    """Met à jour une ligne d'une table
+
+    :parameter
+    -----------
+    query: String
+        Requête préparée à exécuter
+    tulpe_values: (Any)
+        Tulpe des valeurs de requête"""
     conn = init_connection()
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
@@ -74,6 +122,21 @@ class Farine:
     nom_table = "farines"
 
     def __init__(self, alias=None, cereal=None, mouture=None, cendre=None, origine=None):
+        """Objet représentant une farine
+
+        Parameters
+        -----------
+        alias : String, None
+            titre de la farine
+        cereal : String, None
+            cereale de la farine
+        mouture : String, None
+            type de mouture de la farine
+        cendre : String, None
+            cendre de la farine
+        origine : String, None
+            origine de la farine"""
+
         self.id_farine = None
         self.alias = alias
         self.origine = origine
@@ -82,6 +145,7 @@ class Farine:
         self.cendre = cendre
 
     def create_farine(self):
+        """Insère une farine dans la base de données"""
         query = f"INSERT INTO {self.nom_table} (alias, cereale, type_mouture, cendre, origine) VALUES " \
                 f"(%s, %s, %s, %s, %s)"
         values = (self.alias, self.cereal, self.mouture, self.cendre, self.origine)
@@ -89,6 +153,20 @@ class Farine:
 
     @staticmethod
     def get_farines(selector=None, value=None):
+        """Récupère les farines de la base de données, si il n'y a aucun paramètres récupère toutes les farines sinon
+        les rècupère sous la condition selector = value
+
+        :parameter
+        -----------
+        selector : String, None
+            sélecteur de la condition de selection d'une farine
+        value : String, None
+            valeur de la condition de selection d'une farine
+
+        :returns
+        -----------
+        Une liste d'objet farine
+        """
         if selector is not None and value is not None:
             farines_from_bd = get_by(Farine.nom_table, selector, value)
         else:
@@ -120,6 +198,23 @@ class Levain:
     nom_table = "levains"
 
     def __init__(self, alias=None, farine=None, origine=None, cereale=None, hydratation=None, microbiome=None):
+        """Objet représentant un levain
+
+        :parameter
+        -----------
+        alias: String, None
+            Alias du levain
+        farine: String, Int, None
+            Farine ou identifiant de la farine du levain
+        origine: String, None
+            Origine du levain
+        cereale: String, None
+            Cereale du levain
+        hydratation: Int, None
+            Pourcentatge d'hydratation du levain
+        microbiome: String, None
+            Microbiome du levain
+        """
         self.id = None
         self.alias = alias
         self.farine = farine
@@ -129,6 +224,7 @@ class Levain:
         self.microbiome = microbiome
 
     def create_levain(self):
+        """Insert un nouveau levain dans la base de données"""
         query = f"INSERT INTO {self.nom_table} (alias, farine, origine, cereale, hydratation, microbiome) VALUES " \
                 f"(%s, %s, %s, %s, %s, %s)"
         values = (self.alias, self.farine, self.origine, self.cereale, self.hydratation,
@@ -140,6 +236,20 @@ class Levain:
 
     @staticmethod
     def get_levains(selector=None, value=None):
+        """Récupère les levains de la base de données, si il n'y a aucun paramètres récupère tous les levains sinon
+                les rècupère sous la condition selector = value
+
+                :parameter
+                -----------
+                selector : String, None
+                    sélecteur de la condition de selection d'un levain
+                value : String, None
+                    valeur de la condition de selection d'un levain
+
+                :returns
+                -----------
+                Une liste d'objets levains
+                """
         if selector is not None and value is not None:
             levains_from_bd = get_by(Levain.nom_table, selector, value)
         else:
@@ -176,16 +286,39 @@ class Levure:
     nom_table = "levures"
 
     def __init__(self, espece, origine=None):
+        """Objet représentant les levures
+
+        Parameters
+        -----------
+        espece: String
+            Espece de la levure
+        origine: String, None
+            Origine de la levure"""
         self.espece = espece
         self.origine = origine
 
     def create_levure(self):
+        """Insert une levure dans la base de données"""
         query = f"INSERT INTO {self.nom_table} (espece, origine) VALUES ( %s, %s)"
         values = (self.espece, self.origine)
         insert_into(query, values)
 
     @staticmethod
     def get_levures(selector=None, value=None):
+        """Récupère les levures de la base de données, si il n'y a aucun paramètres récupère toutes les levures sinon
+                les rècupère sous la condition selector = value
+
+                :parameter
+                -----------
+                selector : String, None
+                    sélecteur de la condition de selection d'une levure
+                value : String, None
+                    valeur de la condition de selection d'une levure
+
+                :returns
+                -----------
+                Une liste d'objet levure
+                """
         if selector is not None and value is not None:
             levures_from_bd = get_by(Levure.nom_table, selector, value)
         else:
@@ -207,18 +340,45 @@ class User:
     nom_table = "users"
 
     def __init__(self, login, mdp, nom, prenom):
+        """Classe des utilisateurs
+
+        Parameters
+        -----------
+        login: String
+            Login de l'utilisateur
+        mdp: String
+            Mot de passe de l'utilisateur
+        nom: String
+            Nom de l'utilisateur
+        prenom: String
+            Prenom de l'utilisateur"""
         self.login = login
         self.nom = nom
         self.prenom = prenom
         self.mdp = mdp
 
     def create_user(self):
+        """Insert un utilisateur dans la base de données"""
         query = f"INSERT INTO {self.nom_table} (login, nom, prenom, mot_de_passe) VALUES (%s, %s, %s, %s)"
         values = (self.login, self.nom, self.prenom, self.mdp)
         insert_into(query, values)
 
     @staticmethod
     def get_users(selector=None, value=None):
+        """Récupère les utilisateurs de la base de données, si il n'y a aucun paramètres récupère tous les utilisateurs
+        sinon les rècupère sous la condition selector = value
+
+                :parameter
+                -----------
+                selector : String, None
+                    sélecteur de la condition de selection d'un utilisateur
+                value : String, None
+                    valeur de la condition de selection d'un utilisateur
+
+                :returns
+                -----------
+                Une liste d'objets utilisateur
+                """
         users = []
         if selector is not None and value is not None:
             users_from_bd = get_by(User.nom_table, selector, value)
@@ -237,6 +397,12 @@ class Projet:
     nom_table = "projets"
 
     def __init__(self, directeur):
+        """Classe représentant les projets
+
+        Parameters
+        -----------
+        directeur: String
+            Directeur/trice du projet"""
         self.directeur = directeur
         self.participants = []
         self.id_projet = None
@@ -245,7 +411,22 @@ class Projet:
         self.id_projet = id_p
 
     @staticmethod
-    def get_projets(selector, value):
+    def get_projets(selector=None, value=None):
+        """Récupère les projets de la base de données, si il n'y a aucun paramètres récupère tous les projets sinon
+                les rècupères sous la condition selector = value
+
+                :parameter
+                -----------
+                selector : String, None
+                    sélecteur de la condition de selection d'un projet
+                value : String, None
+                    valeur de la condition de selection d'un projet
+
+                :returns
+                -----------
+                Une liste d'objets projet
+                """
+
         if selector is not None and value is not None:
             projets_from_bd = get_by(Projet.nom_table, selector, value)
         else:
@@ -258,6 +439,7 @@ class Projet:
         return projets
 
     def get_participants(self):
+        """Récupère les participants d'un projet depuis la base de données"""
         query = f"SELECT login FROM participer_projet pp JOIN users u ON u.login=pp.login_utilisateur WHERE " \
                 f"id_projet={self.id_projet}"
         participants_from_bd = run_query(query, None)
@@ -277,7 +459,29 @@ class Experience:
 
     def __init__(self, id_boitier, date, lieu, operateur, titres_cpt=None, projet=None, fichier_donnees=None,
                  fichier_resultat=None, remarque=None):
+        """Classe représentant une experience
 
+        Parameters
+        -----------
+        id_boitier: Int
+            identifiant du boitier utiliser dans l'experience
+        date: Date
+            Date de l'experience
+        lieu: String
+            Lieu de l'experience
+        operateur: String
+            Operateur/rice de l'experience
+        titres_cpt: [String], None
+            Titres des capteurs du boitier de l'experience
+        projet: Int, None
+            Identificateur du possible projet de l'experience
+        fichier_donnees: String, UploadFile
+            Fichier TXT ou csv de données de l'expérience
+        fichier_resultat: String
+            Fichier pdf de résultats de l'experience
+        remarque: String, None
+            Eventuelles remarques
+        """
         self.titres_cpt = titres_cpt
         self.identificateur = str(id_boitier) + "_" + str(date) + "_" + operateur
         self.id_boitier = id_boitier
@@ -298,6 +502,7 @@ class Experience:
         return self.identificateur
 
     def create_experience(self):
+        """Insert une experience dans la base de données"""
         query = f"INSERT INTO {self.nom_table} (id, projet, id_boitier, operateur, date, lieu, fichier_donnees, " \
                 f"fichier_resultat, remarque) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         values = (self.identificateur, self.projet, self.id_boitier, self.operateur, self.date, self.lieu,
@@ -305,6 +510,7 @@ class Experience:
         insert_into(query, values)
 
     def update_experience(self):
+        """Met à jour une experience dans la base de données"""
         query = f"UPDATE {self.nom_table} SET projet=%s, id_boitier=%s, operateur=%s, date=%s, lieu=%s,  " \
                 f"fichier_donnees=%s, fichier_resultat=%s, remarque=%s WHERE id = %s "
         values = (self.projet, self.id_boitier, self.operateur, self.date, self.lieu, self.fichier_donnees,
@@ -317,6 +523,20 @@ class Experience:
 
     @staticmethod
     def get_experiences(selector=None, value=None):
+        """Récupère les experiences de la base de données, si il n'y a aucun paramètres récupère toutes les experiences
+        sinon les rècupère sous la condition selector = value
+
+                :parameter
+                -----------
+                selector : String, None
+                    sélecteur de la condition de selection d'une experience
+                value : String, None
+                    valeur de la condition de selection d'une experience
+
+                :returns
+                -----------
+                Une liste d'objets experience
+                """
         if selector is not None and value is not None:
             experiences_from_bd = get_by(Experience.nom_table, selector, value)
         else:
@@ -332,6 +552,13 @@ class Experience:
     COULEURS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9242b4"]
 
     def donnees_brutes(self):
+        """lit le fichier self.fichier_données et trie ses données par type de capteru dans un tableau
+
+        Returns
+        -----------
+        glob :  list[ndarray]
+             la list[ndarray] des données
+             """
         # on trouve en entrée le nom du fichier à lire
         # f = open('data/' + self.fichier_donnees, "r")
         # my_reader = csv.reader(f)
@@ -361,7 +588,8 @@ class Experience:
         return glob
 
     def lissage(self, x, y, p):
-        # Fonction qui débruit une courbe par une moyenne glissante
+        """Fonction qui débruit une courbe par une moyenne glissante
+        """
         # sur 2P+1 points
         yout = []
         xout = x[p: -p]
@@ -371,6 +599,22 @@ class Experience:
         return xout, yout
 
     def reg_lin(self, x, y):
+        """Fonction qui effectue une régression linéaire
+
+        Parameters
+        -----------
+        x : list
+            intervalle des abscisses
+        y : list
+            intervalle des ordonnées
+
+        Returns
+        -----------
+        a : float
+            coefficient directeur et coordonées à l'origine
+        b : flaat
+            coordonnées à l'origine
+        """
         # conversion en array numpy
         x = np.array(x)
         y = np.array(y)
@@ -382,11 +626,23 @@ class Experience:
         return a, b
 
     def info_courbe(self, titre, x, y):
+        """Donne un titre au graphique et aux axes
+
+        Parameters
+        -----------
+        titre : str
+            Titre du graphique
+        x : str
+            Titre de l'axe des abscisses
+        y : str
+            Titre de l'axe des ordonnées
+        """
         plt.title(titre)
         plt.xlabel(x)
         plt.ylabel(y)
 
     def find_t0(self, a, b):
+        """Trouve le t0, le point de début de pousse"""
         t0 = -(b / a)
         return round(t0, 2)
 
@@ -426,7 +682,7 @@ class Experience:
         else:
             previous = y[0]
             for current in y_in_touty[(intervalle - 20) * i: (intervalle + 20) * (i + 1):10]:
-                if previous - current >= 8:
+                if previous - current >= 4:
                     if test:
                         print("STOP FROM HERE")
                     return self.trouver_pente([0], [0], i + 1, intervalle, info_coeff_max, x_len, ax)
@@ -462,7 +718,7 @@ class Experience:
             ax.axis('off')
             tab = ax.table(cellText=df.values, rowLabels=self.titres_cpt, rowColours=["#abdbe3"] * len(donnees),
                            colLabels=df.columns,
-                           colColours=["#abdbe3"] * len(donnees))
+                           colColours=["#abdbe3"] * len(donnees), bbox=[0, 0, 1, 1])
             tab.auto_set_font_size(False)
             tab.set_fontsize(10)
             self._tab_figs.append(fig)
@@ -506,7 +762,7 @@ class Experience:
                         self._touty_liss.append(liss[1])
 
                         self.info_courbe(self.titres_cpt[i], 'temps (min)', 'pousse (mm)')
-                        intervalle = 60
+                        intervalle = 45
 
                         if max(self._touty[2 * i + 1]) > 3:
                             i_max, info_pente = self.trouver_pente(liss[0], liss[1], 0, intervalle, [0, 0, 0],
@@ -514,10 +770,11 @@ class Experience:
                             infos_pente_courbes.append(info_pente)
                             infos_pente_courbes[i].append(self.find_t1(i_max, liss[0], liss[1], intervalle))
 
-                            ax.plot([infos_pente_courbes[i][2] for j in range(len(liss[0]))], np.arange(len(liss[0])),
-                                    linestyle='--', linewidth=0.5, label="t0")
-                            ax.plot([infos_pente_courbes[i][3] for j in range(len(liss[0]))], np.arange(len(liss[0])),
-                                    linestyle='--', linewidth=0.5, label="t1")
+                            ax.plot([infos_pente_courbes[i][2] for j in range(len(liss[0]))],
+                                    np.arange(len(liss[0])), linestyle='--', linewidth=1, label="t0")
+                            ax.plot([infos_pente_courbes[i][3] for j in range(len(liss[0]))],
+                                    np.arange(len(liss[0])), linestyle='--', linewidth=1, label="t1")
+                            ax.legend(loc="lower right")
                         else:
                             infos_pente_courbes.append([0, 0, 0, 0])
                         # if i == 0:
@@ -573,8 +830,10 @@ class Experience:
                 fig, ax = plt.subplots()
                 for i in range(4):
                     arr = self.lissage(self._touty[2 * i], self._touty[2 * i + 1], 5)
-                    ax.plot(arr[0], arr[1])
-                self.info_courbe("Capteurs", 'temps (min)', 'pousse (mm)')
+                    if i < len(self.titres_cpt):
+                        ax.plot(arr[0], arr[1], label=self.titres_cpt[i])
+                ax.legend(loc="lower right")
+                self.info_courbe(f"Tous les capteurs du PouPâ {self.id_boitier}", 'temps (min)', 'pousse (mm)')
                 listOf_Xticks = np.arange(0, max(self._touty[8]), 20)
                 ax.set_xticks(listOf_Xticks, minor=True)
                 listOf_Yticks = np.arange(0, max(self.max_values), 2)
