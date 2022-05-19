@@ -36,7 +36,7 @@ class ConnexionPage(HydraHeadApp):
                       'password': login_form.text_input('Password', type="password"),
                       'submitted': login_form.form_submit_button('Login')}
 
-        if st.button('Guest Login', key='guestbtn'):
+        if st.button('Mode visiteur', key='guestbtn'):
             # set access level to a negative number to allow a kick to the unsecure_app set in the parent
             self.set_access(1, 'guest', True)
             st.session_state["access_level"] = 1
