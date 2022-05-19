@@ -869,6 +869,7 @@ class Experience:
 
     def generate_pdf(self):
         pp = PdfPages(f"data\\results\\{self.get_id()}.pdf")
+
         for fig in self._tab_figs:
             pp.savefig(fig)
         pp.close()
