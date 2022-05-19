@@ -81,9 +81,9 @@ class ExperiencePage(HydraHeadApp):
             dict_farines = {"---": "---"}
             for farine in list_of_farines:
                 if self.session_state.allow_access > 1:
-                    dict_farines[farine.id_farine] = str(farine)
+                    dict_farines[farine.id_farine] = farine.str_from()
                 else:
-                    dict_farines[farine] = str(farine)
+                    dict_farines[farine] = farine.str_from()
 
             # Levains
             list_of_levains = []
@@ -94,9 +94,9 @@ class ExperiencePage(HydraHeadApp):
             dict_levains = {"---": "---"}
             for levain in list_of_levains:
                 if self.session_state.allow_access > 1:
-                    dict_levains[levain.id] = str(levain)
+                    dict_levains[levain.id] = levain.str_form()
                 else:
-                    dict_levains[levain] = str(levain)
+                    dict_levains[levain] = levain.str_form()
 
             # Levures
             list_of_levures = []

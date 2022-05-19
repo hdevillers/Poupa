@@ -182,7 +182,10 @@ class Farine:
         self.id_farine = id_farine
 
     def __str__(self):
-        fstring = f"Farine n°{self.id_farine}: "
+        if st.session_state["access_level"] > 1:
+            fstring = f"Farine n°{self.id_farine}: "
+        else:
+            fstring = f"Farine : "
         if self.alias != '':
             fstring += f"alias = {self.alias}   "
         if self.cereal != '':
@@ -193,11 +196,14 @@ class Farine:
             fstring += f"cendre = {self.cendre}   "
         return fstring
 
+    def str_from(self):
+        return "- " + self.alias
+
 
 class Levain:
     nom_table = "levains"
 
-    def __init__(self, alias=None, farine=None, origine=None, cereale=None, hydratation=None, microbiome=None):
+    def __init__(self, alias, farine=None, origine=None, cereale=None, hydratation=None, microbiome=None):
         """Objet représentant un levain
 
         :parameter
@@ -263,14 +269,17 @@ class Levain:
         return levains
 
     def __str__(self):
-        lstring = f"Levains n°{self.id}: "
+        if st.session_state['access_level'] > 1:
+            lstring = f"Levain n°{self.id}: "
+        else:
+            lstring = f"Levain : "
         if self.alias != '':
             lstring += f"alias = {self.alias}  "
         if self.farine != '':
             if st.session_state['access_level'] > 1:
                 lstring += f"farine = {Farine.get_farines('id', self.farine)[0]}"
             else:
-                lstring += f"{str(self.farine)} "
+                lstring += f" Farine du levain : {str(self.farine)} "
         if self.origine != '':
             lstring += f"origine = {self.origine}  "
         if self.cereale != '':
@@ -279,6 +288,16 @@ class Levain:
             lstring += f"hydratation = {str(self.hydratation)}  "
         if self.microbiome != '':
             lstring += f"bactérie = {self.microbiome}"
+        return lstring
+
+    def str_form(self):
+        lstring = "- " + self.alias
+        if self.farine is not None and self.farine != "":
+            if st.session_state["access_level"] > 1:
+                farine = Farine.get_farines("id", self.farine)[0].alias
+            else:
+                farine = self.farine.alias
+            lstring += f" Farine = {farine}"
         return lstring
 
 

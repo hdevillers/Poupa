@@ -27,20 +27,23 @@ class FarinePage(HydraHeadApp):
     @staticmethod
     def generate_form(allow_access):
         with st.form("add_farine"):
-            input_alias = st.text_input("Alias", max_chars=50)
+            input_alias = st.text_input("Alias*", max_chars=50)
             input_cereale = st.text_input("Céréale", max_chars=50)
             input_mouture = st.text_input("Mouture", max_chars=50)
-            input_cendre = st.text_input("Cendres", max_chars=50)
+            input_cendre = st.text_input("Type/Cendres", max_chars=50)
             input_origine = st.text_input("Origine", max_chars=50)
             st.write("Champs obligatoires marqués d'un *")
             if st.form_submit_button("Ajouter"):
                 farine = models.Farine(input_alias, input_cereale, input_mouture, input_cendre, input_origine)
-                if allow_access > 1:
-                    farine.create_farine()
+                if input_alias != "":
+                    if allow_access > 1:
+                        farine.create_farine()
+                    else:
+                        if "farines" not in st.session_state:
+                            st.session_state['farines'] = []
+                        st.session_state['farines'].append(farine)
                 else:
-                    if "farines" not in st.session_state:
-                        st.session_state['farines'] = []
-                    st.session_state['farines'].append(farine)
+                    st.error("Certains champs obligatoires ne sont pas encore remplis.")
 
 
 class LevainPage(HydraHeadApp):
@@ -76,34 +79,38 @@ class LevainPage(HydraHeadApp):
                 if allow_access > 1:
                     farines_id[farine.id_farine] = str(farine)
                 else:
-                    farines_id[farine] = str(farine)
-            input_alias = st.text_input("Alias", max_chars=50)
-            select_farine = st.selectbox("Numéro de la farine", list(farines_id.items()), 0, format_func=lambda o: o[1])
+                    farines_id[farine] = farine.str_from()
+            input_alias = st.text_input("Alias*", max_chars=50)
+            select_farine = st.selectbox("Farine", list(farines_id.items()), 0, format_func=lambda o: o[1])
             input_origine = st.text_input("Origine", max_chars=100)
             input_cereale = st.text_input("Céréale", max_chars=50)
             input_hydratation = st.number_input("% Hydratation", max_value=999)
-            input_bacterie = st.text_input("Bactérie", max_chars=50)
+            input_bacterie = st.text_input("Microbiote", max_chars=100)
             st.write("Champs obligatoires marqués d'un *")
             if st.form_submit_button("Ajouter"):
-                if input_hydratation < 0:
-                    hydratation_value = ''
-                else:
-                    hydratation_value = input_hydratation
-                if select_farine == "---":
-                    farine_choosen = ''
-                else:
-                    farine_choosen = select_farine[0]
+                if input_alias != "":
+                    if input_hydratation < 0:
+                        hydratation_value = ''
+                    else:
+                        hydratation_value = input_hydratation
+                    if select_farine[0] == "---":
+                        farine_choosen = ''
+                    else:
+                        farine_choosen = select_farine[0]
+                        print(farine_choosen)
 
-                levain = models.Levain(input_alias, farine_choosen, input_origine, input_cereale,
-                                       hydratation_value, input_bacterie)
+                    levain = models.Levain(input_alias, farine_choosen, input_origine, input_cereale,
+                                           hydratation_value, input_bacterie)
 
-                if allow_access > 1:
-                    levain.create_levain()
+                    if allow_access > 1:
+                        levain.create_levain()
+                    else:
+                        if "levains" not in st.session_state:
+                            st.session_state["levains"] = []
+
+                        st.session_state["levains"].append(levain)
                 else:
-                    if "levains" not in st.session_state:
-                        st.session_state["levains"] = []
-
-                    st.session_state["levains"].append(levain)
+                    st.error("Certains champs obligatoires ne sont pas encore remplis.")
 
 
 class LevurePage(HydraHeadApp):

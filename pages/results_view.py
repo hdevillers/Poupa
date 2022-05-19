@@ -27,11 +27,15 @@ class ResultPage(HydraHeadApp):
             st.subheader(f"Experience {experience.identificateur}")
             if experience.projet is not None:
                 st.write(f"Fais partis du projet numéros {experience.projet}")
+            if self.session_state.allow_access > 1:
+                fichier = f"Fichier de données : {experience.fichier_donnees}  \n"
+            else:
+                fichier = f"Fichier de données : {experience.fichier_donnees.name}  \n"
             st.write(f"Boitier : {experience.id_boitier}  \n"
                      f"Date : {experience.date}  \n"
                      f"Lieu : {experience.lieu}  \n"
                      f"Operateur : {experience.operateur}  \n"
-                     f"Fichier de données : {experience.fichier_donnees}  \n")
+                     f"{fichier}")
             if experience.remarque is not None:
                 st.write(f"Remarque : {experience.remarque}  \n")
 
