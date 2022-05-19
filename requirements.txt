@@ -5,4 +5,4 @@ numpy
 matplotlib
 scipy
 mysql-connector-python
-git@github.com:Patarimi/hydralit.git
+git+https://github.com/Patarimi/hydralit.git
