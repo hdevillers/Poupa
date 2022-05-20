@@ -48,10 +48,10 @@ class ExperiencePage(HydraHeadApp):
                 for poupa in list_of_poupa:
                     list_id_poupa.append(poupa[0])
 
-                boitier_selected = st.selectbox("Numéro du PouPa utilisé*", list_id_poupa, value=value_poupa)
+                boitier_selected = st.selectbox("Numéro du PouPa utilisé*", list_id_poupa, value=int(value_poupa))
             else:
                 boitier_selected = st.number_input("Numéro du PouPa utilisé*", max_value=999, min_value=1,
-                                                   value=value_poupa)
+                                                   value=int(value_poupa))
 
             upload_file = st.file_uploader("Fichier de données*", type=["csv", "TXT"])
             input_date = st.date_input("Date de l'experience*", value=value_date)
