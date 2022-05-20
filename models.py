@@ -7,6 +7,7 @@ import re
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import os
+from fpdf import FPDF
 
 
 def init_connection():
@@ -868,18 +869,29 @@ class Experience:
             # tableau des infos
             self.dessiner_tableau(infos_pente_courbes)
 
-    def generate_pdf(self):
+    """def generate_pdf(self):
         pp = PdfPages(f"data\\results\\{self.get_id()}.pdf")
-        """first_page = plt.figure(figsize=(11.69, 8.27))
+        first_page = plt.figure(figsize=(11.69, 8.27))
         first_page.clf()
         first_page.text(0.5, 0.5, str(self), size=24, ha="center")
-        pp.savefig(first_page)"""
+        pp.savefig(first_page)
         for fig in self._tab_figs:
             pp.savefig(fig)
         if test:
             print("os path = " + os.path.dirname(os.path.abspath(__file__)))
             print(os.environ['PYTHONPATH'].split(os.pathsep))
-        pp.close()
+        pp.close()"""
+
+    def generate_pdf(self):
+        pdf = FPDF()
+        pdf.set_font('arial', size=24)
+        i = 0
+        for fig in self._tab_figs:
+            fig.savefig(f"fig{i}.png")
+            pdf.add_page('L')
+            pdf.image(f"fig{i}.png", x=None, y=None, w=0, h=0, type='', link='')
+            i += 1
+        pdf.output(f"{self.get_id()}.pdf")
 
     def generate_csv_cpt(self):
         tab_file = []

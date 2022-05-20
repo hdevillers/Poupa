@@ -48,7 +48,13 @@ class ResultPage(HydraHeadApp):
 
         # Génération du pdf
         with col1:
-            download = st.button("Télécharger les résultats", on_click=experience.generate_pdf)
+            """download = st.button("Télécharger les résultats", on_click=experience.generate_pdf)"""
+            experience.generate_pdf()
+            pdf_byte = ""
+            with open(f"{experience.identificateur}.pdf", "rb") as pdf_file:
+                pdf_byte = pdf_file.read()
+            st.download_button(label="Télécharger les résultats",
+                               data=pdf_byte, file_name="test.pdf", mime="application/octet-stream")
             i = 0
             for cpt in st.session_state['capteurs']:
                 files = experience.generate_csv_cpt()
