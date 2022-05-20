@@ -869,7 +869,10 @@ class Experience:
 
     def generate_pdf(self):
         pp = PdfPages(f"data\\results\\{self.get_id()}.pdf")
-
+        first_page = plt.figure(figsize=(11.69, 8.27))
+        first_page.clf()
+        first_page.text(0.5, 0.5, str(self), size=24, ha="center")
+        pp.savefig(first_page)
         for fig in self._tab_figs:
             pp.savefig(fig)
         pp.close()
