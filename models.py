@@ -677,11 +677,11 @@ class Experience:
             if a < 0:
                 return round(x[x_current], 2)
 
-    def trouver_pente(self, x, y, i, intervalle, info_coeff_max, x_len, ax):
+    def trouver_pente(self, x, y, i, intervalle, info_coeff_max, x_len, ax, stop=False):
         """ trouve la pente maximum, la dessine, puis renvoi [a, b, t0] """
         y_in_touty = self._touty_liss[-1]
         if len(y) < intervalle or len(x) < intervalle:
-            if x != [0] and y != [0]:
+            if not stop:
                 a, b = self.reg_lin([x[0], x[-1]],
                                     [y[0], y[-1]])
                 if info_coeff_max[0] < a:
@@ -705,7 +705,7 @@ class Experience:
                 if previous - current >= 4:
                     if test:
                         print("STOP FROM HERE")
-                    return self.trouver_pente([0], [0], i + 1, intervalle, info_coeff_max, x_len, ax)
+                    return self.trouver_pente(x, y, i + 1, intervalle, info_coeff_max, x_len, ax, True)
                 previous = current
             a, b = self.reg_lin([x[0], x[intervalle]],
                                 [y[0], y[intervalle]])
