@@ -5,8 +5,8 @@ import numpy as np
 import csv
 import re
 from matplotlib import pyplot as plt
-from matplotlib.backends.backend_pdf import PdfPages
-import os
+# from matplotlib.backends.backend_pdf import PdfPages
+# import os
 from fpdf import FPDF
 
 
@@ -538,7 +538,7 @@ class Experience:
                   self.fichier_resultat, self.remarque, self.identificateur,)
         update(query, values)
 
-    def __str__(self):
+    def str_form(self):
         estring = f"{self.identificateur}     lieu = {self.lieu}"
         return estring
 
@@ -571,6 +571,40 @@ class Experience:
         return experiences
 
     COULEURS = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9242b4"]
+
+    def __str__(self):
+        estring = f"**Experience {self.identificateur} :**  \n"
+        if self.projet is not None:
+            estring += f"Fais partis du projet numéros {self.projet}  \n"
+        if st.session_state["access_level"] > 1:
+            fichier = f"Fichier de données : {self.fichier_donnees}  \n"
+        else:
+            fichier = f"Fichier de données : {self.fichier_donnees.name}  \n"
+        estring += f"Boitier : {self.id_boitier}  \n"
+        estring += f"Date : {self.date}  \n"
+        estring += f"Lieu : {self.lieu}  \n"
+        estring += f"Operateur : {self.operateur}  \n"
+        estring += f"{fichier}  \n"
+        if self.remarque is not None:
+            estring += f"Remarque : {self.remarque}  \n"
+        return estring
+
+    def info_as_df(self):
+        infos = [f"Experience {self.identificateur} :"]
+        if self.projet is not None:
+            infos.append(f"Fais partis du projet numéros {self.projet}")
+        if st.session_state["access_level"] > 1:
+            fichier = f"Fichier de données : {self.fichier_donnees}"
+        else:
+            fichier = f"Fichier de données : {self.fichier_donnees.name}"
+        infos.append(f"Boitier : {self.id_boitier}")
+        infos.append(f"Date : {self.date}")
+        infos.append(f"Lieu : {self.lieu}")
+        infos.append(f"Operateur : {self.operateur}")
+        infos.append(f"{fichier}")
+        if self.remarque is not None:
+            infos.append(f"Remarque : {self.remarque}")
+        return infos
 
     def donnees_brutes(self):
         """lit le fichier self.fichier_données et trie ses données par type de capteru dans un tableau
@@ -681,7 +715,7 @@ class Experience:
     def trouver_pente(self, x, y, i, intervalle, info_coeff_max, x_len, ax, stop=False):
         """ trouve la pente maximum, la dessine, puis renvoi [a, b, t0] """
         y_in_touty = self._touty_liss[-1]
-        if len(y) < intervalle or len(x) < intervalle:
+        if len(y) < intervalle or len(x) < intervalle or stop:
             if not stop:
                 a, b = self.reg_lin([x[0], x[-1]],
                                     [y[0], y[-1]])
@@ -694,18 +728,15 @@ class Experience:
             penteX = np.arange(x_len)
             ax.plot(penteX, info_coeff_max[0] * penteX + info_coeff_max[1], color="#B4B100")
             info_coeff_max.append(t0)
-            if test:
-                print("############### stop #################")
-                # ax.plot(penteX, [0] * len(x_len))
+
+            # ax.plot(penteX, [0] * len(x_len))
             coor_max = info_coeff_max[2]
             info_coeff_max.pop(2)
             return coor_max, info_coeff_max
         else:
             previous = y[0]
-            for current in y_in_touty[(intervalle - 15) * i: (intervalle + 15) * (i + 1):1]:
+            for current in y_in_touty[(intervalle - 20) * i: (intervalle + 20) * (i + 1):4]:
                 if previous - current >= 4:
-                    if test:
-                        print("STOP FROM HERE")
                     return self.trouver_pente(x, y, i + 1, intervalle, info_coeff_max, x_len, ax, True)
                 previous = current
             a, b = self.reg_lin([x[0], x[intervalle]],
@@ -715,9 +746,7 @@ class Experience:
                 info_coeff_max[1] = b
                 info_coeff_max[2] = intervalle * (i + 1)
                 # x_len = x[0:intervalle] + intervalle * i
-            if test:
-                print(i)
-                print("a   ={:8.3f}\nb   ={:8.3f}\n".format(a, b))
+
             return self.trouver_pente(x[intervalle:], y[intervalle:], i + 1, intervalle, info_coeff_max, x_len, ax)
 
     def dessiner_tableau(self, donnees):
@@ -869,22 +898,13 @@ class Experience:
             # tableau des infos
             self.dessiner_tableau(infos_pente_courbes)
 
-    """def generate_pdf(self):
-        pp = PdfPages(f"data\\results\\{self.get_id()}.pdf")
-        first_page = plt.figure(figsize=(11.69, 8.27))
-        first_page.clf()
-        first_page.text(0.5, 0.5, str(self), size=24, ha="center")
-        pp.savefig(first_page)
-        for fig in self._tab_figs:
-            pp.savefig(fig)
-        if test:
-            print("os path = " + os.path.dirname(os.path.abspath(__file__)))
-            print(os.environ['PYTHONPATH'].split(os.pathsep))
-        pp.close()"""
-
     def generate_pdf(self):
         pdf = FPDF()
         pdf.set_font('arial', size=24)
+        pdf.add_page('P')
+        infos = self.info_as_df()
+        for inf in infos:
+            pdf.cell(200, 10, txt=inf, ln=1, align='C')
         i = 0
         for fig in self._tab_figs:
             fig.savefig(f"fig{i}.png")
