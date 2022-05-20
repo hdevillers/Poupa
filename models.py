@@ -6,6 +6,7 @@ import csv
 import re
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
+import os
 
 
 def init_connection():
@@ -700,7 +701,7 @@ class Experience:
             return coor_max, info_coeff_max
         else:
             previous = y[0]
-            for current in y_in_touty[(intervalle - 20) * i: (intervalle + 20) * (i + 1):10]:
+            for current in y_in_touty[(intervalle - 15) * i: (intervalle + 15) * (i + 1):1]:
                 if previous - current >= 4:
                     if test:
                         print("STOP FROM HERE")
@@ -869,12 +870,14 @@ class Experience:
 
     def generate_pdf(self):
         pp = PdfPages(f"data\\results\\{self.get_id()}.pdf")
-        first_page = plt.figure(figsize=(11.69, 8.27))
+        """first_page = plt.figure(figsize=(11.69, 8.27))
         first_page.clf()
         first_page.text(0.5, 0.5, str(self), size=24, ha="center")
-        pp.savefig(first_page)
+        pp.savefig(first_page)"""
         for fig in self._tab_figs:
             pp.savefig(fig)
+        if test:
+            print("path = " + os.path.dirname(os.path.abspath(__file__)))
         pp.close()
 
     def generate_csv_cpt(self):
@@ -884,7 +887,7 @@ class Experience:
                 file = 'data\\capteurs\\' + self.identificateur + "_Capteur-" + str(i + 1) + '.csv'
                 tab_file.append(file)
                 with open(file, 'w') as csvfile:
-                    print(csvfile)
+                    # print(csvfile)
                     filewriter = csv.writer(csvfile, delimiter=",", quotechar='|', quoting=csv.QUOTE_MINIMAL)
                     filewriter.writerow(self._touty[2 * i])
                     filewriter.writerow(self._touty[2 * i + 1])
