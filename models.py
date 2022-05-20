@@ -7,6 +7,8 @@ import re
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import os
+import sys
+from fpdf import FPDF
 
 
 def init_connection():
@@ -877,7 +879,8 @@ class Experience:
         for fig in self._tab_figs:
             pp.savefig(fig)
         if test:
-            print("path = " + os.path.dirname(os.path.abspath(__file__)))
+            print("os path = " + os.path.dirname(os.path.abspath(__file__)))
+            print(os.environ['PYTHONPATH'].split(os.pathsep))
         pp.close()
 
     def generate_csv_cpt(self):
