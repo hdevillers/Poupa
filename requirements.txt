@@ -3,4 +3,3 @@ streamlit >= 1.8
 numpy >= 1.21
 matplotlib >= 3.5
 mysql-connector-python >= 8.0
-hydralit >= 1.0.12
