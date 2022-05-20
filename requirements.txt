@@ -1,8 +1,6 @@
-altair
 pandas
 streamlit
 numpy
 matplotlib
-scipy
 mysql-connector-python
 hydralit >= 1.0.12
