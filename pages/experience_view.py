@@ -48,7 +48,7 @@ class ExperiencePage(HydraHeadApp):
                 for poupa in list_of_poupa:
                     list_id_poupa.append(poupa[0])
 
-                boitier_selected = st.selectbox("Numéro du PouPa utilisé*", list_id_poupa, value=int(value_poupa))
+                boitier_selected = st.selectbox("Numéro du PouPa utilisé*", list_id_poupa)
             else:
                 boitier_selected = st.number_input("Numéro du PouPa utilisé*", max_value=999, min_value=1,
                                                    value=int(value_poupa))
@@ -120,7 +120,7 @@ class ExperiencePage(HydraHeadApp):
                     selectlevain = st.selectbox("Levain", list(dict_levains.items()), key=i, format_func=lambda o: o[1])
                     select_levure = st.selectbox("Levure", list(dict_levures.items()), key=i,
                                                  format_func=lambda o: o[1])
-                    input_remarque = st.text_area("Remarque", max_chars=100, key=i)
+                    input_remarque = st.text_area("Remarque", max_chars=100, key=i, value=None)
                     tab_cpt.append((f"Capteur_{i + 1}", input_alias, selectfarine[0], selectlevain[0], select_levure[0],
                                     input_remarque))
                     tab_titre_cpt.append(input_alias)
@@ -143,15 +143,15 @@ class ExperiencePage(HydraHeadApp):
                     list_of_capteurs = []
                     for infos in tab_cpt:
                         if infos[2] == '---':
-                            farine_chosen = ''
+                            farine_chosen = None
                         else:
                             farine_chosen = infos[2]
                         if infos[3] == '---':
-                            levain_chosen = ''
+                            levain_chosen = None
                         else:
                             levain_chosen = infos[3]
                         if infos[4] == '---':
-                            levure_chosen = ''
+                            levure_chosen = None
                         else:
                             levure_chosen = infos[4]
                         cpt = Capteur(infos[0], experience.get_id(), farine_chosen, levain_chosen, levure_chosen,
