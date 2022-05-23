@@ -360,7 +360,7 @@ class Levure:
 class User:
     nom_table = "users"
 
-    def __init__(self, login, mdp, nom, prenom):
+    def __init__(self, login, nom, prenom, mdp=None):
         """Classe des utilisateurs
 
         Parameters
@@ -417,19 +417,17 @@ class User:
 class Projet:
     nom_table = "projets"
 
-    def __init__(self, directeur):
+    def __init__(self, titre, directeur, liste_participants=None):
         """Classe représentant les projets
 
         Parameters
         -----------
         directeur: String
             Directeur/trice du projet"""
+        self.titre = titre
         self.directeur = directeur
-        self.participants = []
-        self.id_projet = None
-
-    def set_id(self, id_p):
-        self.id_projet = id_p
+        self.participants = liste_participants
+        self.id_projet = directeur + "_" + titre
 
     @staticmethod
     def get_projets(selector=None, value=None):
@@ -454,24 +452,46 @@ class Projet:
             projets_from_bd = get_all(Projet.nom_table)
         projets = []
         for projet in projets_from_bd:
-            p = Projet(projet[1])
+            p = Projet(projet[1], projet[2])
             projets.append(p)
-            p.set_id(projet[0])
         return projets
 
     def get_participants(self):
         """Récupère les participants d'un projet depuis la base de données"""
-        query = f"SELECT login FROM participer_projet pp JOIN users u ON u.login=pp.login_utilisateur WHERE " \
-                f"id_projet={self.id_projet}"
-        participants_from_bd = run_query(query, None)
+        query = f"SELECT login, nom, prenom FROM users u JOIN participer_projet pp ON u.login = pp.login_utilisateur " \
+                f"WHERE id_projet=%s"
+        participants_from_bd = run_query(query, (self.id_projet, ))
         participants = []
         for participant in participants_from_bd:
-            u = User(participant[0], participant[1], participant[2], participant[3])
+            u = User(participant[0], participant[1], participant[2])
             participants.append(u)
         return participants
 
     def get_project_experiences(self):
+        """Récupère la liste des experiences d'un projet"""
         return Experience.get_experiences("projet", self.id_projet)
+
+    def create_projet(self):
+        query = f"INSERT INTO {self.nom_table} (id, titre, directeur) VALUES (%s, %s, %s)"
+        values = (self.id_projet, self.titre, self.directeur)
+        insert_into(query, values)
+        for participant in self.participants:
+            self.add_participant(participant)
+
+    def add_participant(self, login_participant):
+        query = f"INSERT INTO participer_projet (id_projet, login_utilisateur) VALUES (%s, %s)"
+        values = (self.id_projet, login_participant)
+        insert_into(query, values)
+
+    def get_other_users(self):
+        query = f"SELECT * FROM users WHERE login NOT IN(SELECT login_utilisateur " \
+                f"FROM participer_projet WHERE id_projet = %s ) AND login != %s"
+        values = (self.id_projet, self.directeur)
+        users_as_tulpe = run_query(query, values)
+        users_as_object = []
+        for user in users_as_tulpe:
+            users_as_object.append(User(user[0], user[1], user[2]))
+            return users_as_object
 
 
 class Experience:
@@ -527,7 +547,7 @@ class Experience:
         query = f"INSERT INTO {self.nom_table} (id, projet, id_boitier, operateur, date, lieu, fichier_donnees, " \
                 f"fichier_resultat, remarque) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         values = (self.identificateur, self.projet, self.id_boitier, self.operateur, self.date, self.lieu,
-                  self.fichier_donnees, self.fichier_resultat, self.remarque)
+                  self.fichier_donnees.name, self.fichier_resultat, self.remarque)
         insert_into(query, values)
 
     def update_experience(self):
@@ -588,6 +608,18 @@ class Experience:
         if self.remarque is not None:
             estring += f"Remarque : {self.remarque}  \n"
         return estring
+
+    def str_exp_and_cpt(self):
+        st.write(str(self))
+        list_cpt = Capteur.get_capteurs("id_experience", self.get_id())
+        col1, col2 = st.columns(2)
+        col3, col4 = st.columns(2)
+        list_cols = [col1, col2, col3, col4]
+        i = 0
+        for capteur in list_cpt:
+            with list_cols[i]:
+                st.write(str(capteur))
+            i += 1
 
     def info_as_df(self):
         infos = [f"Experience {self.identificateur} :"]
@@ -761,6 +793,7 @@ class Experience:
                 data.insert(i, pente)
                 i += 1
             df = pd.DataFrame(data, columns=("pente max (mm/min)", "Début pousse (min)", "Fin pousse (min)"))
+            df.index = self.titres_cpt
             st.dataframe(df)
 
             fig = plt.figure()
@@ -905,12 +938,19 @@ class Experience:
         infos = self.info_as_df()
         for inf in infos:
             pdf.cell(200, 10, txt=inf, ln=1, align='C')
+        """if st.session_state["access_level"] > 1:
+            cpts = Capteur.get_capteurs("id_experience", self.identificateur)
+        else:
+            cpts = st.session_state["capteurs"]"""
         i = 0
         for fig in self._tab_figs:
             fig.savefig(f"fig{i}.png")
             pdf.add_page('L')
             pdf.image(f"fig{i}.png", x=None, y=None, w=0, h=0, type='', link='')
-            i += 1
+            """if i < len(cpts):
+                for info in cpts[i].info_as_tab():
+                    pdf.cell(100, 10, txt=info, ln=1, align='R')
+            i += 1"""
         pdf.output(f"{self.get_id()}.pdf")
 
     def generate_csv_cpt(self):
@@ -971,19 +1011,22 @@ class Capteur:
         if self.id_farine is not None:
             if st.session_state['access_level'] > 1:
                 farine = Farine.get_farines("id", self.id_farine)
-                cstring += f" {str(farine[0])}  \n"
+                if farine:
+                    cstring += f" {str(farine[0])}  \n"
             else:
                 cstring += f"{str(self.id_farine)} "
         if self.id_levain is not None:
             if st.session_state['access_level'] > 1:
                 levain = Levain.get_levains("id", self.id_levain)
-                cstring += f"{str(levain[0])}  \n"
+                if levain:
+                    cstring += f"{str(levain[0])}  \n"
             else:
                 cstring += f"{str(self.id_levain)}  \n"
         if self.levure is not None:
             if st.session_state['access_level'] > 1:
                 levure = Levure.get_levures("espece", self.levure)
-                cstring += f"{str(levure[0])}  \n"
+                if levure:
+                    cstring += f"{str(levure[0])}  \n"
             else:
                 if "levures" in st.session_state:
                     for levure in st.session_state["levures"]:
@@ -994,6 +1037,35 @@ class Capteur:
         if self.fichier_donnees is not None:
             cstring += f"fichier de données = {self.fichier_donnees}  \n"
         return cstring
+
+    def info_as_tab(self):
+        infos = [f"{self.type_capteur} :"]
+        if self.id_farine is not None:
+            if st.session_state['access_level'] > 1:
+                farine = Farine.get_farines("id", self.id_farine)
+                infos.append(f" {str(farine[0])}")
+            else:
+                infos.append(f"{str(self.id_farine)} ")
+        if self.id_levain is not None:
+            if st.session_state['access_level'] > 1:
+                levain = Levain.get_levains("id", self.id_levain)
+                infos.append(f"{str(levain[0])}")
+            else:
+                infos.append(f"{str(self.id_levain)}")
+        if self.levure is not None:
+            if st.session_state['access_level'] > 1:
+                levure = Levure.get_levures("espece", self.levure)
+                infos.append(f"{str(levure[0])}")
+            else:
+                if "levures" in st.session_state:
+                    for levure in st.session_state["levures"]:
+                        if levure.espece == self.levure:
+                            infos.append(f"{str(levure)}")
+        if self.remarque is not None:
+            infos.append(f"remarque = {self.remarque}")
+        if self.fichier_donnees is not None:
+            infos.append(f"fichier de données = {self.fichier_donnees}")
+        return infos
 
     def get_fichier_donnes(self):
         return self.fichier_donnees
