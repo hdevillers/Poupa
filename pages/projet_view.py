@@ -46,10 +46,11 @@ class AddProjectPage(HydraHeadApp):
                 with st.form(f"add_participant {i}"):
                     list_of_users = projet.get_other_users()
                     dico_users = {}
-                    for user in list_of_users:
-                        dico_users[user.login] = str(user)
-                    select_participants = st.multiselect("Ajouter des participants", list(dico_users.items()), key=i,
-                                                         format_func=lambda o: o[1])
+                    if list_of_users is not None:
+                        for user in list_of_users:
+                            dico_users[user.login] = str(user)
+                    select_participants = st.multiselect("Ajouter des participants", list(dico_users.items()),
+                                                         key=i, format_func=lambda o: o[1])
                     if st.form_submit_button("Ajouter participant.e.s"):
                         for participant in select_participants:
                             projet.add_participant(participant[0])

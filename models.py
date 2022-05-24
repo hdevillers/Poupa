@@ -475,6 +475,7 @@ class Projet:
         query = f"INSERT INTO {self.nom_table} (id, titre, directeur) VALUES (%s, %s, %s)"
         values = (self.id_projet, self.titre, self.directeur)
         insert_into(query, values)
+        self.add_participant(self.directeur)
         for participant in self.participants:
             self.add_participant(participant)
 
@@ -494,6 +495,28 @@ class Projet:
         for user in users_as_tulpe:
             users_as_object.append(User(user[0], user[1], user[2]))
             return users_as_object
+
+    @staticmethod
+    def get_projects_from_participant(id_participant):
+        query = f"SELECT titre, directeur FROM projets p JOIN participer_projet pp ON p.id = pp.id_projet WHERE " \
+                f"pp.login_utilisateur=%s"
+        value = (id_participant, )
+        projet_fom_bd = run_query(query, value)
+        projet_as_object = []
+        for projet in projet_fom_bd:
+            projet_as_object.append(Projet(projet[0], projet[1]))
+        return projet_as_object
+
+    def __str__(self):
+        pstring = f"**{self.titre}**:  \n"
+        if self.participants is None:
+            participants = self.get_participants()
+        else:
+            participants = self.participants
+        pstring += f"Participants:  \n"
+        for participant in participants:
+            pstring += f"{str(participant)}  \n"
+        return pstring
 
 
 class Experience:
