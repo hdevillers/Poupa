@@ -479,11 +479,13 @@ class Projet:
             self.add_participant(participant)
 
     def add_participant(self, login_participant):
+        """Ajoute un participant à un projet"""
         query = f"INSERT INTO participer_projet (id_projet, login_utilisateur) VALUES (%s, %s)"
         values = (self.id_projet, login_participant)
         insert_into(query, values)
 
     def get_other_users(self):
+        """Récupère les utilisateurs qui ne participent pas au projet"""
         query = f"SELECT * FROM users WHERE login NOT IN(SELECT login_utilisateur " \
                 f"FROM participer_projet WHERE id_projet = %s ) AND login != %s"
         values = (self.id_projet, self.directeur)
@@ -950,7 +952,8 @@ class Experience:
             """if i < len(cpts):
                 for info in cpts[i].info_as_tab():
                     pdf.cell(100, 10, txt=info, ln=1, align='R')
-            i += 1"""
+            """
+            i += 1
         pdf.output(f"{self.get_id()}.pdf")
 
     def generate_csv_cpt(self):
