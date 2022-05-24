@@ -41,8 +41,8 @@ if user_access_level > 1:
     menu_data = {
         'Home': ['Accueil'],
         'Nouvelle Expérience': ['Nouvelle Expérience'],
-        'Projets': ["Projets"],
         'Résultats': ['Résultats'],
+        'Projets': ["Projets"],
         'Fusion de capteurs': ['Fusion de capteurs'],
         'Farines&Levain': ["Farines", "Levains", "Levures"], }
 else:

@@ -43,6 +43,12 @@ class ExperiencePage(HydraHeadApp):
         with st.form("form experience"):
             st.subheader("Informations de l'experience")
             if self.session_state.allow_access > 1:
+                list_of_projets = Projet.get_projects_from_participant(st.session_state['login'])
+                dict_projet = {'---': '---'}
+                for projet in list_of_projets:
+                    dict_projet[projet.id_projet] = projet.str_form()
+                selectprojet = st.selectbox("Projet", list(dict_projet.items()), format_func=lambda o: o[1])
+
                 list_of_poupa = models.get_all("boitiers")
                 list_id_poupa = []
                 for poupa in list_of_poupa:
@@ -81,9 +87,9 @@ class ExperiencePage(HydraHeadApp):
             dict_farines = {"---": "---"}
             for farine in list_of_farines:
                 if self.session_state.allow_access > 1:
-                    dict_farines[farine.id_farine] = farine.str_from()
+                    dict_farines[farine.id_farine] = farine.str_form()
                 else:
-                    dict_farines[farine] = farine.str_from()
+                    dict_farines[farine] = farine.str_form()
 
             # Levains
             list_of_levains = []
@@ -130,14 +136,17 @@ class ExperiencePage(HydraHeadApp):
                 if upload_file is None or input_operateur == "" or input_lieu == "":
                     st.error("Certains champs obligatoires ne sont pas encore remplis.")
                     can_go = False
+                projet_choosen = None
                 if self.session_state.allow_access > 1:
                     operateur = models.get_by("users", "login", input_operateur)
                     if not operateur:
                         st.error("Opérateur inconnus")
                         can_go = False
+                    if selectprojet != '---':
+                        projet_choosen = selectprojet[0]
                 if can_go:
                     experience = Experience(int(boitier_selected), input_date, input_lieu, input_operateur,
-                                            tab_titre_cpt, None, upload_file)
+                                            tab_titre_cpt, projet_choosen, upload_file)
                     st.session_state['experience'] = experience
                     # st.sidebar.write(st.session_state)
                     list_of_capteurs = []

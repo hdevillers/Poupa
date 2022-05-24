@@ -60,8 +60,9 @@ class ResultPage(HydraHeadApp):
                     else:
                         experience.update_experience()
                     for cpt in st.session_state['capteurs']:
-                        files = experience.generate_csv_cpt()
-                        cpt.set_fichier_donnees(files[i])
+                        if i < len(experience.titres_cpt):
+                            files = experience.generate_csv_cpt()
+                            cpt.set_fichier_donnees(files[i])
                         i += 1
                         if not models.Capteur.get_capteur_by_pk(cpt.get_type(), cpt.get_id_experience()):
                             cpt.create_capteur()

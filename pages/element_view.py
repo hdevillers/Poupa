@@ -79,7 +79,7 @@ class LevainPage(HydraHeadApp):
                 if allow_access > 1:
                     farines_id[farine.id_farine] = str(farine)
                 else:
-                    farines_id[farine] = farine.str_from()
+                    farines_id[farine] = farine.str_form()
             input_alias = st.text_input("Alias*", max_chars=50)
             select_farine = st.selectbox("Farine", list(farines_id.items()), 0, format_func=lambda o: o[1])
             input_origine = st.text_input("Origine", max_chars=100)
