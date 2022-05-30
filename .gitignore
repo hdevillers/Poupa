@@ -129,3 +129,7 @@ dmypy.json
 .pyre/
 
 .streamlit/secrets.toml
+
+#docker
+Dockerfile
+docker-compose.yml
