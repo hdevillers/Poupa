@@ -99,7 +99,7 @@ class InscriptionPage(HydraHeadApp):
     def _do_signup(self, form_data):
         if form_data['password'] == form_data['password2']:
             hash_password = make_hashes(st.secrets['seed'] + form_data['password'])
-            user = models.User(form_data['username'], hash_password, form_data['nom'], form_data['prenom'])
+            user = models.User(form_data['username'], form_data['nom'], form_data['prenom'], hash_password)
             try:
                 user.create_user()
             except Error as err:

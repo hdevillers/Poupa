@@ -198,7 +198,7 @@ class Farine:
             fstring += f"cendre = {self.cendre}   "
         return fstring
 
-    def str_from(self):
+    def str_form(self):
         return "- " + self.alias
 
 
@@ -518,6 +518,9 @@ class Projet:
             pstring += f"{str(participant)}  \n"
         return pstring
 
+    def str_form(self):
+        return f"{self.titre}     {self.directeur}"
+
 
 class Experience:
     nom_table = "experiences"
@@ -809,9 +812,18 @@ class Experience:
     def dessiner_tableau(self, donnees):
         st.header("Tableau de données")
         container = st.container()
+        # on enleve le capteur vide du tableau
+        i = 0
+        for donnee in donnees:
+            if donnee == ['Nothing']:
+                donnees.pop(i)
+                self.titres_cpt.pop(i)
+            else:
+                i += 1
         with container:
             i = 0
             data = []
+            print(donnees)
             for pente in donnees:
                 pente.pop(1)
                 # pente.insert(0, self.titres_cpt[i])
@@ -904,11 +916,12 @@ class Experience:
 
                     else:
                         if self._first_time:
-                            self.titres_cpt.pop(i)
+                            self.titres_cpt[i] = "Nothing"
                         fig, ax = plt.subplots()
                         ax.text(0.5, 0.5, "Pas de données")
                         st.pyplot(fig)
                         self._tab_figs.append(fig)
+                        infos_pente_courbes.append(["Nothing"])
                     # info_courbe("Capteur n°" + str(i + 1), 'temps (min)', 'pousse (mm)', fig_courbe_vide)
                     # fig_courbe_vide.grid()
 
@@ -997,6 +1010,25 @@ class Capteur:
     nom_table = "capteurs"
 
     def __init__(self, type_capteur, id_experience, id_farine, id_levain, levure, remarque=None, fichier_donnees=None):
+        """Classe representant le contenu des flacons placés sous chaqeu capteur du arduino
+
+        Parameters
+        -----------
+        type_capteur:
+            le type du capteur (1, 2, 3, 4 ou temperature)
+        id_experience:
+            identifiant de l'experience du capteur
+        id_farine:
+            identifiant de la farine utilisée
+        id_levain:
+            identifiant du levain utilisé
+        levure:
+            espece de la levure utilisée
+        remarque:
+            éventuelle remarque
+        fichier_donnees:
+            nom du fichier ou vont être stockés les données des capteurs
+            """
         self.type_capteur = type_capteur
         self.id_experience = id_experience
         self.id_farine = id_farine
@@ -1018,6 +1050,7 @@ class Capteur:
         return self.id_levain
 
     def create_capteur(self):
+        """Insert un nouveau capteru dans la base de données"""
         query = f"INSERT INTO {self.nom_table} ( type_capteur, id_experience, id_farine, id_levain, levure, remarque, " \
                 f"fichier_donnees) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         values = (self.type_capteur, self.id_experience, self.id_farine, self.id_levain, self.levure, self.remarque,
@@ -1026,6 +1059,7 @@ class Capteur:
         insert_into(query, values)
 
     def update_capteur(self):
+        """Met à jour un capteur dans la base de données"""
         query = f"UPDATE {self.nom_table} SET id_farine=%s, id_levain=%s, levure=%s, remarque=%s, " \
                 f"fichier_donnees=%s) WHERE type_capteur = %s AND id_experience = %s "
         values = (self.id_farine, self.id_levain, self.levure, self.remarque,
@@ -1065,6 +1099,13 @@ class Capteur:
         return cstring
 
     def info_as_tab(self):
+        """Les information de self sont placées dans un tableau
+
+        Returns
+        -----------
+        infos:
+            le tableau avec toutes les info du capteur self
+        """
         infos = [f"{self.type_capteur} :"]
         if self.id_farine is not None:
             if st.session_state['access_level'] > 1:
@@ -1101,9 +1142,28 @@ class Capteur:
 
     @staticmethod
     def get_capteur_by_pk(type_cpt, id_exp):
+        """Renvoi la listes des capteurs depuis la base de données à partir de la clé primaire (type et id de
+        l'experience)
+
+        Parameters
+        -----------
+        type_cpt:
+            type du capteur
+        id_exp:
+            identifiant de l'experience du capteur
+
+        Returns
+        -----------
+        le capteur sous forme d'objet Capteur"""
         query = f"SELECT * FROM capteurs WHERE type_capteur = %s AND id_experience = %s"
         tuple_values = (type_cpt, id_exp)
-        return run_query(query, tuple_values)
+        capteur_from_bd = run_query(query, tuple_values)
+        capteur_as_object = ""
+        for capteur in capteur_from_bd:
+            capteur_as_object = Capteur(capteur[0][0], capteur[0][1], capteur[0][2], capteur[0][3], capteur[0][4],
+                                        capteur[0][5], capteur[0][6])
+        return capteur_as_object
+
 
     @staticmethod
     def get_capteurs(selector=None, value=None):
