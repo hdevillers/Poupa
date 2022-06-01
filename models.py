@@ -9,12 +9,15 @@ from matplotlib import pyplot as plt
 # import os
 from fpdf import FPDF
 
+test = True
+islocal = True
+
 
 def init_connection():
-    return mysql.connector.connect(**st.secrets["mysql"])
-
-
-test = True
+    if islocal:
+        return mysql.connector.connect(**st.secrets["mysqllocalhost"])
+    else:
+        return mysql.connector.connect(**st.secrets["mysql"])
 
 
 @st.experimental_memo(ttl=10)
@@ -116,8 +119,28 @@ def update(query, tuple_values):
 class Boitier:
     nom_table = "boitiers"
 
-    def __init__(self, id_boitier):
+    def __init__(self, id_boitier, proprio):
         self.id = id_boitier
+        self.proprio = proprio
+
+    @staticmethod
+    def get_boitiers(selector=None, value=None):
+        if selector is not None and value is not None:
+            boitiers_from_bd = get_by(Boitier.nom_table, selector, value)
+        else:
+            boitiers_from_bd = get_all(Boitier.nom_table)
+        boitiers = []
+        for boitier in boitiers_from_bd:
+            boitiers.append(Boitier(boitier[0], boitier[1]))
+        return boitiers
+
+    def create_boitier(self):
+        query = f"INSERT INTO {self.nom_table} (id, proprietaire) VALUES (%s, %s)"
+        values = (self.id, self.proprio)
+        insert_into(query, values)
+
+    def __str__(self):
+        return f"Boitier {self.id} appartenant à {self.proprio}"
 
 
 class Farine:
@@ -460,7 +483,7 @@ class Projet:
         """Récupère les participants d'un projet depuis la base de données"""
         query = f"SELECT login, nom, prenom FROM users u JOIN participer_projet pp ON u.login = pp.login_utilisateur " \
                 f"WHERE id_projet=%s"
-        participants_from_bd = run_query(query, (self.id_projet, ))
+        participants_from_bd = run_query(query, (self.id_projet,))
         participants = []
         for participant in participants_from_bd:
             u = User(participant[0], participant[1], participant[2])
@@ -500,7 +523,7 @@ class Projet:
     def get_projects_from_participant(id_participant):
         query = f"SELECT titre, directeur FROM projets p JOIN participer_projet pp ON p.id = pp.id_projet WHERE " \
                 f"pp.login_utilisateur=%s"
-        value = (id_participant, )
+        value = (id_participant,)
         projet_fom_bd = run_query(query, value)
         projet_as_object = []
         for projet in projet_fom_bd:
@@ -1163,7 +1186,6 @@ class Capteur:
             capteur_as_object = Capteur(capteur[0][0], capteur[0][1], capteur[0][2], capteur[0][3], capteur[0][4],
                                         capteur[0][5], capteur[0][6])
         return capteur_as_object
-
 
     @staticmethod
     def get_capteurs(selector=None, value=None):

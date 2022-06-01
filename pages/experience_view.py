@@ -1,6 +1,6 @@
 import models
 from models import *
-from pages.element_view import FarinePage, LevainPage, LevurePage
+from pages.element_view import FarinePage, LevainPage, LevurePage, BoitierPage
 from hydralit import HydraHeadApp
 from datetime import date
 
@@ -39,6 +39,9 @@ class ExperiencePage(HydraHeadApp):
                 LevainPage.generate_form(self.session_state.allow_access)
             with st.expander("Ajouter une Levure"):
                 LevurePage.generate_form(self.session_state.allow_access)
+            if self.session_state.allow_access > 1:
+                with st.expander("Ajouter Boitier"):
+                    BoitierPage.generate_form()
 
         with st.form("form experience"):
             st.subheader("Informations de l'experience")
@@ -49,12 +52,12 @@ class ExperiencePage(HydraHeadApp):
                     dict_projet[projet.id_projet] = projet.str_form()
                 selectprojet = st.selectbox("Projet", list(dict_projet.items()), format_func=lambda o: o[1])
 
-                list_of_poupa = models.get_all("boitiers")
-                list_id_poupa = []
-                for poupa in list_of_poupa:
-                    list_id_poupa.append(poupa[0])
-
-                boitier_selected = st.selectbox("Numéro du PouPa utilisé*", list_id_poupa)
+                list_of_boitiers = models.Boitier.get_boitiers()
+                dict_boitiers = {}
+                for boitier in list_of_boitiers:
+                    dict_boitiers[boitier] = str(boitier)
+                boitier_selected = st.selectbox("Numéro du PouPa utilisé*", list(dict_boitiers.items()),
+                                                format_func=lambda o: o[1])
             else:
                 boitier_selected = st.number_input("Numéro du PouPa utilisé*", max_value=999, min_value=1,
                                                    value=int(value_poupa))
@@ -145,7 +148,7 @@ class ExperiencePage(HydraHeadApp):
                     if selectprojet != '---':
                         projet_choosen = selectprojet[0]
                 if can_go:
-                    experience = Experience(int(boitier_selected), input_date, input_lieu, input_operateur,
+                    experience = Experience(int(boitier_selected[0].id), input_date, input_lieu, input_operateur,
                                             tab_titre_cpt, projet_choosen, upload_file)
                     st.session_state['experience'] = experience
                     # st.sidebar.write(st.session_state)

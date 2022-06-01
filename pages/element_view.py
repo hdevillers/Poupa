@@ -122,7 +122,7 @@ class LevurePage(HydraHeadApp):
         st.header("Levures")
         st.write("Retrouvez ici la liste des levures disponnibles et un formulaire pour en ajouter de nouvelles ")
         with st.expander("Ajouter levure"):
-            self.generate_form(self.session_state.allow_access)
+            LevurePage.generate_form(self.session_state.allow_access)
         with st.container():
             all_levures = []
             if self.session_state.allow_access > 1:
@@ -147,5 +147,38 @@ class LevurePage(HydraHeadApp):
                     if "levures" not in st.session_state:
                         st.session_state["levures"] = []
                     st.session_state["levures"].append(levure)
+                else:
+                    st.error("Certains champs obligatoires ne sont pas encore remplis.")
+
+
+class BoitierPage(HydraHeadApp):
+    def __init__(self, title='', **kwargs):
+        self.__dict__.update(kwargs)
+        self.title = title
+
+    def run(self):
+        st.header("Boitiers")
+        st.write("Retrouvez ici la liste des boitiers disponnibles et un formulaire pour en ajouter de nouveaux ")
+        with st.expander("Ajouter levure"):
+            BoitierPage.generate_form()
+        with st.container():
+            all_boitiers = models.Boitier.get_boitiers()
+        for boitier in all_boitiers:
+            st.write(str(boitier))
+
+    @staticmethod
+    def generate_form():
+        with st.form("form boitiers"):
+            input_number = st.number_input("Numéros du boitier", min_value=1, max_value=999)
+            list_of_users = models.User.get_users()
+            dict_users = {}
+            for user in list_of_users:
+                dict_users[user.login] = str(user)
+            input_proprio = st.selectbox("Propiétaire du PouPa", list(dict_users.items()), format_func=lambda o: o[1])
+            st.write("champs obligatoires marqués d'un *")
+            if st.form_submit_button("Ajouter"):
+                if input_number is not None or input_proprio is not None:
+                    boitier = models.Boitier(input_number, input_proprio[0])
+                    boitier.create_boitier()
                 else:
                     st.error("Certains champs obligatoires ne sont pas encore remplis.")

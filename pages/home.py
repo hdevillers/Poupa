@@ -10,6 +10,7 @@ class HomePage(HydraHeadApp):
 
     def run(self):
         if self.session_state.allow_access > 1:
+            st.subheader(f"Bienvenu {st.session_state['login']}")
             st.subheader("Experiences")
             all_exp = models.Experience.get_experiences('operateur', st.session_state['login'])
             for experience in all_exp:
