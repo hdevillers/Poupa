@@ -108,7 +108,7 @@ class InscriptionPage(HydraHeadApp):
             with st.spinner("🤓 now redirecting to login...."):
                 time.sleep(2)
 
-                self.do_redirect()
+                self.do_redirect("Signup")
         else:
             st.error("Les mots de passes doivent être identiques")
 

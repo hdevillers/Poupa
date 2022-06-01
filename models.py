@@ -1,3 +1,4 @@
+import requests
 import streamlit as st
 import mysql.connector
 import pandas as pd
@@ -119,9 +120,10 @@ def update(query, tuple_values):
 class Boitier:
     nom_table = "boitiers"
 
-    def __init__(self, id_boitier, proprio):
-        self.id = id_boitier
+    def __init__(self, num_boitier, proprio):
+        self.numeros = num_boitier
         self.proprio = proprio
+        self.id = None
 
     @staticmethod
     def get_boitiers(selector=None, value=None):
@@ -131,16 +133,18 @@ class Boitier:
             boitiers_from_bd = get_all(Boitier.nom_table)
         boitiers = []
         for boitier in boitiers_from_bd:
-            boitiers.append(Boitier(boitier[0], boitier[1]))
+            b = Boitier(boitier[1], boitier[2])
+            boitiers.append(b)
+            b.id = boitier[0]
         return boitiers
 
     def create_boitier(self):
-        query = f"INSERT INTO {self.nom_table} (id, proprietaire) VALUES (%s, %s)"
-        values = (self.id, self.proprio)
+        query = f"INSERT INTO {self.nom_table} (numeros, proprietaire) VALUES (%s, %s)"
+        values = (self.numeros, self.proprio)
         insert_into(query, values)
 
     def __str__(self):
-        return f"Boitier {self.id} appartenant à {self.proprio}"
+        return f"Boitier {self.numeros} appartenant à {self.proprio}"
 
 
 class Farine:
@@ -574,6 +578,7 @@ class Experience:
         remarque: String, None
             Eventuelles remarques
         """
+
         self.titres_cpt = titres_cpt
         self.identificateur = str(id_boitier) + "_" + str(date) + "_" + operateur
         self.id_boitier = id_boitier
@@ -584,6 +589,7 @@ class Experience:
         self.fichier_donnees = fichier_donnees
         self.fichier_resultat = fichier_resultat
         self.remarque = remarque
+        self._brut_data = None
         self._touty = []
         self._touty_liss = []
         self._tab_figs = []
@@ -697,15 +703,12 @@ class Experience:
         glob :  list[ndarray]
              la list[ndarray] des données
              """
-        # on trouve en entrée le nom du fichier à lire
-        # f = open('data/' + self.fichier_donnees, "r")
-        # my_reader = csv.reader(f)
-        my_reader = pd.read_csv(self.fichier_donnees).values.tolist()
+        self._brut_data = pd.read_csv(self.fichier_donnees).values.tolist()
         stot = [[], [], [], [], [], [], [], [], [], [], ]
         w = []
         glob = []
         # convertion des données du fichier en matrice
-        for row in my_reader:
+        for row in self._brut_data:
             # transformation de la chaine de caractère en nombre -> on enleve les char mais on garde les num de capteurs
             w.append([float(w) for w in re.findall(r'-?\d+\.?\d*', str(row))])
         for loop in w:
@@ -1027,6 +1030,11 @@ class Experience:
                     filewriter.writerow(self._touty[2 * i])
                     filewriter.writerow(self._touty[2 * i + 1])
         return tab_file
+
+    def save_in_docker(self):
+        f = open(f'files/{self.identificateur}.TXT', 'w')
+        f.write(self._brut_data)
+        f.close()
 
 
 class Capteur:

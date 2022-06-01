@@ -27,7 +27,6 @@ class ExperiencePage(HydraHeadApp):
         value_operateur = ""
         if "dic_previous" in st.session_state:
             dp = st.session_state["dic_previous"]
-            value_poupa = dp["PouPa"]
             value_date = dp["Date"]
             value_lieu = dp["Lieu"]
             value_operateur = dp["Operateur"]
@@ -55,7 +54,8 @@ class ExperiencePage(HydraHeadApp):
                 list_of_boitiers = models.Boitier.get_boitiers()
                 dict_boitiers = {}
                 for boitier in list_of_boitiers:
-                    dict_boitiers[boitier] = str(boitier)
+                    dict_boitiers[boitier.id] = str(boitier)
+                st.write(dict_boitiers)
                 boitier_selected = st.selectbox("Numéro du PouPa utilisé*", list(dict_boitiers.items()),
                                                 format_func=lambda o: o[1])
             else:
@@ -74,8 +74,7 @@ class ExperiencePage(HydraHeadApp):
             tab_titre_cpt = []
             tab_cpt = []
 
-            dic_previous = {"PouPa": boitier_selected,
-                            "Date": input_date,
+            dic_previous = {"Date": input_date,
                             "Lieu": input_lieu,
                             "Operateur": input_operateur}
             st.session_state["dic_previous"] = dic_previous
@@ -148,7 +147,7 @@ class ExperiencePage(HydraHeadApp):
                     if selectprojet != '---':
                         projet_choosen = selectprojet[0]
                 if can_go:
-                    experience = Experience(int(boitier_selected[0].id), input_date, input_lieu, input_operateur,
+                    experience = Experience(int(boitier_selected[0]), input_date, input_lieu, input_operateur,
                                             tab_titre_cpt, projet_choosen, upload_file)
                     st.session_state['experience'] = experience
                     # st.sidebar.write(st.session_state)
