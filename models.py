@@ -840,17 +840,19 @@ class Experience:
         container = st.container()
         # on enleve le capteur vide du tableau
         i = 0
-        for donnee in donnees:
-            if donnee == ['Nothing']:
-                donnees.pop(i)
-                self.titres_cpt.pop(i)
-            else:
-                i += 1
+        if self._first_time:
+            for donnee in donnees:
+                if donnee == ['Nothing']:
+                    donnees.pop(i)
+                    self.titres_cpt.pop(i)
+                else:
+                    i += 1
         with container:
             i = 0
             data = []
             print(donnees)
             for pente in donnees:
+                print(i)
                 pente.pop(1)
                 # pente.insert(0, self.titres_cpt[i])
                 data.insert(i, pente)
@@ -991,9 +993,9 @@ class Experience:
                 st.pyplot(fig)
                 self._tab_figs.append(fig)
 
-            self._first_time = False
             # tableau des infos
             self.dessiner_tableau(infos_pente_courbes)
+            self._first_time = False
 
     def generate_pdf(self):
         pdf = FPDF()
