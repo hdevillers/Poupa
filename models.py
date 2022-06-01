@@ -840,19 +840,21 @@ class Experience:
         container = st.container()
         # on enleve le capteur vide du tableau
         i = 0
-        if self._first_time:
-            for donnee in donnees:
-                if donnee == ['Nothing']:
-                    donnees.pop(i)
+
+        for donnee in donnees:
+            if donnee == ['Nothing']:
+                donnees.pop(i)
+                if self._first_time:
                     self.titres_cpt.pop(i)
-                else:
-                    i += 1
+            else:
+                i += 1
         with container:
             i = 0
             data = []
             print(donnees)
             for pente in donnees:
                 print(i)
+                print(pente)
                 pente.pop(1)
                 # pente.insert(0, self.titres_cpt[i])
                 data.insert(i, pente)
