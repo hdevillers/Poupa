@@ -38,16 +38,16 @@ class ResultPage(HydraHeadApp):
         # Génération du pdf
         with col1:
             """download = st.button("Télécharger les résultats", on_click=experience.generate_pdf)"""
-            experience.generate_pdf()
-            with open(f"{experience.identificateur}.pdf", "rb") as pdf_file:
-                pdf_byte = pdf_file.read()
-            st.download_button(label="Télécharger les résultats",
-                               data=pdf_byte, file_name=f"{experience.identificateur}.pdf",
-                               mime="application/octet-stream")
-            i = 0
+            experience.generate_zip_file()
+            with open(f"temp/{experience.identificateur}.7z", "rb") as fp:
+
+                st.download_button(label="Télécharger les résultats",
+                                   data=fp, file_name=f"{experience.identificateur}.7z",
+                                   mime="application/x-7z-compressed")
+            """i = 0
             for cpt in st.session_state['capteurs']:
                 files = experience.generate_csv_cpt()
-                cpt.set_fichier_donnees(files[i])
+                cpt.set_fichier_donnees(files[i])"""
 
         # Enregistrement dans la base de données
         with col2:

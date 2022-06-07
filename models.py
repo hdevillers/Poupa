@@ -6,6 +6,7 @@ import numpy as np
 import csv
 import re
 from matplotlib import pyplot as plt
+from zipfile import ZipFile
 # from matplotlib.backends.backend_pdf import PdfPages
 # import os
 from fpdf import FPDF
@@ -1012,32 +1013,43 @@ class Experience:
             cpts = st.session_state["capteurs"]"""
         i = 0
         for fig in self._tab_figs:
-            fig.savefig(f"fig{i}.png")
+            fig.savefig(f"temp/fig{i}.png")
             pdf.add_page('L')
-            pdf.image(f"fig{i}.png", x=None, y=None, w=0, h=0, type='', link='')
+            pdf.image(f"temp/fig{i}.png", x=None, y=None, w=0, h=0, type='', link='')
             """if i < len(cpts):
                 for info in cpts[i].info_as_tab():
                     pdf.cell(100, 10, txt=info, ln=1, align='R')
             """
             i += 1
-        pdf.output(f"{self.get_id()}.pdf")
+        pdf.output(f"temp/{self.get_id()}.pdf")
 
     def generate_csv_cpt(self):
         tab_file = []
         for i in range(4):
             if len(self._touty[2 * i]) > 3:
-                file = 'data\\capteurs\\' + self.identificateur + "_Capteur-" + str(i + 1) + '.csv'
+                file = self.identificateur + "_Capteur-" + str(i + 1) + '.csv'
                 tab_file.append(file)
-                with open(file, 'w') as csvfile:
+                with open('temp/' + file, 'w') as csvfile:
                     # print(csvfile)
                     filewriter = csv.writer(csvfile, delimiter=",", quotechar='|', quoting=csv.QUOTE_MINIMAL)
                     filewriter.writerow(self._touty[2 * i])
                     filewriter.writerow(self._touty[2 * i + 1])
         return tab_file
 
+    def generate_zip_file(self):
+        self.generate_pdf()
+        files = self.generate_csv_cpt()
+        zipObj = ZipFile(f"temp/{self.identificateur}.7z", "w")
+        zipObj.write(f'temp/{self.identificateur}.pdf')
+        for file in files:
+            zipObj.write("temp/"+file)
+        zipObj.close()
+
     def save_in_docker(self):
         f = open(f'files/{self.identificateur}.TXT', 'w')
-        f.write(self._brut_data)
+        for row in self._brut_data:
+            for data in row:
+                f.write(str(data))
         f.close()
 
 
