@@ -138,17 +138,20 @@ class ExperiencePage(HydraHeadApp):
                 if upload_file is None or input_operateur == "" or input_lieu == "":
                     st.error("Certains champs obligatoires ne sont pas encore remplis.")
                     can_go = False
-                projet_choosen = None
+                projet_chosen = None
                 if self.session_state.allow_access > 1:
                     operateur = models.get_by("users", "login", input_operateur)
                     if not operateur:
                         st.error("Opérateur inconnus")
                         can_go = False
                     if selectprojet != '---':
-                        projet_choosen = selectprojet[0]
+                        projet_chosen = selectprojet[0]
+                    boitier_chosen = int(boitier_selected[0])
+                else:
+                    boitier_chosen = boitier_selected
                 if can_go:
-                    experience = Experience(int(boitier_selected[0]), input_date, input_lieu, input_operateur,
-                                            tab_titre_cpt, projet_choosen, upload_file)
+                    experience = Experience(boitier_chosen, input_date, input_lieu, input_operateur,
+                                            tab_titre_cpt, projet_chosen, upload_file)
                     st.session_state['experience'] = experience
                     # st.sidebar.write(st.session_state)
                     list_of_capteurs = []

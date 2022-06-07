@@ -6,7 +6,7 @@ from pages.results_view import ResultPage
 from pages.projet_view import AddProjectPage
 from hydralit import HydraApp
 from pages.merge_capteurs import MergePage
-from pages.element_view import FarinePage, LevainPage, LevurePage
+from pages.element_view import FarinePage, LevainPage, LevurePage, BoitierPage
 import myloading
 
 
@@ -27,6 +27,7 @@ app.add_app("Fusion de capteurs", icon="🔃", app=MergePage("Fusion de capteurs
 app.add_app("Farines", icon="🌾", app=FarinePage("Farines"))
 app.add_app("Levains", icon="🦠", app=LevainPage("Levains"))
 app.add_app("Levures", app=LevurePage("Levures"))
+app.add_app("Boitiers", app=BoitierPage("Boitiers"))
 app.add_app("Projets", icon="🗒️", app=AddProjectPage("Projets"))
 
 app.add_app("Signup", icon="🛰️", app=pages.connexion.InscriptionPage("Inscription"), is_unsecure=True)
@@ -44,7 +45,7 @@ if user_access_level > 1:
         'Résultats': ['Résultats'],
         'Projets': ["Projets"],
         'Fusion de capteurs': ['Fusion de capteurs'],
-        'Farines&Levain': ["Farines", "Levains", "Levures"], }
+        'Farines&Levain': ["Farines", "Levains", "Levures", "Boitiers"], }
 else:
     menu_data = {
         'Home': ['Accueil'],
