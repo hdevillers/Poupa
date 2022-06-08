@@ -51,11 +51,10 @@ class ResultPage(HydraHeadApp):
 
         # Enregistrement dans la base de données
         with col2:
-            if self.session_state.allow_access > 1:
+            if self.session_state.allow_access > 1 and experience.new_exp:
                 archiver = st.button("Archiver dans la base de données")
                 if archiver:
                     i = 0
-                    """
                     if not models.get_by("experiences", "id", experience.get_id()):
                         experience.create_experience()
                     else:
@@ -68,5 +67,5 @@ class ResultPage(HydraHeadApp):
                         if not models.Capteur.get_capteur_by_pk(cpt.get_type(), cpt.get_id_experience()):
                             cpt.create_capteur()
                         else:
-                            cpt.update_capteur()"""
+                            cpt.update_capteur()
                     experience.save_in_docker()

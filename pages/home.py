@@ -13,10 +13,19 @@ class HomePage(HydraHeadApp):
             st.subheader(f"Bienvenu {st.session_state['login']}")
             st.subheader("Experiences")
             all_exp = models.Experience.get_experiences('operateur', st.session_state['login'])
+            i = 0
             for experience in all_exp:
                 with st.container():
                     if experience.projet is None:
                         experience.str_exp_and_cpt()
+                        button = st.button("Générer", key="bttnexp"+str(i))
+                        i += 1
+                        if button:
+                            experience.new_exp = False
+                            experience.titres_cpt = ["Capteur-1", "Capteur-2", "Capteur-3", "Capteur-4"]
+                            st.session_state["experience"] = experience
+                            st.session_state["capteurs"] = models.Capteur.get_capteurs('id_experience',
+                                                                                       experience.identificateur)
             st.subheader("Projets")
             projets = models.Projet.get_projects_from_participant(st.session_state['login'])
             for projet in projets:

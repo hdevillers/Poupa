@@ -1,4 +1,3 @@
-import requests
 import streamlit as st
 import mysql.connector
 import pandas as pd
@@ -555,7 +554,7 @@ class Experience:
     test = True
 
     def __init__(self, id_boitier, date, lieu, operateur, titres_cpt=None, projet=None, fichier_donnees=None,
-                 fichier_resultat=None, remarque=None):
+                 fichier_resultat=None, remarque=None, new_exp=True):
         """Classe représentant une experience
 
         Parameters
@@ -596,6 +595,7 @@ class Experience:
         self._tab_figs = []
         self.max_values = []
         self._first_time = True
+        self.new_exp = new_exp
 
     def get_id(self):
         return self.identificateur
@@ -605,7 +605,7 @@ class Experience:
         query = f"INSERT INTO {self.nom_table} (id, projet, id_boitier, operateur, date, lieu, fichier_donnees, " \
                 f"fichier_resultat, remarque) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         values = (self.identificateur, self.projet, self.id_boitier, self.operateur, self.date, self.lieu,
-                  self.fichier_donnees.name, self.fichier_resultat, self.remarque)
+                  "files/" + self.fichier_donnees.name, self.fichier_resultat, self.remarque)
         insert_into(query, values)
 
     def update_experience(self):
@@ -704,12 +704,17 @@ class Experience:
         glob :  list[ndarray]
              la list[ndarray] des données
              """
-        self._brut_data = pd.read_csv(self.fichier_donnees).values.tolist()
+        if self.new_exp:
+            self._brut_data = pd.read_csv(self.fichier_donnees).values
+        else:
+            self._brut_data = pd.read_csv(self.fichier_resultat, encoding= 'unicode_escape').values
+        datas = self._brut_data.tolist()
+
         stot = [[], [], [], [], [], [], [], [], [], [], ]
         w = []
         glob = []
         # convertion des données du fichier en matrice
-        for row in self._brut_data:
+        for row in datas:
             # transformation de la chaine de caractère en nombre -> on enleve les char mais on garde les num de capteurs
             w.append([float(w) for w in re.findall(r'-?\d+\.?\d*', str(row))])
         for loop in w:
@@ -901,6 +906,7 @@ class Experience:
             tab_col = [col1, col2, col3, col4, col5, col6]
             # pour chaque graph, on fait une transaltation vers la droite et vers le bas pour que les courbes
             # commencent à (0, 0) puis on les dessines elles et leur pente max et on trouve le t0 et t1
+            st.write(self._touty)
             for i in range(4):
                 with tab_col[i]:
                     if len(self._touty[2 * i]) > 3:
@@ -1049,7 +1055,7 @@ class Experience:
         f = open(f'files/{self.identificateur}.TXT', 'w')
         for row in self._brut_data:
             for data in row:
-                f.write(str(data))
+                f.write(f"{str(data)}  \n")
         f.close()
 
 
