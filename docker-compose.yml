@@ -1,0 +1,44 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      context: .
+    depends_on:
+      - db
+    networks:
+      - frontend
+      - backend
+    ports:
+      - 127.0.0.1:8503:8501
+    volumes:
+      - .:/app
+      - file_data:/app/files
+      - temp_data:/app/temp
+
+  db:
+    image: mysql:5.7.36
+    environment:
+      - MYSQL_ROOT_PASSWORD=poupa
+      - MYSQL_USER=poupa
+      - MYSQL_PASSWORD=poupa
+      - MYSQL_DATABASE=poupa
+    networks:
+      - backend
+    ports:
+      - 127.0.0.1:8502:3306
+    volumes:
+      - ./db:/db
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+    driver: local
+  file_data:
+    driver: local
+  temp_data:
+    driver: local
+
+networks:
+  frontend:
+  backend:
