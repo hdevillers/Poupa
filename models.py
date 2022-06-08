@@ -11,7 +11,7 @@ from zipfile import ZipFile
 from fpdf import FPDF
 
 test = True
-islocal = True
+islocal = False
 
 
 def init_connection():

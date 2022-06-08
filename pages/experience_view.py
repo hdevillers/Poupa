@@ -55,7 +55,6 @@ class ExperiencePage(HydraHeadApp):
                 dict_boitiers = {}
                 for boitier in list_of_boitiers:
                     dict_boitiers[boitier.id] = str(boitier)
-                st.write(dict_boitiers)
                 boitier_selected = st.selectbox("Numéro du PouPa utilisé*", list(dict_boitiers.items()),
                                                 format_func=lambda o: o[1])
             else:
