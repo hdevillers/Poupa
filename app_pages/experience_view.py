@@ -1,6 +1,6 @@
 import models
 from models import *
-from pages.element_view import FarinePage, LevainPage, LevurePage, BoitierPage
+from app_pages.element_view import FarinePage, LevainPage, LevurePage, BoitierPage
 from hydralit import HydraHeadApp
 from datetime import date
 

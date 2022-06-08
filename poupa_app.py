@@ -1,12 +1,12 @@
 import streamlit as st
-import pages.connexion
-from pages.experience_view import ExperiencePage
-from pages.home import HomePage
-from pages.results_view import ResultPage
-from pages.projet_view import AddProjectPage
+import app_pages.connexion
+from app_pages.experience_view import ExperiencePage
+from app_pages.home import HomePage
+from app_pages.results_view import ResultPage
+from app_pages.projet_view import AddProjectPage
 from hydralit import HydraApp
-from pages.merge_capteurs import MergePage
-from pages.element_view import FarinePage, LevainPage, LevurePage, BoitierPage
+from app_pages.merge_capteurs import MergePage
+from app_pages.element_view import FarinePage, LevainPage, LevurePage, BoitierPage
 import myloading
 
 
@@ -30,9 +30,9 @@ app.add_app("Levures", app=LevurePage("Levures"))
 app.add_app("Boitiers", icon='⚙', app=BoitierPage("Boitiers"))
 app.add_app("Projets", icon="🗒️", app=AddProjectPage("Projets"))
 
-app.add_app("Signup", icon="🛰️", app=pages.connexion.InscriptionPage("Inscription"), is_unsecure=True)
+app.add_app("Signup", icon="🛰️", app=app_pages.connexion.InscriptionPage("Inscription"), is_unsecure=True)
 
-app.add_app("Login", app=pages.connexion.ConnexionPage("Connexion"), is_login=True)
+app.add_app("Login", app=app_pages.connexion.ConnexionPage("Connexion"), is_login=True)
 
 app.add_loader_app(myloading.MyLoadingApp())
 
