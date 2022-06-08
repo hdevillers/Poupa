@@ -144,7 +144,9 @@ class ExperiencePage(HydraHeadApp):
                     if not operateur:
                         st.error("Opérateur inconnus")
                         can_go = False
-                    if selectprojet != '---':
+                    if selectprojet[0] == '---':
+                        projet_chosen = None
+                    else:
                         projet_chosen = selectprojet[0]
                     boitier_chosen = int(boitier_selected[0])
                 else:

@@ -27,7 +27,7 @@ app.add_app("Fusion de capteurs", icon="🔃", app=MergePage("Fusion de capteurs
 app.add_app("Farines", icon="🌾", app=FarinePage("Farines"))
 app.add_app("Levains", icon="🦠", app=LevainPage("Levains"))
 app.add_app("Levures", app=LevurePage("Levures"))
-app.add_app("Boitiers", app=BoitierPage("Boitiers"))
+app.add_app("Boitiers", icon='⚙', app=BoitierPage("Boitiers"))
 app.add_app("Projets", icon="🗒️", app=AddProjectPage("Projets"))
 
 app.add_app("Signup", icon="🛰️", app=pages.connexion.InscriptionPage("Inscription"), is_unsecure=True)
@@ -52,7 +52,7 @@ else:
         'Nouvelle Expérience': ['Nouvelle Expérience'],
         'Résultats': ['Résultats'],
         'Fusion de capteurs': ['Fusion de capteurs'],
-        'Farines&Levain': ["Farines", "Levains", "Levures"], }
+        'Ajouter éléments': ["Farines", "Levains", "Levures"], }
 
 over_theme = {'txc_inactive': '#FFFFFF'}
 
