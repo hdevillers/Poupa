@@ -45,7 +45,7 @@ if user_access_level > 1:
         'Résultats': ['Résultats'],
         'Projets': ["Projets"],
         'Fusion de capteurs': ['Fusion de capteurs'],
-        'Farines&Levain': ["Farines", "Levains", "Levures", "Boitiers"], }
+        'Ajouter éléments': ["Farines", "Levains", "Levures", "Boitiers"], }
 else:
     menu_data = {
         'Home': ['Accueil'],

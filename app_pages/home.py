@@ -22,10 +22,16 @@ class HomePage(HydraHeadApp):
                         i += 1
                         if button:
                             experience.new_exp = False
-                            experience.titres_cpt = ["Capteur-1", "Capteur-2", "Capteur-3", "Capteur-4"]
+                            capteurs = models.Capteur.get_capteurs('id_experience', experience.identificateur)
+                            t_titre = []
+                            i = 1
+                            for capteur in capteurs:
+                                t_titre.append(capteur.alias)
+                            while len(t_titre) < 4:
+                                t_titre.append("Nothing")
+                            experience.titres_cpt = t_titre
                             st.session_state["experience"] = experience
-                            st.session_state["capteurs"] = models.Capteur.get_capteurs('id_experience',
-                                                                                       experience.identificateur)
+                            st.session_state["capteurs"] = capteurs
             st.subheader("Projets")
             projets = models.Projet.get_projects_from_participant(st.session_state['login'])
             for projet in projets:

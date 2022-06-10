@@ -6,12 +6,13 @@ import csv
 import re
 from matplotlib import pyplot as plt
 from zipfile import ZipFile
+from abc import ABC, abstractmethod
 # from matplotlib.backends.backend_pdf import PdfPages
 # import os
 from fpdf import FPDF
 
 test = True
-islocal = False
+islocal = True
 
 
 def init_connection():
@@ -906,7 +907,6 @@ class Experience:
             tab_col = [col1, col2, col3, col4, col5, col6]
             # pour chaque graph, on fait une transaltation vers la droite et vers le bas pour que les courbes
             # commencent à (0, 0) puis on les dessines elles et leur pente max et on trouve le t0 et t1
-            st.write(self._touty)
             for i in range(4):
                 with tab_col[i]:
                     if len(self._touty[2 * i]) > 3:
@@ -1062,15 +1062,17 @@ class Experience:
 class Capteur:
     nom_table = "capteurs"
 
-    def __init__(self, type_capteur, id_experience, id_farine, id_levain, levure, remarque=None, fichier_donnees=None):
+    def __init__(self, numero, id_experience, alias, id_farine, id_levain, levure, remarque=None, fichier_donnees=None):
         """Classe representant le contenu des flacons placés sous chaqeu capteur du arduino
 
         Parameters
         -----------
-        type_capteur:
+        numero:
             le type du capteur (1, 2, 3, 4 ou temperature)
         id_experience:
             identifiant de l'experience du capteur
+        alias:
+            le titre personnalisé du capteur
         id_farine:
             identifiant de la farine utilisée
         id_levain:
@@ -1082,8 +1084,9 @@ class Capteur:
         fichier_donnees:
             nom du fichier ou vont être stockés les données des capteurs
             """
-        self.type_capteur = type_capteur
+        self.numero = numero
         self.id_experience = id_experience
+        self.alias = alias
         self.id_farine = id_farine
         self.id_levain = id_levain
         self.levure = levure
@@ -1091,7 +1094,7 @@ class Capteur:
         self.fichier_donnees = fichier_donnees
 
     def get_type(self):
-        return self.type_capteur
+        return self.numero
 
     def get_id_experience(self):
         return self.id_experience
@@ -1104,9 +1107,9 @@ class Capteur:
 
     def create_capteur(self):
         """Insert un nouveau capteru dans la base de données"""
-        query = f"INSERT INTO {self.nom_table} ( type_capteur, id_experience, id_farine, id_levain, levure, remarque, " \
-                f"fichier_donnees) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        values = (self.type_capteur, self.id_experience, self.id_farine, self.id_levain, self.levure, self.remarque,
+        query = f"INSERT INTO {self.nom_table} ( numero, id_experience, alias, id_farine, id_levain, levure, remarque, " \
+                f"fichier_donnees) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+        values = (self.numero, self.id_experience, self.alias, self.id_farine, self.id_levain, self.levure, self.remarque,
                   self.fichier_donnees,)
         print(values)
         insert_into(query, values)
@@ -1116,11 +1119,11 @@ class Capteur:
         query = f"UPDATE {self.nom_table} SET id_farine=%s, id_levain=%s, levure=%s, remarque=%s, " \
                 f"fichier_donnees=%s) WHERE type_capteur = %s AND id_experience = %s "
         values = (self.id_farine, self.id_levain, self.levure, self.remarque,
-                  self.fichier_donnees, self.type_capteur, self.id_experience,)
+                  self.fichier_donnees, self.numero, self.id_experience,)
         update(query, values)
 
     def __str__(self):
-        cstring = f"**{self.type_capteur}**:  \n"
+        cstring = f"**{self.alias}**:  \n"
         if self.id_farine is not None:
             if st.session_state['access_level'] > 1:
                 farine = Farine.get_farines("id", self.id_farine)
@@ -1159,7 +1162,7 @@ class Capteur:
         infos:
             le tableau avec toutes les info du capteur self
         """
-        infos = [f"{self.type_capteur} :"]
+        infos = [f"{self.alias} :"]
         if self.id_farine is not None:
             if st.session_state['access_level'] > 1:
                 farine = Farine.get_farines("id", self.id_farine)
@@ -1194,13 +1197,13 @@ class Capteur:
         self.fichier_donnees = file
 
     @staticmethod
-    def get_capteur_by_pk(type_cpt, id_exp):
+    def get_capteur_by_pk(numero, id_exp):
         """Renvoi la listes des capteurs depuis la base de données à partir de la clé primaire (type et id de
         l'experience)
 
         Parameters
         -----------
-        type_cpt:
+        numero:
             type du capteur
         id_exp:
             identifiant de l'experience du capteur
@@ -1209,12 +1212,12 @@ class Capteur:
         -----------
         le capteur sous forme d'objet Capteur"""
         query = f"SELECT * FROM capteurs WHERE type_capteur = %s AND id_experience = %s"
-        tuple_values = (type_cpt, id_exp)
+        tuple_values = (numero, id_exp)
         capteur_from_bd = run_query(query, tuple_values)
         capteur_as_object = ""
         for capteur in capteur_from_bd:
             capteur_as_object = Capteur(capteur[0][0], capteur[0][1], capteur[0][2], capteur[0][3], capteur[0][4],
-                                        capteur[0][5], capteur[0][6])
+                                        capteur[0][5], capteur[0][6], capteur[0][7])
         return capteur_as_object
 
     @staticmethod
@@ -1225,7 +1228,8 @@ class Capteur:
             capteurs_from_database = get_all(Capteur.nom_table)
         capteurs = []
         for capteur in capteurs_from_database:
-            capteurs.append(Capteur(capteur[0], capteur[1], capteur[2], capteur[3], capteur[4], capteur[5], capteur[6]))
+            capteurs.append(Capteur(capteur[0], capteur[1], capteur[2], capteur[3], capteur[4], capteur[5], capteur[6],
+                                    capteur[7]))
         return capteurs
 
 
