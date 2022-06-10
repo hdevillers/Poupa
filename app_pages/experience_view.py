@@ -153,8 +153,8 @@ class ExperiencePage(HydraHeadApp):
                 if can_go:
                     experience = Experience(boitier_chosen, input_date, input_lieu, input_operateur,
                                             tab_titre_cpt, projet_chosen, upload_file)
+                    experience.fichier_resultat = f"files/{experience.identificateur}.TXT"
                     st.session_state['experience'] = experience
-                    # st.sidebar.write(st.session_state)
                     list_of_capteurs = []
                     i = 1
                     for infos in tab_cpt:
@@ -172,7 +172,7 @@ class ExperiencePage(HydraHeadApp):
                             levure_chosen = infos[3]
                         cpt = Capteur(i, experience.get_id(), infos[0], farine_chosen, levain_chosen, levure_chosen,
                                       infos[4], experience.get_id() + infos[0] + '.csv')
-                        i +=1
+                        i += 1
                         list_of_capteurs.append(cpt)
                     st.session_state[f'capteurs'] = list_of_capteurs
                     st.success(f"Résultats génerés ! **Allez consulter la page Résultats**")

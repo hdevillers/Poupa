@@ -606,14 +606,14 @@ class Experience:
         query = f"INSERT INTO {self.nom_table} (id, projet, id_boitier, operateur, date, lieu, fichier_donnees, " \
                 f"fichier_resultat, remarque) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         values = (self.identificateur, self.projet, self.id_boitier, self.operateur, self.date, self.lieu,
-                  "files/" + self.fichier_donnees.name, self.fichier_resultat, self.remarque)
+                  self.fichier_donnees.name, self.fichier_resultat, self.remarque)
         insert_into(query, values)
 
     def update_experience(self):
         """Met à jour une experience dans la base de données"""
         query = f"UPDATE {self.nom_table} SET projet=%s, id_boitier=%s, operateur=%s, date=%s, lieu=%s,  " \
                 f"fichier_donnees=%s, fichier_resultat=%s, remarque=%s WHERE id = %s "
-        values = (self.projet, self.id_boitier, self.operateur, self.date, self.lieu, self.fichier_donnees,
+        values = (self.projet, self.id_boitier, self.operateur, self.date, self.lieu, self.fichier_donnees.name,
                   self.fichier_resultat, self.remarque, self.identificateur,)
         update(query, values)
 
@@ -655,10 +655,10 @@ class Experience:
         estring = f"**Experience {self.identificateur} :**  \n"
         if self.projet is not None:
             estring += f"Fais partis du projet numéros {self.projet}  \n"
-        if st.session_state["access_level"] > 1:
-            fichier = f"Fichier de données : {self.fichier_donnees}  \n"
+        if type(self.fichier_donnees) is str:
+            fichier = f"Fichier de données : {self.fichier_donnees}"
         else:
-            fichier = f"Fichier de données : {self.fichier_donnees.name}  \n"
+            fichier = f"Fichier de données : {self.fichier_donnees.name}"
         estring += f"Boitier : {self.id_boitier}  \n"
         estring += f"Date : {self.date}  \n"
         estring += f"Lieu : {self.lieu}  \n"
@@ -684,7 +684,7 @@ class Experience:
         infos = [f"Experience {self.identificateur} :"]
         if self.projet is not None:
             infos.append(f"Fais partis du projet numéros {self.projet}")
-        if st.session_state["access_level"] > 1:
+        if type(self.fichier_donnees) is str:
             fichier = f"Fichier de données : {self.fichier_donnees}"
         else:
             fichier = f"Fichier de données : {self.fichier_donnees.name}"
@@ -708,7 +708,7 @@ class Experience:
         if self.new_exp:
             self._brut_data = pd.read_csv(self.fichier_donnees).values
         else:
-            self._brut_data = pd.read_csv(self.fichier_resultat, encoding= 'unicode_escape').values
+            self._brut_data = pd.read_csv(self.fichier_resultat, encoding='unicode_escape').values
         datas = self._brut_data.tolist()
 
         stot = [[], [], [], [], [], [], [], [], [], [], ]
@@ -1048,11 +1048,11 @@ class Experience:
         zipObj = ZipFile(f"temp/{self.identificateur}.7z", "w")
         zipObj.write(f'temp/{self.identificateur}.pdf')
         for file in files:
-            zipObj.write("temp/"+file)
+            zipObj.write("temp/" + file)
         zipObj.close()
 
     def save_in_docker(self):
-        f = open(f'files/{self.identificateur}.TXT', 'w')
+        f = open(self.fichier_resultat, 'w')
         for row in self._brut_data:
             for data in row:
                 f.write(f"{str(data)}  \n")
@@ -1107,18 +1107,18 @@ class Capteur:
 
     def create_capteur(self):
         """Insert un nouveau capteru dans la base de données"""
-        query = f"INSERT INTO {self.nom_table} ( numero, id_experience, alias, id_farine, id_levain, levure, remarque, " \
+        query = f"INSERT INTO {self.nom_table} (numero, id_experience, alias, id_farine, id_levain, levure, remarque, " \
                 f"fichier_donnees) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-        values = (self.numero, self.id_experience, self.alias, self.id_farine, self.id_levain, self.levure, self.remarque,
-                  self.fichier_donnees,)
+        values = (self.numero, self.id_experience, self.alias, self.id_farine, self.id_levain, self.levure,
+                  self.remarque, self.fichier_donnees,)
         print(values)
         insert_into(query, values)
 
     def update_capteur(self):
         """Met à jour un capteur dans la base de données"""
-        query = f"UPDATE {self.nom_table} SET id_farine=%s, id_levain=%s, levure=%s, remarque=%s, " \
-                f"fichier_donnees=%s) WHERE type_capteur = %s AND id_experience = %s "
-        values = (self.id_farine, self.id_levain, self.levure, self.remarque,
+        query = f"UPDATE {self.nom_table} SET alias=%s, id_farine=%s, id_levain=%s, levure=%s, remarque=%s, " \
+                f"fichier_donnees=%s) WHERE numero = %s AND id_experience = %s "
+        values = (self.alias, self.id_farine, self.id_levain, self.levure, self.remarque,
                   self.fichier_donnees, self.numero, self.id_experience,)
         update(query, values)
 
@@ -1211,7 +1211,7 @@ class Capteur:
         Returns
         -----------
         le capteur sous forme d'objet Capteur"""
-        query = f"SELECT * FROM capteurs WHERE type_capteur = %s AND id_experience = %s"
+        query = f"SELECT * FROM capteurs WHERE numero = %s AND id_experience = %s"
         tuple_values = (numero, id_exp)
         capteur_from_bd = run_query(query, tuple_values)
         capteur_as_object = ""
