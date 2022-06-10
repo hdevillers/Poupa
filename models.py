@@ -6,7 +6,6 @@ import csv
 import re
 from matplotlib import pyplot as plt
 from zipfile import ZipFile
-from abc import ABC, abstractmethod
 # from matplotlib.backends.backend_pdf import PdfPages
 # import os
 from fpdf import FPDF
