@@ -36,14 +36,6 @@ CREATE TABLE IF NOT EXISTS `boitiers` (
   KEY `fk_boitier_proprio` (`proprietaire`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `boitiers`
---
-
-INSERT INTO `boitiers` (`id`, `numeros`, `proprietaire`) VALUES
-(1, 1, 'mrakowski'),
-(2, 2, 'mrakowski');
-
 -- --------------------------------------------------------
 
 --
@@ -68,20 +60,6 @@ CREATE TABLE IF NOT EXISTS `capteurs` (
   KEY `fk_cpt_levure` (`levure`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `capteurs`
---
-
-INSERT INTO `capteurs` (`numeros`, `id_experience`, `alias`, `id_farine`, `id_levain`, `levure`, `remarque`, `fichier_donnees`) VALUES
-(1, '1_2022-06-07_mrakowski', 'Capteur_1', NULL, NULL, NULL, 'None', '2_2022-06-07_mrakowski_Capteur-1.csv'),
-(1, '2_2022-06-10_mrakowski', 'a', NULL, NULL, NULL, 'None', '2_2022-06-10_mrakowski_Capteur-1.csv'),
-(2, '1_2022-06-07_mrakowski', 'Capteur_2', NULL, NULL, NULL, 'None', '2_2022-06-07_mrakowski_Capteur-2.csv'),
-(2, '2_2022-06-10_mrakowski', 'b', NULL, NULL, NULL, 'None', '2_2022-06-10_mrakowski_Capteur-2.csv'),
-(3, '1_2022-06-07_mrakowski', 'Capteur_3', NULL, NULL, NULL, 'None', '2_2022-06-07_mrakowski_Capteur-3.csv'),
-(3, '2_2022-06-10_mrakowski', 'c', NULL, NULL, NULL, 'None', '2_2022-06-10_mrakowski_Capteur-3.csv'),
-(4, '1_2022-06-07_mrakowski', 'Capteur_4', NULL, NULL, NULL, 'None', '2_2022-06-07_mrakowski_Capteur-4.csv'),
-(4, '2_2022-06-10_mrakowski', 'd', NULL, NULL, NULL, 'None', '2_2022-06-10_mrakowski_Capteur-4.csv');
-
 -- --------------------------------------------------------
 
 --
@@ -105,14 +83,6 @@ CREATE TABLE IF NOT EXISTS `experiences` (
   KEY `fk_exp_b` (`id_boitier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `experiences`
---
-
-INSERT INTO `experiences` (`id`, `projet`, `id_boitier`, `operateur`, `date`, `lieu`, `fichier_donnees`, `fichier_resultat`, `remarque`) VALUES
-('1_2022-06-07_mrakowski', NULL, 1, 'mrakowski', '2022-06-07', 'Montpellier', 'PP01-001.TXT', 'files/1_2022-06-07_mrakowski.TXT', NULL),
-('2_2022-06-10_mrakowski', 'mrakowski_Un projet Hyper cool', 2, 'mrakowski', '2022-06-10', 'Montpellier', 'PP02-001.TXT', 'files/2_2022-06-10_mrakowski.TXT', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -129,13 +99,6 @@ CREATE TABLE IF NOT EXISTS `farines` (
   `origine` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `farines`
---
-
-INSERT INTO `farines` (`id`, `alias`, `cereale`, `type_mouture`, `cendre`, `origine`) VALUES
-(1, 'Farine expérimentale 75 ', 'blé', '', '', 'Inrae');
 
 -- --------------------------------------------------------
 
@@ -157,14 +120,6 @@ CREATE TABLE IF NOT EXISTS `levains` (
   KEY `fk_levain_farine` (`farine`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `levains`
---
-
-INSERT INTO `levains` (`id`, `alias`, `farine`, `origine`, `cereale`, `hydratation`, `microbiome`) VALUES
-(1, 'levain pouette', 1, 'INRAe', '', 0, ''),
-(2, '', 1, '', '', NULL, 'Ya de superbes microorganismes'),
-(3, 'un autre levain', 1, '', '', 46, '');
 
 -- --------------------------------------------------------
 
@@ -179,14 +134,6 @@ CREATE TABLE IF NOT EXISTS `levures` (
   PRIMARY KEY (`espece`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `levures`
---
-
-INSERT INTO `levures` (`espece`, `origine`) VALUES
-('une levure vraiment stylé', 'INRAe'),
-('Youhou', 'Ici la vie est belle');
-
 -- --------------------------------------------------------
 
 --
@@ -200,15 +147,6 @@ CREATE TABLE IF NOT EXISTS `participer_projet` (
   PRIMARY KEY (`id_projet`,`login_utilisateur`),
   KEY `fk_participer_user` (`login_utilisateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `participer_projet`
---
-
-INSERT INTO `participer_projet` (`id_projet`, `login_utilisateur`) VALUES
-('mrakowski_Un projet Hyper cool', 'fmabille'),
-('mrakowski_Un projet Hyper cool', 'mrakowski'),
-('mrakowski_Un projet Hyper cool', 'sdequin');
 
 -- --------------------------------------------------------
 
@@ -225,13 +163,6 @@ CREATE TABLE IF NOT EXISTS `projets` (
   KEY `fk_projet_dir` (`directeur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `projets`
---
-
-INSERT INTO `projets` (`id`, `titre`, `directeur`) VALUES
-('mrakowski_Un projet Hyper cool', 'Un projet Hyper cool', 'mrakowski');
-
 -- --------------------------------------------------------
 
 --
@@ -246,15 +177,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `mot_de_passe` varchar(64) NOT NULL,
   PRIMARY KEY (`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `users`
---
-
-INSERT INTO `users` (`login`, `nom`, `prenom`, `mot_de_passe`) VALUES
-('fmabille', 'frédéric', 'mabille', '22b347fb0391ea74dbdf2f93b1ea5d5fe58a04b8f04d76026c733d99d9f826f9'),
-('mrakowski', 'rakowski', 'maelis', '2fa85dd42ff469fd28b52b1d19411158138b14803cf98d30803c1d61a8dc0677'),
-('sdequin', 'Dequin', 'Sylvie', 'ad8b9a6c04e5b94e6fed77699ce3c47772e6900894db72ffd6afafc5ae7a6cb3');
 
 --
 -- Contraintes pour les tables déchargées

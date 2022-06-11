@@ -18,20 +18,10 @@ class HomePage(HydraHeadApp):
                 with st.container():
                     if experience.projet is None:
                         experience.str_exp_and_cpt()
-                        button = st.button("Générer", key="bttnexp"+str(i))
+                        button = st.button("Générer", key="bttnexp" + str(i))
                         i += 1
                         if button:
-                            experience.new_exp = False
-                            capteurs = models.Capteur.get_capteurs('id_experience', experience.identificateur)
-                            t_titre = []
-                            i = 1
-                            for capteur in capteurs:
-                                t_titre.append(capteur.alias)
-                            while len(t_titre) < 4:
-                                t_titre.append("Nothing")
-                            experience.titres_cpt = t_titre
-                            st.session_state["experience"] = experience
-                            st.session_state["capteurs"] = capteurs
+                            HomePage.generate_exp_from_bd(experience)
             st.subheader("Projets")
             projets = models.Projet.get_projects_from_participant(st.session_state['login'])
             for projet in projets:
@@ -42,18 +32,23 @@ class HomePage(HydraHeadApp):
                     button = st.button("Générer", key="bttnexp" + str(i))
                     i += 1
                     if button:
-                        experience.new_exp = False
-                        capteurs = models.Capteur.get_capteurs('id_experience', experience.identificateur)
-                        t_titre = []
-                        i = 1
-                        for capteur in capteurs:
-                            t_titre.append(capteur.alias)
-                        while len(t_titre) < 4:
-                            t_titre.append("Nothing")
-                        experience.titres_cpt = t_titre
-                        st.session_state["experience"] = experience
-                        st.session_state["capteurs"] = capteurs
+                        HomePage.generate_exp_from_bd(experience)
+
         else:
             st.warning(f"Vous êtes connecté(e) en **mode visiteur**, vous n'avez donc **pas accés** à la base de "
                        f"données, les farines, levains et levures que vous créérez **seront perdus** si vous vous "
                        f"deconnectez ou quittez l'application ")
+
+    @staticmethod
+    def generate_exp_from_bd(experience):
+        experience.new_exp = False
+        capteurs = models.Capteur.get_capteurs('id_experience', experience.identificateur)
+        t_titre = []
+        for capteur in capteurs:
+            t_titre.append(capteur.alias)
+        while len(t_titre) < 4:
+            t_titre.append("Nothing")
+        experience.titres_cpt = t_titre
+        st.session_state["experience"] = experience
+        st.session_state["capteurs"] = capteurs
+        st.success(f"Résultats génerés ! **Allez consulter la page Résultats**")
