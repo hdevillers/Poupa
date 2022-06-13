@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `boitiers`;
 CREATE TABLE IF NOT EXISTS `boitiers` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `numeros` int(3) NOT NULL,
+  `numero` int(3) NOT NULL,
   `proprietaire` varchar(20) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fk_boitier_proprio` (`proprietaire`)
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `boitiers` (
 
 DROP TABLE IF EXISTS `capteurs`;
 CREATE TABLE IF NOT EXISTS `capteurs` (
-  `numeros` int(11) NOT NULL,
+  `numero` int(11) NOT NULL,
   `id_experience` varchar(50) NOT NULL,
   `alias` varchar(50) NOT NULL,
   `id_farine` int(3) DEFAULT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `capteurs` (
   `levure` varchar(50) DEFAULT NULL,
   `remarque` varchar(100) DEFAULT NULL,
   `fichier_donnees` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`numeros`,`id_experience`) USING BTREE,
+  PRIMARY KEY (`numero`,`id_experience`) USING BTREE,
   UNIQUE KEY `unique_id` (`alias`,`id_experience`) USING BTREE,
   KEY `fk_utCpt_exp` (`id_experience`),
   KEY `fk_cpt_farine` (`id_farine`),
