@@ -93,22 +93,23 @@ class InscriptionPage(HydraHeadApp):
                       'prenom': login_form.text_input('Prénom'),
                       'password': login_form.text_input('Password', type="password"),
                       'password2': login_form.text_input('Confirm Password', type="password"),
-                      'submitted': login_form.form_submit_button('Sign Up')}
+                      'submitted': login_form.form_submit_button("Inscription")}
         return form_state
 
     def _do_signup(self, form_data):
         if form_data['password'] == form_data['password2']:
             hash_password = make_hashes(st.secrets['seed'] + form_data['password'])
             user = models.User(form_data['username'], form_data['nom'], form_data['prenom'], hash_password)
-            try:
+            already_exist = models.User.get_users("login", form_data['username'])
+            if already_exist:
+                st.error("L'identifiant existe déja !")
+                print(already_exist)
+            else:
                 user.create_user()
-            except Error as err:
-                st.error(err.msg)
-                raise
-            with st.spinner("🤓 now redirecting to login...."):
-                time.sleep(2)
-
-                self.do_redirect("Signup")
+                with st.spinner("🤓 now redirecting to login...."):
+                    time.sleep(2)
+                    self.set_access(0, None)
+                    self.do_redirect()
         else:
             st.error("Les mots de passes doivent être identiques")
 

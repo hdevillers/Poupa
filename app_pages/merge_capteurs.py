@@ -9,7 +9,7 @@ class MergePage(HydraHeadApp):
         self.title = title
 
     def run(self):
-        st.header("Fusion de Pâtons")
+        st.header("Fusion de Capteurs")
         st.write("Sur cette page comparez plusieurs pâtons d'experience différentes. Pour cela, vous devez d'abord "
                  "avoir généré l'experience du pâton voulu et enregistré les résultats sur votre ordinateur. Vous "
                  "pouvez alors selectionner le fichier des capteurs correspondants dans le selecteur ci-dessous ")

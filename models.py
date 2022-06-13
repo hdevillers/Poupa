@@ -11,10 +11,10 @@ from zipfile import ZipFile
 from fpdf import FPDF
 
 test = True
-islocal = True
+islocal = False
 
 
-def init_connection():
+def init_connexion():
     if islocal:
         return mysql.connector.connect(**st.secrets["mysqllocalhost"])
     else:
@@ -32,7 +32,7 @@ def run_query(query, tuple_values):
 
     tuple_values : (Any)
         Valeurs de la requête """
-    conn = init_connection()
+    conn = init_connexion()
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
         return cur.fetchall()
@@ -95,7 +95,7 @@ def insert_into(query, tuple_values):
         Tulpe des valeurs de requête
     """
 
-    conn = init_connection()
+    conn = init_connexion()
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
         conn.commit()
@@ -111,7 +111,7 @@ def update(query, tuple_values):
         Requête préparée à exécuter
     tulpe_values: (Any)
         Tulpe des valeurs de requête"""
-    conn = init_connection()
+    conn = init_connexion()
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
         conn.commit()
@@ -1240,7 +1240,9 @@ class MergeCapteur:
         max_values = []
         max_len = []
         i = 0
+        # on parcourt la liste des fichiers
         for file in self.list_files:
+            # on récupère les valeurs
             my_data = pd.read_csv(file, sep=",").values.tolist()
             self.list_cpt.append(my_data)
             ax.plot(my_data[0])
