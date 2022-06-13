@@ -6,8 +6,6 @@ import csv
 import re
 from matplotlib import pyplot as plt
 from zipfile import ZipFile
-# from matplotlib.backends.backend_pdf import PdfPages
-# import os
 from fpdf import FPDF
 
 test = True
@@ -121,7 +119,7 @@ class Boitier:
     nom_table = "boitiers"
 
     def __init__(self, num_boitier, proprio):
-        self.numeros = num_boitier
+        self.numero = num_boitier
         self.proprio = proprio
         self.id = None
 
@@ -139,12 +137,12 @@ class Boitier:
         return boitiers
 
     def create_boitier(self):
-        query = f"INSERT INTO {self.nom_table} (numeros, proprietaire) VALUES (%s, %s)"
-        values = (self.numeros, self.proprio)
+        query = f"INSERT INTO {self.nom_table} (numero, proprietaire) VALUES (%s, %s)"
+        values = (self.numero, self.proprio)
         insert_into(query, values)
 
     def __str__(self):
-        return f"Boitier {self.numeros} appartenant à {self.proprio}"
+        return f"Boitier {self.numero} appartenant à {self.proprio}"
 
 
 class Farine:
