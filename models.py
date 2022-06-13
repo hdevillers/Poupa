@@ -927,9 +927,9 @@ class Experience:
                             infos_pente_courbes[i].append(self.find_t1(i_max, liss[0], liss[1], intervalle))
 
                             ax.plot([infos_pente_courbes[i][2] for j in range(len(liss[0]))],
-                                    np.arange(len(liss[0])), linestyle='--', linewidth=1, label="t0")
+                                    np.arange(len(liss[0])), linestyle='--', linewidth=1, label="début de la pousse")
                             ax.plot([infos_pente_courbes[i][3] for j in range(len(liss[0]))],
-                                    np.arange(len(liss[0])), linestyle='--', linewidth=1, label="t1")
+                                    np.arange(len(liss[0])), linestyle='--', linewidth=1, label="fin de la pousse")
                             ax.legend(loc="lower right")
                         else:
                             infos_pente_courbes.append([0, 0, 0, 0])
@@ -967,6 +967,7 @@ class Experience:
                 if self._first_time:
                     self._touty[8] = (self._touty[8] - self._touty[8][0]) / 60
                 ax.plot(self._touty[8], self._touty[9])
+                self.info_courbe("temperature", 'temps (min)', 'température  (°c)')
 
                 listOf_Xticks = np.arange(0, max(self._touty[8]), 20)
                 ax.set_xticks(listOf_Xticks, minor=True)
@@ -979,7 +980,6 @@ class Experience:
                 st.pyplot(fig)
                 # fig_temp.plot(touty[8], touty[9], color=COULEURS[4])
                 plt.ylim(ymin=10)
-                self.info_courbe("temperature", 'temps (min)', 'température  (°c)')
                 self._tab_figs.append(fig)
 
             # toutes les courbes
