@@ -81,14 +81,19 @@ class ExperiencePage(HydraHeadApp):
             # selectbox
             # Farines
             list_of_farines = []
+            # Si on est connecté on récupère la farine de la base de donnée
             if self.session_state.allow_access > 1:
                 list_of_farines = models.Farine.get_farines()
+            # Si farines est dans st.session_state alors on est mode visiteur
             if "farines" in st.session_state:
                 list_of_farines = st.session_state["farines"]
+            # valeurs par défauts et pour un choix nul
             dict_farines = {"---": "---"}
             for farine in list_of_farines:
+                # Si on est connecté alors l'index est l'identifiant
                 if self.session_state.allow_access > 1:
                     dict_farines[farine.id_farine] = farine.str_form()
+                # Si on est en mode visiteur l'index est l'objet Farine
                 else:
                     dict_farines[farine] = farine.str_form()
 
@@ -123,7 +128,8 @@ class ExperiencePage(HydraHeadApp):
                 with list_col[i]:
                     st.write(f"**Capteur_{i + 1}**")
                     input_alias = st.text_input("Alias*", key=i, value=f"Capteur-{i+1}")
-                    selectfarine = st.selectbox("Farine", list(dict_farines.items()), key=i, format_func=lambda o: o[1])
+                    selectfarine = st.selectbox("Farine", list(dict_farines.items()), key=i,
+                                                format_func=lambda o: o[1])
                     selectlevain = st.selectbox("Levain", list(dict_levains.items()), key=i, format_func=lambda o: o[1])
                     select_levure = st.selectbox("Levure", list(dict_levures.items()), key=i,
                                                  format_func=lambda o: o[1])

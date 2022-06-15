@@ -805,38 +805,37 @@ class Experience:
     def trouver_pente(self, x, y, i, intervalle, info_coeff_max, x_len, ax, stop=False):
         """ trouve la pente maximum, la dessine, puis renvoi [a, b, t0] """
         y_in_touty = self._touty_liss[-1]
+        # si on est pas à la fin des données ou que les données sont toujours représentative (stop = False) on continue
         if len(y) < intervalle or len(x) < intervalle or stop:
             if not stop:
-                a, b = self.reg_lin([x[0], x[-1]],
-                                    [y[0], y[-1]])
+                a, b = self.reg_lin([x[0], x[-1]], [y[0], y[-1]])
                 if info_coeff_max[0] < a:
                     info_coeff_max[0] = round(a, 3)
                     info_coeff_max[1] = b
                     info_coeff_max[2] = intervalle * (i + 1)
-                # x_len = x[0:intervalle] + intervalle * i
+            # on trouve le moment ou la droite ax+b traverse l'axes des abcsisses
             t0 = self.find_t0(info_coeff_max[0], info_coeff_max[1])
             penteX = np.arange(x_len)
+            # on affiche la pente
             ax.plot(penteX, info_coeff_max[0] * penteX + info_coeff_max[1], color="#B4B100")
             info_coeff_max.append(t0)
-
-            # ax.plot(penteX, [0] * len(x_len))
             coor_max = info_coeff_max[2]
             info_coeff_max.pop(2)
             return coor_max, info_coeff_max
         else:
             previous = y[0]
+            # on vérifie si on se trouve dans une partie très bruité de la courbe : partie avec beaucoup de piques
             for current in y_in_touty[(intervalle - 20) * i: (intervalle + 20) * (i + 1):4]:
                 if previous - current >= 4:
                     return self.trouver_pente(x, y, i + 1, intervalle, info_coeff_max, x_len, ax, True)
                 previous = current
-            a, b = self.reg_lin([x[0], x[intervalle]],
-                                [y[0], y[intervalle]])
+            # on fait une régréssion linéaire sur un interval
+            a, b = self.reg_lin([x[0], x[intervalle]], [y[0], y[intervalle]])
+            # si le coefficint directeur est plus grand que l'acien maximum on réatribut les valeurs max
             if info_coeff_max[0] < a:
                 info_coeff_max[0] = round(a, 3)
                 info_coeff_max[1] = b
                 info_coeff_max[2] = intervalle * (i + 1)
-                # x_len = x[0:intervalle] + intervalle * i
-
             return self.trouver_pente(x[intervalle:], y[intervalle:], i + 1, intervalle, info_coeff_max, x_len, ax)
 
     def dessiner_tableau(self, donnees):
@@ -885,7 +884,6 @@ class Experience:
         pouvant occasionner une lenteur et remplie deux fois *tab_figures* \n
         **Solution** : pour *tab_figures* on le vide à chaque fois que l'on execute dessiner_courbes mais je n'ai pas
         de solution viable pour le fait qu'elle soit appelée deux fois pour l'instant """
-
         self._tab_figs = []
         with st.container():
             st.header("Courbes")
@@ -1010,19 +1008,11 @@ class Experience:
         infos = self.info_as_df()
         for inf in infos:
             pdf.cell(200, 10, txt=inf, ln=1, align='C')
-        """if st.session_state["access_level"] > 1:
-            cpts = Capteur.get_capteurs("id_experience", self.identificateur)
-        else:
-            cpts = st.session_state["capteurs"]"""
         i = 0
         for fig in self._tab_figs:
             fig.savefig(f"temp/fig{i}.png")
             pdf.add_page('L')
             pdf.image(f"temp/fig{i}.png", x=None, y=None, w=0, h=0, type='', link='')
-            """if i < len(cpts):
-                for info in cpts[i].info_as_tab():
-                    pdf.cell(100, 10, txt=info, ln=1, align='R')
-            """
             i += 1
         pdf.output(f"temp/{self.get_id()}.pdf")
 
