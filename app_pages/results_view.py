@@ -44,10 +44,7 @@ class ResultPage(HydraHeadApp):
                 st.download_button(label="Télécharger les résultats",
                                    data=fp, file_name=f"{experience.identificateur}.7z",
                                    mime="application/x-7z-compressed")
-            """i = 0
-            for cpt in st.session_state['capteurs']:
-                files = experience.generate_csv_cpt()
-                cpt.set_fichier_donnees(files[i])"""
+
 
         # Enregistrement dans la base de données
         with col2:
