@@ -119,12 +119,25 @@ class Boitier:
     nom_table = "boitiers"
 
     def __init__(self, num_boitier, proprio):
+        """
+        Classe représentant les boitiers
+        :param num_boitier: numéros du boitier
+        :param proprio: propriétaire du boitier
+        """
         self.numero = num_boitier
         self.proprio = proprio
         self.id = None
 
     @staticmethod
     def get_boitiers(selector=None, value=None):
+        """
+        Récupère les boitiers de la base de données, si il n'y a aucun paramètres récupère toutes les boitiers sinon
+        les rècupère sous la condition selector = value
+
+        :param selector: sélecteur de la condition de selection d'une farine
+        :param value: valeur de la condition de selection d'une farine
+        :return: une liste d'objets Boitier
+        """
         if selector is not None and value is not None:
             boitiers_from_bd = get_by(Boitier.nom_table, selector, value)
         else:
@@ -137,6 +150,7 @@ class Boitier:
         return boitiers
 
     def create_boitier(self):
+        """Insère un boitier dans la base de données"""
         query = f"INSERT INTO {self.nom_table} (numero, proprietaire) VALUES (%s, %s)"
         values = (self.numero, self.proprio)
         insert_into(query, values)
@@ -149,7 +163,8 @@ class Farine:
     nom_table = "farines"
 
     def __init__(self, alias=None, cereal=None, mouture=None, cendre=None, origine=None):
-        """Objet représentant une farine
+        """
+        Objet représentant une farine
 
         Parameters
         -----------
@@ -162,7 +177,13 @@ class Farine:
         cendre : String, None
             cendre de la farine
         origine : String, None
-            origine de la farine"""
+            origine de la farine
+        :param alias:
+        :param cereal:
+        :param mouture:
+        :param cendre:
+        :param origine:
+        """
 
         self.id_farine = None
         self.alias = alias
