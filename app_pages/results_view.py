@@ -18,7 +18,7 @@ class ResultPage(HydraHeadApp):
 
         mssg_archiver = ''
         if self.session_state.allow_access > 1:
-            mssg_archiver = " ou les enregistrer dans la base de données pour les consulter plus tard en cliquant sur "\
+            mssg_archiver = " ou les enregistrer dans la base de données pour les consulter plus tard en cliquant sur " \
                             "**'Archiver dans la base de données'** "
         st.write(f"Vous pouvez consulter vos resutats sur cette page. Retrouvez ses informations dans la barre de "
                  f"droite et les différents graphiques ci-dessous. Vous pouvez télécharger un pdf de votre résultat en "
@@ -40,11 +40,9 @@ class ResultPage(HydraHeadApp):
             """download = st.button("Télécharger les résultats", on_click=experience.generate_pdf)"""
             experience.generate_zip_file()
             with open(f"temp/{experience.identificateur}.7z", "rb") as fp:
-
                 st.download_button(label="Télécharger les résultats",
                                    data=fp, file_name=f"{experience.identificateur}.7z",
                                    mime="application/x-7z-compressed")
-
 
         # Enregistrement dans la base de données
         with col2:
