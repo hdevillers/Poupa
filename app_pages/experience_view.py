@@ -65,7 +65,8 @@ class ExperiencePage(HydraHeadApp):
             input_date = st.date_input("Date de l'experience*", value=value_date)
             input_lieu = st.text_input("Lieu de l'experience*", value=value_lieu)
             if "login" in st.session_state:
-                input_operateur = st.text_input("Operateur/trice de l'experience*", value=st.session_state['login'])
+                input_operateur = st.session_state['login']
+                st.warning(f"Opérateur/trice : {st.session_state['login']}")
             else:
                 input_operateur = st.text_input("Operateur/trice de l'experience*", value=value_operateur)
 
@@ -133,7 +134,7 @@ class ExperiencePage(HydraHeadApp):
                     selectlevain = st.selectbox("Levain", list(dict_levains.items()), key=i, format_func=lambda o: o[1])
                     select_levure = st.selectbox("Levure", list(dict_levures.items()), key=i,
                                                  format_func=lambda o: o[1])
-                    input_remarque = st.text_area("Remarque", max_chars=100, key=i, value=None)
+                    input_remarque = st.text_area("Remarque", max_chars=100, key=i)
                     tab_cpt.append((input_alias, selectfarine[0], selectlevain[0], select_levure[0],
                                     input_remarque))
                     tab_titre_cpt.append(input_alias)

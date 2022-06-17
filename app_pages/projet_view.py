@@ -15,7 +15,7 @@ class AddProjectPage(HydraHeadApp):
         with st.sidebar:
             with st.form("form projet"):
                 input_titre = st.text_input("Titre*", max_chars=30)
-                input_directeur = st.text_input("Directeur/rice du projet*", value=st.session_state['login'])
+                input_directeur = st.warning(f"Directeur/rice du projet : {st.session_state['login']}")
 
                 list_of_users = User.get_users()
                 dico_users = {}
