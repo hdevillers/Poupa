@@ -838,7 +838,7 @@ class Experience:
             t0 = self.find_t0(info_coeff_max[0], info_coeff_max[1])
             penteX = np.arange(x_len)
             # on affiche la pente
-            ax.plot(penteX, info_coeff_max[0] * penteX + info_coeff_max[1], color="#B4B100")
+            ax.plot(penteX, info_coeff_max[0] * penteX + info_coeff_max[1], color="#B4B100", label="pente max")
             info_coeff_max.append(t0)
             coor_max = info_coeff_max[2]
             info_coeff_max.pop(2)
@@ -1005,7 +1005,8 @@ class Experience:
                 for i in range(4):
                     arr = self.lissage(self._touty[2 * i], self._touty[2 * i + 1], 5)
                     if i < len(self.titres_cpt):
-                        ax.plot(arr[0], arr[1], label=self.titres_cpt[i])
+                        if self.titres_cpt[i] != "Nothing":
+                            ax.plot(arr[0], arr[1], label=self.titres_cpt[i])
                 ax.legend(loc="lower right")
                 self.info_courbe(f"Tous les capteurs du PouPâ {self.id_boitier}", 'temps (min)', 'pousse (mm)')
                 listOf_Xticks = np.arange(0, max(self._touty[8]), 20)
@@ -1244,6 +1245,7 @@ class Capteur:
 class MergeCapteur:
     def __init__(self, list_files):
         self.list_files = list_files
+        self.list_name_files = []
         self.list_cpt = []
         fig, ax = plt.subplots()
         max_values = []
@@ -1252,9 +1254,12 @@ class MergeCapteur:
         # on parcourt la liste des fichiers
         for file in self.list_files:
             # on récupère les valeurs
+            name = file.name
+            print("name : " + file.name)
             my_data = pd.read_csv(file, sep=",").values.tolist()
             self.list_cpt.append(my_data)
-            ax.plot(my_data[0])
+            ax.plot(my_data[0], label=name)
+            ax.legend(loc="lower right")
             i += 1
             max_values.append(max(my_data[0]))
             max_len.append(len(my_data[0]))

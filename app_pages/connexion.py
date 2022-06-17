@@ -6,12 +6,6 @@ from typing import Dict
 from mysql.connector import Error
 from hydralit import HydraHeadApp
 
-"""
-***************************************** IMPORTANT ***************************************************
-Comme aucun moyen de récupération de mot de passe n'a été mis en place (en s'identifiant avec son adresse mail), 
-l'utilisation de mot de passe a été désactivée. Pour la réimplémenter il suffit de remttre en code les commentaires
-suivis de '(mdp)'.
-"""
 
 def make_hashes(password):
     return hashlib.sha256(str.encode(password)).hexdigest()
@@ -39,7 +33,7 @@ class ConnexionPage(HydraHeadApp):
         login_form = st.form(key="login_form")
 
         form_state = {'username': login_form.text_input('Identifiant'),
-                      # (mdp)'password': login_form.text_input('Password', type="password"),
+                      'password': login_form.text_input('Password', type="password"),
                       'submitted': login_form.form_submit_button('Login')}
 
         if st.button('Mode visiteur', key='guestbtn'):
@@ -54,8 +48,7 @@ class ConnexionPage(HydraHeadApp):
         return form_state
 
     def _do_login(self, form_data):
-        # (mdp) access, nom, prenom = self._check_access(form_data['username'], form_data['password'])
-        access, nom, prenom = self._check_access(form_data['username'])
+        access, nom, prenom = self._check_access(form_data['username'], form_data['password'])
         if access:
             st.success(f"Connecté en tant que {nom} {prenom}")
             st.session_state['login'] = form_data['username']
@@ -71,11 +64,10 @@ class ConnexionPage(HydraHeadApp):
             if nom is not None:
                 st.error("Mauvais mot de passe :P")
 
-    def _check_access(self, login, mdp=None):
+    def _check_access(self, login, mdp):
         user = models.get_by('users', 'login', login)
         if user:
-            # (mdp) return check_hashes(str(st.secrets["seed"] + mdp), user[0][3]), user[0][1], user[0][2]
-            return True, user[0][1], user[0][2]
+            return check_hashes(str(st.secrets["seed"] + mdp), user[0][3]), user[0][1], user[0][2]
         else:
             st.error("Utilisateur inconnus")
             return False, None, None
@@ -98,15 +90,16 @@ class InscriptionPage(HydraHeadApp):
         form_state = {'username': login_form.text_input('Identifiant'),
                       'nom': login_form.text_input('Nom'),
                       'prenom': login_form.text_input('Prénom'),
-                      # (mdp) 'password': login_form.text_input('Password', type="password"),
-                      # (mdp) 'password2': login_form.text_input('Confirm Password', type="password"),
+                      'password': login_form.text_input('Password', type="password"),
+                      'password2': login_form.text_input('Confirm Password', type="password"),
                       'submitted': login_form.form_submit_button("Inscription")}
+        st.error("ATTENTION : il n'y a pas encore de moyen de retrouver votre mot de passe si vous l'oubliez")
         return form_state
 
     def _do_signup(self, form_data):
-        # (mdp) if form_data['password'] == form_data['password2']:
-            # (mdp) hash_password = make_hashes(st.secrets['seed'] + form_data['password'])
-            user = models.User(form_data['username'], form_data['nom'], form_data['prenom'], "temporaire")
+        if form_data['password'] == form_data['password2']:
+            hash_password = make_hashes(st.secrets['seed'] + form_data['password'])
+            user = models.User(form_data['username'], form_data['nom'], form_data['prenom'], hash_password)
             already_exist = models.User.get_users("login", form_data['username'])
             if already_exist:
                 st.error("L'identifiant existe déja !")
@@ -117,6 +110,6 @@ class InscriptionPage(HydraHeadApp):
                     time.sleep(2)
                     self.set_access(0, None)
                     self.do_redirect()
-        # (mdp) else:
-            #(mdp) st.error("Les mots de passes doivent être identiques")
+        else:
+            st.error("Les mots de passes doivent être identiques")
 
