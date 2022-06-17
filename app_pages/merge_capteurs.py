@@ -9,12 +9,14 @@ class MergePage(HydraHeadApp):
         self.title = title
 
     def run(self):
-        st.header("Fusion de Capteurs")
+        st.header("Comparaison de Capteurs")
         st.write("Sur cette page comparez plusieurs pâtons d'experience différentes. Pour cela, vous devez d'abord "
                  "avoir généré l'experience du pâton voulu et enregistré les résultats sur votre ordinateur. Vous "
                  "pouvez alors selectionner le fichier des capteurs correspondants dans le selecteur ci-dessous ")
         with st.form('choose cpt'):
             list_cpt = []
+            # début du code pour, récupérer les fichiers des capteurs du serveur et les afficher comme une liste de
+            # radio boutons. Pas implémenté par contraite de temps
             """if self.session_state.allow_access > 1:
                 all_exp = models.get_by("experiences", 'operateur', st.session_state['login'])
                 list_checkbox = []
