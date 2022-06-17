@@ -457,7 +457,7 @@ class User:
         return users
 
     def __str__(self):
-        return self.login + " : " + self.nom + " " + self.prenom
+        return self.nom + " " + self.prenom
 
 
 class Projet:
