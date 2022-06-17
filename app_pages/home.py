@@ -11,6 +11,14 @@ class HomePage(HydraHeadApp):
     def run(self):
         if self.session_state.allow_access > 1:
             st.subheader(f"Bienvenu {st.session_state['login']}")
+            st.write("Bienvenu sur l'application PouPâ, le site où vous pourrez traiter les données récupérées de vos "
+                     "experimentation ! Pour créer un projet rassemblant plusieur personnes, allez sur la page "
+                     "'Projets'. Vous pouvez aller renseigner votre experience sur la page "
+                     "'Nouvelle experience', ajouter des éléments à l'avance en vous rendant dans une section de "
+                     "'Ajouter Elements'. Vous pouvez égalament comparer les capteurs d'experineces différnetes sur "
+                     "la page 'Comparaison de Capteurs'.")
+            st.write("Retrouvez ci-dessous vos anciennes experiences et les projet auxquels vous participez. Pour "
+                     "reconsulter les résultats, appuyez sur 'Générer' et rendez-vous sur la page Résultats")
             st.subheader("Experiences")
             all_exp = models.Experience.get_experiences('operateur', st.session_state['login'])
             i = 0
@@ -35,6 +43,11 @@ class HomePage(HydraHeadApp):
                         HomePage.generate_exp_from_bd(experience)
 
         else:
+            st.header("Bienvenu sur l'application PouPâ, le site où vous pourrez traiter les données récupérées de vos "
+                      "experimentation ! Vous pouvez aller renseigner votre experience sur la page "
+                      "'Nouvelle experience', ajouter des éléments à l'avance en vous rendant dans une section de "
+                      "'Ajouter Elements'. Vous pouvez égalament comparer les capteurs d'experineces différnetes sur "
+                      "la page 'Comparaison de Capteurs'.")
             st.warning(f"Vous êtes connecté(e) en **mode visiteur**, vous n'avez donc **pas accés** à la base de "
                        f"données, les farines, levains et levures que vous créérez **seront perdus** si vous vous "
                        f"deconnectez ou quittez l'application ")
