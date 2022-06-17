@@ -21,15 +21,14 @@ def init_connexion():
 
 @st.experimental_memo(ttl=10)
 def run_query(query, tuple_values):
-    """Prepare et execute une requête sql avec des parametres
+    """
+    Prepare et execute une requête sql avec des parametres
 
-    Parameters
-    -----------
-    query : String
-        Requête préparée à executer
+    :param query: Requête préparée à executer
+    :param tuple_values: Valeurs de la requête
+    :return: tulpes des lignes sélectionnées
+    """
 
-    tuple_values : (Any)
-        Valeurs de la requête """
     conn = init_connexion()
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
@@ -37,13 +36,12 @@ def run_query(query, tuple_values):
 
 
 def get_all(nom_table):
-    """Recupère toutes les lignes d'une table
-
-    :parameter
-    -----------
-    nom_table : String
-        Nom de la table
     """
+    Recupère toutes les lignes d'une table
+    :param nom_table: Nom de la table
+    :return: tulpes des lignes
+    """
+
     query = f"SELECT * FROM {nom_table}"
     return run_query(query, None)
 
@@ -51,17 +49,12 @@ def get_all(nom_table):
 def get_by(nom_table, selector, value):
     """Récupère des lignes d'un tableau avec une condition
 
-    Parameters
-    -----------
-    nom_table: String
-        Nom de la table
-
-    selector: String
-        sélecteur de la condition de selection
-
-    value : String, None
-        valeur de la condition de selection
+    :param nom_table: Nom de la table
+    :param selector: sélecteur de la condition de selection
+    :param value: valeur de la condition de selection
+    :return: tuples des lignes sélectionnées
     """
+
     query = f"SELECT * FROM {nom_table} WHERE {selector} = %s"
     tuple_values = (value,)
     return run_query(query, tuple_values)
@@ -82,15 +75,11 @@ def get_by(nom_table, selector, value):
 
 @st.experimental_memo(ttl=10)
 def insert_into(query, tuple_values):
-    """Insert une ligne dans une table
+    """
+    Insert une ligne dans une table
+    :param query: Requête préparée à exécuter
+    :param tuple_values:  Tulpe des valeurs de requête
 
-    Parameters
-    -----------
-    query: String
-        Requête préparée à exécuter
-
-    tuple_values: (Any)
-        Tulpe des valeurs de requête
     """
 
     conn = init_connexion()
@@ -103,12 +92,10 @@ def insert_into(query, tuple_values):
 def update(query, tuple_values):
     """Met à jour une ligne d'une table
 
-    :parameter
-    -----------
-    query: String
-        Requête préparée à exécuter
-    tulpe_values: (Any)
-        Tulpe des valeurs de requête"""
+    :param query: Requête préparée à exécuter
+    :param tuple_values: Tulpe des valeurs de requête
+    """
+
     conn = init_connexion()
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
@@ -166,23 +153,11 @@ class Farine:
         """
         Objet représentant une farine
 
-        Parameters
-        -----------
-        alias : String, None
-            titre de la farine
-        cereal : String, None
-            cereale de la farine
-        mouture : String, None
-            type de mouture de la farine
-        cendre : String, None
-            cendre de la farine
-        origine : String, None
-            origine de la farine
-        :param alias:
-        :param cereal:
-        :param mouture:
-        :param cendre:
-        :param origine:
+        :param alias: titre de la farine
+        :param cereal: cereale de la farine
+        :param mouture: type de mouture de la farine
+        :param cendre: cendre de la farine
+        :param origine: origine de la farine
         """
 
         self.id_farine = None
@@ -204,17 +179,11 @@ class Farine:
         """Récupère les farines de la base de données, si il n'y a aucun paramètres récupère toutes les farines sinon
         les rècupère sous la condition selector = value
 
-        :parameter
-        -----------
-        selector : String, None
-            sélecteur de la condition de selection d'une farine
-        value : String, None
-            valeur de la condition de selection d'une farine
-
-        :returns
-        -----------
-        Une liste d'objet farine
+        :param selector: sélecteur de la condition de selection d'une farine
+        :param value: valeur de la condition de selection d'une farine
+        :return: Une liste d'objet farine
         """
+
         if selector is not None and value is not None:
             farines_from_bd = get_by(Farine.nom_table, selector, value)
         else:
@@ -252,23 +221,16 @@ class Levain:
     nom_table = "levains"
 
     def __init__(self, alias, farine=None, origine=None, cereale=None, hydratation=None, microbiome=None):
-        """Objet représentant un levain
-
-        :parameter
-        -----------
-        alias: String, None
-            Alias du levain
-        farine: String, Int, None
-            Farine ou identifiant de la farine du levain
-        origine: String, None
-            Origine du levain
-        cereale: String, None
-            Cereale du levain
-        hydratation: Int, None
-            Pourcentatge d'hydratation du levain
-        microbiome: String, None
-            Microbiome du levain
         """
+        Objet représentant un levain
+        :param alias: Alias du levain
+        :param farine: Farine ou identifiant de la farine du levain
+        :param origine: Origine du levain
+        :param cereale: Cereale du levain
+        :param hydratation: Pourcentatge d'hydratation du levain
+        :param microbiome: Microbiome du levain
+        """
+
         self.id = None
         self.alias = alias
         self.farine = farine
@@ -293,17 +255,11 @@ class Levain:
         """Récupère les levains de la base de données, si il n'y a aucun paramètres récupère tous les levains sinon
                 les rècupère sous la condition selector = value
 
-                :parameter
-                -----------
-                selector : String, None
-                    sélecteur de la condition de selection d'un levain
-                value : String, None
-                    valeur de la condition de selection d'un levain
+        :param selector: sélecteur de la condition de selection d'un levain
+        :param value: valeur de la condition de selection d'un levain
+        :return: Une liste d'objets levains
+        """
 
-                :returns
-                -----------
-                Une liste d'objets levains
-                """
         if selector is not None and value is not None:
             levains_from_bd = get_by(Levain.nom_table, selector, value)
         else:
