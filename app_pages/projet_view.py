@@ -27,14 +27,14 @@ class AddProjectPage(HydraHeadApp):
                     if input_titre == '' or input_directeur == '':
                         st.error("Les champs obligatoires n'ont pas tous été remplis")
                     else:
-                        if input_directeur not in User.get_users('login', input_directeur):
-                            st.error("Directeur ou directrice inconnue")
+                        if input_titre in Projet.get_projets('titre', input_titre):
+                            st.error("Un projet avec ce nom existe déjà")
                         else:
                             participants = []
                             for participant in select_participants:
                                 participants.append(participant[0])
 
-                            p = Projet(input_titre, input_directeur, participants)
+                            p = Projet(input_titre, st.session_state['login'], participants)
                             p.create_projet()
 
         st.subheader("Vos projets")

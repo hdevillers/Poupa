@@ -496,7 +496,7 @@ class Projet:
         users_as_object = []
         for user in users_as_tulpe:
             users_as_object.append(User(user[0], user[1], user[2]))
-            return users_as_object
+        return users_as_object
 
     @staticmethod
     def get_projects_from_participant(id_participant):
