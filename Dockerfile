@@ -2,7 +2,7 @@ FROM python:3.10
 
 WORKDIR /app
 
-VOLUME ['/app' , '/app/files']
+VOLUME '/app' '/app/files'
 
 COPY requirements.txt ./requirements.txt
 
