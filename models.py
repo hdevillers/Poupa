@@ -18,7 +18,6 @@ def init_connexion():
         return mysql.connector.connect(**st.secrets["mysql"])
 
 
-#@st.experimental_memo(ttl=10)
 @st.cache_data
 def run_query(query, tuple_values):
     """
@@ -75,7 +74,6 @@ def get_by(nom_table, selector, value):
     return run_query(query, tuple_values)"""
 
 
-#@st.experimental_memo(ttl=10)
 @st.cache_data
 def insert_into(query, tuple_values):
     """
@@ -91,7 +89,6 @@ def insert_into(query, tuple_values):
         conn.commit()
 
 
-#@st.experimental_memo(ttl=10)
 @st.cache_data
 def update(query, tuple_values):
     """Met à jour une ligne d'une table
