@@ -2,6 +2,7 @@ services:
   app:
     build:
       context: .
+    restart: always
     depends_on:
       - db
     networks:
@@ -16,6 +17,7 @@ services:
 
   db:
     image: mysql:5.7.36
+    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=poupa
       - MYSQL_USER=poupa
