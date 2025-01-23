@@ -1,7 +1,8 @@
-pandas >= 1.3.5
-streamlit >= 1.8.1
-numpy >= 1.21
-matplotlib >= 3.5
-mysql-connector-python >= 8.0
-git+https://github.com/TangleSpace/hydralit.git
+pandas >= 2.2.3
+streamlit == 1.26.0
+numpy >= 1.26, <2
+matplotlib >= 3.10.0
+mysql-connector-python >= 9.2.0
+hydralit >= 1.0.14
+#git+https://github.com/TangleSpace/hydralit.git
 fpdf~=1.7.2
