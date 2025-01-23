@@ -18,7 +18,7 @@ def init_connexion():
         return mysql.connector.connect(**st.secrets["mysql"])
 
 
-@st.cache_data
+#@st.cache_data
 def run_query(query, tuple_values):
     """
     Prepare et execute une requête sql avec des parametres
@@ -74,7 +74,7 @@ def get_by(nom_table, selector, value):
     return run_query(query, tuple_values)"""
 
 
-@st.cache_data
+#@st.cache_data
 def insert_into(query, tuple_values):
     """
     Insert une ligne dans une table
@@ -87,9 +87,10 @@ def insert_into(query, tuple_values):
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
         conn.commit()
+    conn.close()
 
 
-@st.cache_data
+#@st.cache_data
 def update(query, tuple_values):
     """Met à jour une ligne d'une table
 
@@ -101,6 +102,7 @@ def update(query, tuple_values):
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
         conn.commit()
+    conn.close()
 
 
 class Boitier:
