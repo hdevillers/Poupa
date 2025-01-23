@@ -8,7 +8,6 @@ from matplotlib import pyplot as plt
 from zipfile import ZipFile
 from fpdf import FPDF
 
-test = True
 islocal = False
 
 
@@ -19,7 +18,8 @@ def init_connexion():
         return mysql.connector.connect(**st.secrets["mysql"])
 
 
-@st.experimental_memo(ttl=10)
+#@st.experimental_memo(ttl=10)
+@st.cache_data
 def run_query(query, tuple_values):
     """
     Prepare et execute une requête sql avec des parametres
@@ -32,7 +32,9 @@ def run_query(query, tuple_values):
     conn = init_connexion()
     with conn.cursor() as cur:
         cur.execute(query, tuple_values)
-        return cur.fetchall()
+        out = cur.fetchall()
+        conn.close()
+        return out
 
 
 def get_all(nom_table):
@@ -73,7 +75,8 @@ def get_by(nom_table, selector, value):
     return run_query(query, tuple_values)"""
 
 
-@st.experimental_memo(ttl=10)
+#@st.experimental_memo(ttl=10)
+@st.cache_data
 def insert_into(query, tuple_values):
     """
     Insert une ligne dans une table
@@ -88,7 +91,8 @@ def insert_into(query, tuple_values):
         conn.commit()
 
 
-@st.experimental_memo(ttl=10)
+#@st.experimental_memo(ttl=10)
+@st.cache_data
 def update(query, tuple_values):
     """Met à jour une ligne d'une table
 
@@ -526,7 +530,6 @@ class Projet:
 
 class Experience:
     nom_table = "experiences"
-    test = True
 
     def __init__(self, id_boitier, date, lieu, operateur, titres_cpt=None, projet=None, fichier_donnees=None,
                  fichier_resultat=None, remarque=None, new_exp=True):
